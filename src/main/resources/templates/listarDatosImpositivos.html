@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Listado de Datos Impositivos</title>
+</head>
+<body>
+    <h2>Listado de Datos Impositivos</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>IVA</th>
+                <th>Tasa Aeroportuaria Nacional</th>
+                <th>Tasa Aeroportuaria Internacional</th>
+                <th>Cotización Dólar</th>
+                <th>Fecha Modificación</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="datosImpositivos : ${datosImpositivosList}">
+                <td th:text="${datosImpositivos.id}"></td>
+                <td th:text="${datosImpositivos.iva}"></td>
+                <td th:text="${datosImpositivos.tasaAeroportuariaNacional}"></td>
+                <td th:text="${datosImpositivos.tasaAeroportuariaInternacional}"></td>
+                <td th:text="${datosImpositivos.cotizacionDolar}"></td>
+                <td th:text="${datosImpositivos.fechaModificacion}"></td>
+                <td>
+					<a th:href="@{/datosImpositivos/editarDatosImpositivos/{id}(id=${datosImpositivos.id})}">Editar</a>
+					</td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

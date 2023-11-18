@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Editar Datos Impositivos</title>
+</head>
+<body>
+    <h2>Editar Datos Impositivos</h2>
+    <form th:object="${datosImpositivos}" th:action="@{/datosImpositivos/guardarDatos}" method="post">
+        <input type="hidden" th:field="*{id}" />
+        <label>IVA:</label>
+        <input type="text" th:field="*{iva}" />
+        <br />
+        <label>Tasa Aeroportuaria Nacional:</label>
+        <input type="text" th:field="*{tasaAeroportuariaNacional}" />
+        <br />
+        <label>Tasa Aeroportuaria Internacional:</label>
+        <input type="text" th:field="*{tasaAeroportuariaInternacional}" />
+        <br />
+        <label>Cotización Dólar:</label>
+        <input type="text" th:field="*{cotizacionDolar}" />
+        <br />
+        <button type="submit">Guardar</button>
+    </form>
+</body>
+</html>
+
