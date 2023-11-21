@@ -9,9 +9,7 @@ import tuti.desi.servicios.VueloServiceImpl;
 @Validated
 @RestController
 public class VueloController {
-
     private final VueloServiceImpl vueloServiceImpl;
-
 
     @Autowired
     public VueloController(VueloServiceImpl vueloServiceImpl) {

@@ -31,9 +31,9 @@ public class Vuelo {
     @NotNull
     private LocalTime horaPartida;
     private String avion;
-    @Column(name = "nro_filas")
+    @Transient
     private int nroFilas;
-    @Column(name = "asiento_por_fila")
+    @Transient
     private int asientosPorFila;
     @Column(name = "nro_asientos")
     private int nroAsientos;
