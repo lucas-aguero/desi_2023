@@ -3,6 +3,9 @@ package tuti.desi.presentacion;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 import jakarta.validation.Valid;
 import tuti.desi.entidades.DatosImpositivos;
@@ -17,23 +20,40 @@ public class DatosImpositivosController {
     @Autowired
     private DatosImpositivosService datosImpositivosService;
 
-    @GetMapping("/listarDatosImpositivos")
-    public String listar(Model model) {
+    @GetMapping
+    public String listarYPrepararForm(Model model) {
         List<DatosImpositivos> datosImpositivosList = datosImpositivosService.getAll();
-        model.addAttribute("datosImpositivosList", datosImpositivosList);
-        return "listarDatosImpositivos";
-    }
 
-    @GetMapping("/editarDatosImpositivos/{id}")
-    public String editar(@PathVariable Long id, Model model) {
-        DatosImpositivos datosImpositivos = datosImpositivosService.getById(id);
-        model.addAttribute("datosImpositivos", datosImpositivos);
-        return "editarDatosImpositivos";
-    }
+        if (!datosImpositivosList.isEmpty()) {
+            // Si hay datos, agregarlos al modelo
+            model.addAttribute("datosImpositivosList", datosImpositivosList);
+        } else {
+            // Si no hay datos, agregar un formulario vacío al modelo
+            DatosImpositivosForm form = new DatosImpositivosForm();
+            model.addAttribute("formBean", form);
+        }
 
-    @PostMapping("/guardarDatos")
-    public String guardarDatos(@ModelAttribute("datosImpositivos") @Valid DatosImpositivos datosImpositivos) throws Exception {
-        datosImpositivosService.save(datosImpositivos);
-        return "redirect:/datosImpositivos/listarDatosImpositivos";
+        return "datosImpositivos";
+    }
+     
+      @RequestMapping( method=RequestMethod.POST)
+    public String submit( @ModelAttribute("formBean") @Valid DatosImpositivosForm formBean,BindingResult result, ModelMap modelo,@RequestParam String action)  {
+    	
+    	if(action.equals("Cancelar"))
+    	{
+    		modelo.clear();
+    		return "redirect:/";
+    	}
+    		    	
+    	
+    	if(action.equals("Editar"))
+    	{
+    		modelo.clear();
+    		return "redirect:/editarDatosImpositivos";
+    	}
+    		
+    	return "redirect:/";
+    	
+    	
     }
 }
