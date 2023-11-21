@@ -6,6 +6,6 @@ import tuti.desi.entidades.Aeropuerto;
 
 @Repository
 public interface IAeropuertoRepo extends JpaRepository<Aeropuerto, String> {
-    
+
 
 }
