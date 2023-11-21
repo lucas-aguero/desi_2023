@@ -1,4 +1,4 @@
-package tuti.desi.presentacion;
+package tuti.desi.presentacion.controller;
 
 import java.util.List;
 
@@ -17,6 +17,7 @@ import jakarta.validation.Valid;
 import tuti.desi.entidades.Ciudad;
 import tuti.desi.entidades.Provincia;
 import tuti.desi.excepciones.Excepcion;
+import tuti.desi.presentacion.form.CiudadesBuscarForm;
 import tuti.desi.servicios.CiudadService;
 import tuti.desi.servicios.ProvinciaService;
 

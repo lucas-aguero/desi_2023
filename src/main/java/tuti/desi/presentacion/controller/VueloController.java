@@ -1,4 +1,4 @@
-package tuti.desi.presentacion;
+package tuti.desi.presentacion.controller;
 
 import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +15,7 @@ public class VueloController {
 
     @Autowired
     public VueloController(VueloServiceImpl vueloServiceImpl) {
-        VueloServiceImpl = vueloServiceImpl;
+        this.vueloServiceImpl = vueloServiceImpl;
     }
-
 
 }

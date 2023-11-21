@@ -33,7 +33,7 @@ public class Aeropuerto {
     private double lon;
     private String tz;
     @OneToMany(mappedBy = "origen")
-    private @Singular List<Vuelo> vuelosOrigen;
+    private @Singular("vueloOrigen") List<Vuelo> vuelosOrigen;
     @OneToMany(mappedBy = "destino")
-    private @Singular List<Vuelo> vuelosDestino;
+    private @Singular ("vueloDestino") List<Vuelo> vuelosDestino;
 }
