@@ -3,6 +3,7 @@ package tuti.desi.entidades;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
+import lombok.Builder;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -13,6 +14,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 @Data
+@Builder
 @Entity
 @Table(name = "vuelos")
 public class Vuelo {

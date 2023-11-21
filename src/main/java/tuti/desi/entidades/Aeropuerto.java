@@ -2,11 +2,14 @@ package tuti.desi.entidades;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
+import lombok.Builder;
 import lombok.Data;
+import lombok.Singular;
 
 import java.util.List;
 
 @Data
+@Builder
 @Entity
 @Table(name="aeropuertos")
 public class Aeropuerto {
@@ -30,7 +33,7 @@ public class Aeropuerto {
     private double lon;
     private String tz;
     @OneToMany(mappedBy = "origen")
-    private List<Vuelo> vuelosOrigen;
+    private @Singular List<Vuelo> vuelosOrigen;
     @OneToMany(mappedBy = "destino")
-    private List<Vuelo> vuelosDestino;
+    private @Singular List<Vuelo> vuelosDestino;
 }
