@@ -9,8 +9,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.validation.constraints.DecimalMax;
 import jakarta.validation.constraints.DecimalMin;
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 
 @Entity
@@ -43,7 +41,7 @@ public class DatosImpositivos {
 	
 	// Getter y setters
 
-	public @NotNull(message = "Debe ingresar el iva") @Min(value = 0, message = "El porcentaje de iva debe ser mayor o igual a 0") @Max(value = 100, message = "El porcentaje de iva debe ser menor o igual a 100") int getIva() {
+	public int getIva() {
 		return iva;
 	}
 
