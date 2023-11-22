@@ -3,12 +3,14 @@ package tuti.desi.servicios;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
+import org.springframework.stereotype.Service;
 import tuti.desi.accesoDatos.IAeropuertoRepo;
 import tuti.desi.entidades.Aeropuerto;
 
 import java.io.InputStream;
 import java.util.Map;
 
+@Service
 public class AeropuertoServiceImpl implements IAeropuertoService{
 
     private final IAeropuertoRepo aeropuertoRepo;
@@ -21,7 +23,7 @@ public class AeropuertoServiceImpl implements IAeropuertoService{
 
 
     @Override
-    public void loadAirportsFromJsonFile(String jsonFilePath) {
+    public void loadAirportsFromJsonFile() {
         var objectMapper = new ObjectMapper();
 
         try {

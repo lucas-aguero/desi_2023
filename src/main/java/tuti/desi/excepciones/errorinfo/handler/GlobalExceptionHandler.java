@@ -14,9 +14,8 @@ import java.util.Date;
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(VueloNoCreadoException.class)
-    public ResponseEntity<ErrorInfo> handleVueloNoCreadoException(VueloNoCreadoException e){
+    public ResponseEntity<Object> handleVueloNoCreadoException(VueloNoCreadoException e){
 
-        val message = "Ha ocurrido un error interno. No se pudo crear el registro en la base de datos";
         var errorInfo = new ErrorInfo();
         errorInfo.setMessage(e.getMessage());
         errorInfo.setStatusCode(HttpStatus.INTERNAL_SERVER_ERROR.value());
