@@ -1,10 +1,9 @@
 package tuti.desi.servicios;
 
-import lombok.val;
 import org.springframework.stereotype.Service;
 import tuti.desi.accesoDatos.IVueloRepo;
+import tuti.desi.dto.VueloDTO;
 import tuti.desi.entidades.Vuelo;
-import tuti.desi.presentacion.form.CrearVueloForm;
 
 import java.util.Optional;
 
@@ -13,11 +12,14 @@ public class VueloServiceImpl implements VueloService {
 
     IVueloRepo vueloRepo;
 
-    public void crearVuelo(CrearVueloForm vueloForm){
+    @Override
+    public VueloDTO crearVuelo(VueloDTO vueloDTO){
 
+        return null;
     }
 
-    public Vuelo findById(Long nroVuelo){
+    @Override
+    public VueloDTO findById(Long nroVuelo){
 
 
         Optional<Vuelo> vueloOptional = vueloRepo.findById(nroVuelo);
@@ -34,11 +36,10 @@ public class VueloServiceImpl implements VueloService {
                     .precio(vueloOptional.get().getPrecio())
                     .build();
 
-            return vuelo;
+            return null;
         }
 
         return null;
 
     }
-
 }

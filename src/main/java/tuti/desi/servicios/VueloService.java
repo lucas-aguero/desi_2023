@@ -1,10 +1,10 @@
 package tuti.desi.servicios;
 
-import tuti.desi.accesoDatos.IVueloRepo;
-import tuti.desi.presentacion.form.CrearVueloForm;
+import tuti.desi.dto.VueloDTO;
 
 public interface VueloService {
 
-    public void crearVuelo(CrearVueloForm vueloForm);
+    public VueloDTO crearVuelo(VueloDTO vueloDTO);
 
+    public VueloDTO findById(Long nroVuelo);
 }
