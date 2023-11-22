@@ -6,6 +6,7 @@ import tuti.desi.accesoDatos.IVueloRepo;
 import tuti.desi.dto.VueloDTO;
 import tuti.desi.entidades.Vuelo;
 import tuti.desi.excepciones.VueloNoCreadoException;
+import tuti.desi.excepciones.VueloNoEncontradoException;
 import tuti.desi.mapper.VueloMapper;
 
 import java.util.Optional;
@@ -46,21 +47,14 @@ public class VueloServiceImpl implements VueloService {
         Optional<Vuelo> vueloOptional = vueloRepo.findById(nroVuelo);
 
         if(vueloOptional.isPresent()){
-            var vuelo = Vuelo.builder()
-                    .nroVuelo(vueloOptional.get().getNroVuelo())
-                    .tipoVuelo(vueloOptional.get().getTipoVuelo())
-                    .avion(vueloOptional.get().getAvion())
-                    .origen(vueloOptional.get().getOrigen())
-                    .destino(vueloOptional.get().getDestino())
-                    .horaPartida(vueloOptional.get().getHoraPartida())
-                    .nroAsientos(vueloOptional.get().getNroAsientos())
-                    .precio(vueloOptional.get().getPrecio())
-                    .build();
 
-            return null;
+            return vueloMapper.vueloToVueloDTO(vueloOptional.get());
+        }else{
+
+            throw new VueloNoEncontradoException("El vuelo con nro: " + nroVuelo + "no existe.");
         }
 
-        return null;
+
 
     }
 }
