@@ -7,6 +7,7 @@ import lombok.Builder;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
+import tuti.desi.entidades.enums.EstadoVuelo;
 import tuti.desi.entidades.enums.TipoVuelo;
 
 import java.math.BigDecimal;
@@ -48,6 +49,8 @@ public class Vuelo {
     private Aeropuerto destino;
     @Column(name="tipo_vuelo")
     private TipoVuelo tipoVuelo;
+    @Column(name="estado_vuelo")
+    private EstadoVuelo estadoVuelo;
     @NotNull
     private BigDecimal precio;
 

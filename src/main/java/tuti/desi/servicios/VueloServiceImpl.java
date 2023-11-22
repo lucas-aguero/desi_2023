@@ -26,11 +26,12 @@ public class VueloServiceImpl implements VueloService {
 
     @Override
     public VueloDTO crearVuelo(VueloDTO vueloDTO) throws VueloNoCreadoException {
+        //Formatear fechas antes de crear vuelo
         try{
             Vuelo vuelo = vueloMapper.vueloDTOToVuelo(vueloDTO);
             vueloRepo.save(vuelo);
 
-            return vueloDTO;
+            return vueloMapper.vueloToVueloDTO(vuelo);
 
         }catch(Exception e){
 
