@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import tuti.desi.dto.VueloDTO;
-import tuti.desi.excepciones.CrearVueloException;
+import tuti.desi.excepciones.VueloNoCreadoException;
+import tuti.desi.excepciones.errorinfo.ErrorInfo;
 import tuti.desi.servicios.VueloService;
-import tuti.desi.servicios.VueloServiceImpl;
 
 @Validated
 @RestController
@@ -24,16 +24,16 @@ public class VueloController {
     }
 
     @PostMapping("/vuelos")
-    public ResponseEntity<VueloDTO> crearVuelo(@RequestBody VueloDTO dto, HttpServletRequest request){
+    public ResponseEntity<?> crearVuelo(@RequestBody VueloDTO dto, HttpServletRequest request){
 
         try{
             VueloDTO nuevoVueloDTO = vueloService.crearVuelo(dto);
 
             return new ResponseEntity<>(nuevoVueloDTO, HttpStatus.OK);
 
-        }catch (Exception e){
+        }catch (VueloNoCreadoException e){
 
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
 
         }
     }

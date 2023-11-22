@@ -1,21 +1,42 @@
 package tuti.desi.servicios;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tuti.desi.accesoDatos.IVueloRepo;
 import tuti.desi.dto.VueloDTO;
 import tuti.desi.entidades.Vuelo;
+import tuti.desi.excepciones.VueloNoCreadoException;
+import tuti.desi.mapper.VueloMapper;
 
 import java.util.Optional;
 
 @Service
 public class VueloServiceImpl implements VueloService {
 
-    IVueloRepo vueloRepo;
+    private final IVueloRepo vueloRepo;
+    private final VueloMapper vueloMapper;
+
+    @Autowired
+    public VueloServiceImpl(IVueloRepo vueloRepo, VueloMapper vueloMapper) {
+        this.vueloRepo = vueloRepo;
+        this.vueloMapper = vueloMapper;
+    }
+
 
     @Override
-    public VueloDTO crearVuelo(VueloDTO vueloDTO){
+    public VueloDTO crearVuelo(VueloDTO vueloDTO) throws VueloNoCreadoException {
+        try{
+            Vuelo vuelo = vueloMapper.vueloDTOToVuelo(vueloDTO);
+            vueloRepo.save(vuelo);
 
-        return null;
+            return vueloDTO;
+
+        }catch(Exception e){
+
+            throw new VueloNoCreadoException("Ha ocurrido un error interno." +
+                    " No se pudo crear el registro en la base de datos");
+        }
+
     }
 
     @Override
