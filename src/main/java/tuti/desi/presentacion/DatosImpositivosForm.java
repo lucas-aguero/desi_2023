@@ -13,30 +13,18 @@ public class DatosImpositivosForm {
 	private LocalDateTime fecha;
 	private Long id;
 
-	@NotNull (message = "Debe ingresar el iva")
-	@Min(value=0, message = "El porcentaje de iva debe ser mayor o igual a 0")
-	@Max(value=100, message = "El porcentaje de iva debe ser menor o igual a 100")
 	private int iva;
-	
-	@NotNull (message = "Debe ingresar la cotización del dolar")
-	@DecimalMin(value="0.00", message = "El valor de la cotización debe ser mayor o igual a 0 y no debe exceder los dos decimales.")
-	private Double cotizacion_dolar;
-	
-	@NotNull (message = "Debe ingresar el valor de la tasa aeroportuaria Nacional")
-	@DecimalMin(value="0.00", message = "El valor de la tasa debe ser mayor o igual a 0 y no debe exceder los dos decimales.")
-	private Double tasa_aeroportuaria_nacional;
-	
-	@NotNull (message = "Debe ingresar el valor de la tasa aeroportuaria Internacional")
-	@DecimalMin(value="0.00", message = "El valor de la tasa debe ser mayor o igual a 0 y no debe exceder los dos decimales.")
-	private Double tasa_aeroportuaria_internacional;
+	private Double cotizacionDolar;
+	private Double tasaAeroportuariaNacional;
+	private Double tasaAeroportuariaInternacional;
 	
 	
 	public DatosImpositivosForm(DatosImpositivos a) {
 		super();
-		this.cotizacion_dolar = a.getCotizacionDolar();
+		this.cotizacionDolar = a.getCotizacionDolar();
 		this.iva = a.getIva();
-		this.tasa_aeroportuaria_internacional = a.getTasaAeroportuariaInternacional();
-		this.tasa_aeroportuaria_nacional = a.getTasaAeroportuariaNacional();
+		this.tasaAeroportuariaInternacional = a.getTasaAeroportuariaInternacional();
+		this.tasaAeroportuariaNacional = a.getTasaAeroportuariaNacional();
 		this.fecha = LocalDateTime.now();
 		this.id = a.getId();
 	}
@@ -49,9 +37,9 @@ public class DatosImpositivosForm {
 	{
 		DatosImpositivos a = new DatosImpositivos();
 		a.setIva(this.iva);
-		a.setCotizacionDolar(this.cotizacion_dolar);
-		a.setTasaAeroportuariaInternacional(this.tasa_aeroportuaria_internacional);
-		a.setTasaAeroportuariaNacional(this.tasa_aeroportuaria_nacional);
+		a.setCotizacionDolar(this.cotizacionDolar);
+		a.setTasaAeroportuariaInternacional(this.tasaAeroportuariaInternacional);
+		a.setTasaAeroportuariaNacional(this.tasaAeroportuariaNacional);
 		a.setFechaModificacion(LocalDateTime.now());
 		a.setId(this.id);
 		return a;
@@ -74,27 +62,27 @@ public class DatosImpositivosForm {
 	}
 
 	public Double getTasaAeroportuariaNacional() {
-		return tasa_aeroportuaria_nacional;
+		return tasaAeroportuariaNacional;
 	}
 
 	public void setTasaAeroportuariaNacional(Double tasaAeroportuariaNacional) {
-		this.tasa_aeroportuaria_nacional = tasaAeroportuariaNacional;
+		this.tasaAeroportuariaNacional = tasaAeroportuariaNacional;
 	}
 
 	public Double getTasaAeroportuariaInternacional() {
-		return tasa_aeroportuaria_internacional;
+		return tasaAeroportuariaInternacional;
 	}
 
 	public void setTasaAeroportuariaInternacional(Double tasaAeroportuariaInternacional) {
-		this.tasa_aeroportuaria_internacional = tasaAeroportuariaInternacional;
+		this.tasaAeroportuariaInternacional = tasaAeroportuariaInternacional;
 	}
 
 	public Double getCotizacionDolar() {
-		return cotizacion_dolar;
+		return cotizacionDolar;
 	}
 
 	public void setCotizacionDolar(Double cotizacionDolar) {
-		this.cotizacion_dolar = cotizacionDolar;
+		this.cotizacionDolar = cotizacionDolar;
 	}
 
 	public LocalDateTime getFechaModificacion() {

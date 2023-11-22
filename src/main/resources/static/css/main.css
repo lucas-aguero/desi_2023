@@ -65,3 +65,13 @@ float: left;
 .error {
     color: red;
 }
+
+.error-message {
+    color: red; /* Color del texto del mensaje de error */
+    font-size: 12px; /* Tamaño de fuente del mensaje de error */
+}
+
+.error-input {
+    border: 1px solid red; /* Borde rojo para el campo con error */
+}
+
