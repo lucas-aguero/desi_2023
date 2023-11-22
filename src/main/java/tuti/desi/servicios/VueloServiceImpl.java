@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import tuti.desi.accesoDatos.IVueloRepo;
 import tuti.desi.dto.VueloDTO;
 import tuti.desi.entidades.Vuelo;
+import tuti.desi.entidades.enums.EstadoVuelo;
 import tuti.desi.excepciones.VueloNoCreadoException;
 import tuti.desi.excepciones.VueloNoEncontradoException;
 import tuti.desi.mapper.VueloMapper;
@@ -29,6 +30,9 @@ public class VueloServiceImpl implements VueloService {
         //Formatear fechas antes de crear vuelo
         try{
             Vuelo vuelo = vueloMapper.vueloDTOToVuelo(vueloDTO);
+            vuelo.setEstadoVuelo(EstadoVuelo.NORMAL);
+            vuelo.setTipoVuelo();
+
             vueloRepo.save(vuelo);
 
             return vueloMapper.vueloToVueloDTO(vuelo);
