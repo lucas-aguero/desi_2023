@@ -10,7 +10,7 @@
 
         th, td {
             display: inline-block;
-            width: 150px; /* Puedes ajustar el ancho según tus necesidades */
+            width: 150px;
             text-align: left;
             padding: 8px;
         }
@@ -20,12 +20,13 @@
         }
 
         .acciones {
-            margin-top: 10px; /* Puedes ajustar el margen según tus necesidades */
+            margin-top: 10px;
         }
     </style>
 </head>
 <body>
     <h2>Datos Impositivos</h2>
+    <form th:action="@{/datosImpositivos}" th:object="${formBean}" method="post">
     <table>
         <thead>
             <tr>
@@ -34,25 +35,25 @@
                 <th>Tasa Aeroportuaria Internacional: USD</th>
                 <th>Cotización Dólar: $</th>
                 <th>Fecha Modificación: </th>
-                <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
-            <tr th:each="datosImpositivos : ${datosImpositivosList}">
-                <td th:text="${datosImpositivos.iva}"></td>
-                <td th:text="${datosImpositivos.tasaAeroportuariaNacional}"></td>
-                <td th:text="${datosImpositivos.tasaAeroportuariaInternacional}"></td>
-                <td th:text="${datosImpositivos.cotizacionDolar}"></td>
-                <td th:text="${datosImpositivos.fechaModificacion}"></td>
-                <td>
-                   <a th:href="@{/datosImpositivos/editarDatosImpositivos/{id}(id=${datosImpositivos.id})}">Editar</a>
-                </td>
-            </tr>
+            <tr>
+				<td th:text="${ultimoRegistro != null ? ultimoRegistro.iva : ''}"></td>
+				 <td th:text="${ultimoRegistro.tasaAeroportuariaNacional}"></td>
+				 <td th:text="${ultimoRegistro.tasaAeroportuariaInternacional}"></td>
+				 <td th:text="${ultimoRegistro.cotizacionDolar}"></td>
+				  <td th:text="${ultimoRegistro.fechaModificacion}"></td>
+			</tr>
         </tbody>
     </table>
-    <div class="acciones">
-        <button type="submit">Cancelar</button>
-    </div>
+     <table class="botones">
+      <tr>
+	      <td><input type="submit" name="action" value="Editar" /></td>
+	       <td><input type="submit" name="action" value="Cancelar" /></td>
+      </tr>
+    </table>
+    </form>
 </body>
 </html>
 

@@ -10,7 +10,8 @@ import tuti.desi.entidades.DatosImpositivos;
 
 public class DatosImpositivosForm {
 	
-	private LocalDate fecha;
+	private LocalDateTime fecha;
+	private Long id;
 
 	@NotNull (message = "Debe ingresar el iva")
 	@Min(value=0, message = "El porcentaje de iva debe ser mayor o igual a 0")
@@ -36,7 +37,8 @@ public class DatosImpositivosForm {
 		this.iva = a.getIva();
 		this.tasa_aeroportuaria_internacional = a.getTasaAeroportuariaInternacional();
 		this.tasa_aeroportuaria_nacional = a.getTasaAeroportuariaNacional();
-		this.fecha = LocalDate.now();
+		this.fecha = LocalDateTime.now();
+		this.id = a.getId();
 	}
 	
 	public DatosImpositivosForm() {
@@ -51,7 +53,55 @@ public class DatosImpositivosForm {
 		a.setTasaAeroportuariaInternacional(this.tasa_aeroportuaria_internacional);
 		a.setTasaAeroportuariaNacional(this.tasa_aeroportuaria_nacional);
 		a.setFechaModificacion(LocalDateTime.now());
+		a.setId(this.id);
 		return a;
 	}
 	
+	public Long getId() {
+	    return id;
+	}
+
+	public void setId(Long id) {
+	    this.id = id;
+	}	
+	
+	public int getIva() {
+		return iva;
+	}
+	
+	public void setIva(int iva) {
+		this.iva = iva;
+	}
+
+	public Double getTasaAeroportuariaNacional() {
+		return tasa_aeroportuaria_nacional;
+	}
+
+	public void setTasaAeroportuariaNacional(Double tasaAeroportuariaNacional) {
+		this.tasa_aeroportuaria_nacional = tasaAeroportuariaNacional;
+	}
+
+	public Double getTasaAeroportuariaInternacional() {
+		return tasa_aeroportuaria_internacional;
+	}
+
+	public void setTasaAeroportuariaInternacional(Double tasaAeroportuariaInternacional) {
+		this.tasa_aeroportuaria_internacional = tasaAeroportuariaInternacional;
+	}
+
+	public Double getCotizacionDolar() {
+		return cotizacion_dolar;
+	}
+
+	public void setCotizacionDolar(Double cotizacionDolar) {
+		this.cotizacion_dolar = cotizacionDolar;
+	}
+
+	public LocalDateTime getFechaModificacion() {
+		return fecha;
+	}
+
+	public void setFechaModificacion(LocalDateTime fechaModificacion) {
+		this.fecha = fechaModificacion;
+	}
 }

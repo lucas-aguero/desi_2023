@@ -5,22 +5,21 @@
 </head>
 <body>
     <h2>Editar Datos Impositivos</h2>
-    <form th:object="${datosImpositivos}" th:action="@{/datosImpositivos/guardarDatos}" method="post">
+    <form th:object="${formBean}" th:action="@{/editarDatosImpositivos}" method="post">
         <input type="hidden" th:field="*{id}" />
         <label>IVA:</label>
         <input type="text" th:field="*{iva}" />
         <br />
         <label>Tasa Aeroportuaria Nacional:</label>
-        <input type="text" th:field="*{tasaAeroportuariaNacional}" />
+        <input type="text" th:field="*{tasa_aeroportuaria_nacional}" />
         <br />
         <label>Tasa Aeroportuaria Internacional:</label>
-        <input type="text" th:field="*{tasaAeroportuariaInternacional}" />
+        <input type="text" th:field="*{tasa_aeroportuaria_internacional}" />
         <br />
         <label>Cotización Dólar:</label>
-        <input type="text" th:field="*{cotizacionDolar}" />
+        <input type="text" th:field="*{cotizacion_dolar}" />
         <br />
         <button type="submit">Guardar</button>
     </form>
 </body>
 </html>
-

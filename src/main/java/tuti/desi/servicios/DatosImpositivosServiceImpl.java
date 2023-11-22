@@ -6,7 +6,6 @@ import tuti.desi.entidades.DatosImpositivos;
 import tuti.desi.excepciones.Excepcion;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 import java.util.regex.Pattern;
 
 @Service
@@ -18,11 +17,6 @@ public class DatosImpositivosServiceImpl implements DatosImpositivosService {
 	@Override
 	public List<DatosImpositivos> getAll() {
 		return datosImpositivosRepo.findAll();
-	}
-	
-	@Override 
-	public DatosImpositivos getById(Optional<Long> id) {
-		return datosImpositivosRepo.findById(id.orElse(null)).orElse(null);
 	}
 
 	@Override
@@ -52,19 +46,6 @@ public class DatosImpositivosServiceImpl implements DatosImpositivosService {
         	throw new Excepcion("El campo de Cotización del dolar no puede ser negativo y cómo máximo debe tener dos decimales. Debe estar en pesos.");
         }
     }
-	
-	@Override
-	public void saveOrUpdate(DatosImpositivos datosImpositivos) throws Excepcion {
-		
-		if (datosImpositivosRepo.findAll() != null) {
-			validarDatosImpositivos(datosImpositivos);
-			//Actualizar la fecha de modificación antes de guardar
-			datosImpositivos.setFechaModificacion(LocalDateTime.now());
-			datosImpositivosRepo.updateDatosImpositivos(datosImpositivos.getCotizacionDolar(), datosImpositivos.getFechaModificacion(),datosImpositivos.getIva() , datosImpositivos.getTasaAeroportuariaInternacional(), datosImpositivos.getTasaAeroportuariaNacional());
-		} else {
-			save(datosImpositivos);
-		}
-	}
 	
     private boolean validarDecimales(Double valor, int maxDecimales) throws Excepcion {
         if (valor != null) {
