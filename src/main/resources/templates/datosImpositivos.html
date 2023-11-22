@@ -9,10 +9,8 @@
         }
 
         th, td {
-            display: inline-block;
-            width: 150px;
-            text-align: left;
             padding: 8px;
+            text-align: left;
         }
 
         th {
@@ -23,37 +21,37 @@
             margin-top: 10px;
         }
     </style>
+    <link rel="stylesheet" th:href="@{/css/main.css}"/>
 </head>
 <body>
     <h2>Datos Impositivos</h2>
     <form th:action="@{/datosImpositivos}" th:object="${formBean}" method="post">
-    <table>
-        <thead>
+        <table>
             <tr>
-                <th>IVA: %</th>
-                <th>Tasa Aeroportuaria Nacional: $</th>
-                <th>Tasa Aeroportuaria Internacional: USD</th>
-                <th>Cotización Dólar: $</th>
-                <th>Fecha Modificación: </th>
+                <td><b>IVA: %</b></td>
+                <td><span th:text="${ultimoRegistro != null ? ultimoRegistro.iva : ''}"></span></td>
             </tr>
-        </thead>
-        <tbody>
             <tr>
-				<td th:text="${ultimoRegistro != null ? ultimoRegistro.iva : ''}"></td>
-				 <td th:text="${ultimoRegistro.tasaAeroportuariaNacional}"></td>
-				 <td th:text="${ultimoRegistro.tasaAeroportuariaInternacional}"></td>
-				 <td th:text="${ultimoRegistro.cotizacionDolar}"></td>
-				  <td th:text="${ultimoRegistro.fechaModificacion}"></td>
-			</tr>
-        </tbody>
-    </table>
-     <table class="botones">
-      <tr>
-	      <td><input type="submit" name="action" value="Editar" /></td>
-	       <td><input type="submit" name="action" value="Cancelar" /></td>
-      </tr>
-    </table>
+                <td><b>Tasa Aeroportuaria Nacional: $</b></td>
+                <td><span th:text="${ultimoRegistro.tasaAeroportuariaNacional}"></span></td>
+            </tr>
+            <tr>
+                <td><b>Tasa Aeroportuaria Internacional: USD</b></td>
+                <td><span th:text="${ultimoRegistro.tasaAeroportuariaInternacional}"></span></td>
+            </tr>
+            <tr>
+                <td><b>Cotización Dólar: $</b></td>
+                <td><span th:text="${ultimoRegistro.cotizacionDolar}"></span></td>
+            </tr>
+            <tr>
+                <td><b>Fecha Modificación:</b></td>
+                <td><span th:text="${ultimoRegistro.fechaModificacion}"></span></td>
+            </tr>
+        </table>
+        <div class="acciones">
+            <input type="submit" name="action" value="Editar" />
+            <input type="submit" name="action" value="Cancelar" />
+        </div>
     </form>
 </body>
 </html>
-
