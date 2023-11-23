@@ -62,7 +62,7 @@ public class Vuelo {
     public void setTipoVuelo() {
         String argentina = "AR";
 
-        if(argentina.equalsIgnoreCase(this.destino.getCountry())) {
+        if(argentina.equalsIgnoreCase(this.origen.getCountry()) && argentina.equalsIgnoreCase(this.destino.getCountry())) {
             this.tipoVuelo = TipoVuelo.NACIONAL;
         }
         else {
