@@ -21,7 +21,6 @@ import java.util.UUID;
 @Table(name = "vuelos")
 public class Vuelo {
     @Id
-    //@GeneratedValue(strategy = GenerationType.IDENTITY)
     @GeneratedValue
     @Column(name = "nro_vuelo")
     private UUID nroVuelo;
