@@ -13,6 +13,7 @@ import tuti.desi.entidades.enums.TipoVuelo;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.UUID;
 
 @Data
 @Builder
@@ -20,9 +21,9 @@ import java.time.LocalTime;
 @Table(name = "vuelos")
 public class Vuelo {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     @Column(name = "nro_vuelo")
-    private Long nroVuelo;
+    private UUID nroVuelo;
     @Column(name = "fecha_partida")
     @DateTimeFormat
     @NotNull
