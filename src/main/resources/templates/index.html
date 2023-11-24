@@ -1,20 +1,28 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-  <body>
-	
-   
-	
-   <div class="starter-template">
-        <h1>Ejemplo Spring Boot Web Thymeleaf </h1>
-        <h2>
-            <span th:text="'Bienvenido'"></span>
-        </h2>
-    </div>
- 
-    <a th:href="ciudadesBuscar">Buscar Ciudades</a>
-    <a th:href="datosImpositivos">Datos Impositivos</a>
-    
+    <head>
+        <meta th:replace=" ~{parent/template::charset}">
+        <meta th:replace=" ~{parent/template::viewport}">
+        <title>Home</title>
+        <meta th:replace=" ~{parent/template::bootstrap}">
+    </head>
 
-        
-  </body>
+    <body>
+        <!--NAVBAR-->
+        <header th:replace=" ~{parent/template::header}">
+            <div class="starter-template">
+                <h1>Ejemplo Spring Boot Web Thymeleaf </h1>
+                <h2>
+                    <span th:text="'Bienvenido'"></span>
+                </h2>
+            </div>
+        </header>
+
+
+
+        <a th:href="ciudadesBuscar">Buscar Ciudades</a>
+        <a th:href="datosImpositivos">Datos Impositivos</a>
+
+        <script th:replace="~{parent/template::js-bundle}"></script>
+    </body>
 </html>

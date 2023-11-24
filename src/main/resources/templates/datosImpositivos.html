@@ -19,6 +19,7 @@
        }
    </style>
    <link rel="stylesheet" th:href="@{/css/main.css}"/>
+    <link th:replace=" ~{bootstrap}"></th:replace>
 </head>
 <body>
    <h2>Datos Impositivos</h2>
@@ -52,5 +53,6 @@
            <input type="submit" name="action" value="Cancelar" />
        </div>
    </form>
+   <script th:replace="~{parent/template::js-bundle}"></script>
 </body>
 </html>

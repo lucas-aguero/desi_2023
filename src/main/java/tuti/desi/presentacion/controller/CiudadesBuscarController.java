@@ -47,7 +47,10 @@ public class CiudadesBuscarController {
     }
     
     @RequestMapping( method=RequestMethod.POST)
-    public String submit( @ModelAttribute("formBean") @Valid CiudadesBuscarForm  formBean,BindingResult result, ModelMap modelo,@RequestParam String action) throws Excepcion {
+    public String submit( @ModelAttribute("formBean") @Valid CiudadesBuscarForm  formBean,
+						  BindingResult result,
+						  ModelMap modelo,
+						  @RequestParam String action) throws Excepcion {
     	
     	
     	if(action.equals("Buscar"))

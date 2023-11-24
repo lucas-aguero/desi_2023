@@ -1,10 +1,10 @@
-package tuti.desi.dto;
+package tuti.desi.presentacion.form;
 
 import java.math.BigDecimal;
 import java.time.LocalTime;
 import java.util.UUID;
 
-public record VueloDTO(
+public record VueloForm(
         UUID nroVuelo,
         String fechaPartida,
         LocalTime horaPartida,

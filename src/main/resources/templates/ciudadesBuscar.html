@@ -2,17 +2,21 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title><span th:text="#{ciudad.buscar.titulo}"></span></title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta th:replace=" ~{parent/template::charset}">
+    <meta th:replace=" ~{parent/template::viewport}">
     <link rel="stylesheet" th:href="@{/css/main.css}"/>
+    <meta th:replace=" ~{parent/template::bootstrap}">
 </head>
 <body>
+    <header th:replace="~{parent/template::header}">
+        <div class="starter-template">
+            <h1><span  th:text="#{empresa}" /></h1>
+            <h2>
+                <span th:text="#{ciudad.buscar.titulo}"></span>
+            </h2>
+        </div>
+    </header>
 
-	<div class="starter-template">
-        <h1><span  th:text="#{empresa}" /></h1>
-        <h2>
-            <span th:text="#{ciudad.buscar.titulo}"></span>
-        </h2>
-    </div>
     
 <form  th:action="@{/ciudadesBuscar}" th:object="${formBean}" method="post">
 	<p th:each="err : ${#fields.errors('global')}" th:text="${err}" class="error" />
@@ -79,6 +83,6 @@
                             
 </form>
 
-
+    <script th:replace=" ~{parent/template::js-bundle}"></script>
 </body>
 </html>	

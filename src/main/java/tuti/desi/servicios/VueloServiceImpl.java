@@ -3,7 +3,7 @@ package tuti.desi.servicios;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tuti.desi.accesoDatos.IVueloRepo;
-import tuti.desi.dto.VueloDTO;
+import tuti.desi.presentacion.form.VueloForm;
 import tuti.desi.entidades.Vuelo;
 import tuti.desi.entidades.enums.EstadoVuelo;
 import tuti.desi.excepciones.VueloNoCreadoException;
@@ -26,16 +26,16 @@ public class VueloServiceImpl implements VueloService {
 
 
     @Override
-    public VueloDTO crearVuelo(VueloDTO vueloDTO) throws VueloNoCreadoException {
+    public VueloForm crearVuelo(VueloForm vueloDTO) throws VueloNoCreadoException {
         //Formatear fechas antes de crear vuelo
         try{
-            Vuelo vuelo = vueloMapper.vueloDTOToVuelo(vueloDTO);
+            Vuelo vuelo = vueloMapper.formToVuelo(vueloDTO);
             vuelo.setEstadoVuelo(EstadoVuelo.NORMAL);
             vuelo.setTipoVuelo();
 
             vueloRepo.save(vuelo);
 
-            return vueloMapper.vueloToVueloDTO(vuelo);
+            return vueloMapper.vueloToForm(vuelo);
 
         }catch(Exception e){
 
@@ -46,14 +46,14 @@ public class VueloServiceImpl implements VueloService {
     }
 
     @Override
-    public VueloDTO findById(Long nroVuelo){
+    public VueloForm findById(Long nroVuelo){
 
 
         Optional<Vuelo> vueloOptional = vueloRepo.findById(nroVuelo);
 
         if(vueloOptional.isPresent()){
 
-            return vueloMapper.vueloToVueloDTO(vueloOptional.get());
+            return vueloMapper.vueloToForm(vueloOptional.get());
         }else{
 
             throw new VueloNoEncontradoException("El vuelo con nro: " + nroVuelo + "no existe.");

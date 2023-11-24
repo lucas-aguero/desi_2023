@@ -56,7 +56,9 @@ public class Vuelo {
     private BigDecimal precio;
 
     public void setNroAsientos(int nroFilas, int asientosPorFila) {
+
         this.nroAsientos = nroFilas * asientosPorFila;
+
     }
 
     @Autowired //fuerzo a spring que utilice este metodo durante la IOC

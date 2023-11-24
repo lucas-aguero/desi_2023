@@ -1,11 +1,11 @@
 package tuti.desi.servicios;
 
-import tuti.desi.dto.VueloDTO;
+import tuti.desi.presentacion.form.VueloForm;
 import tuti.desi.excepciones.VueloNoCreadoException;
 
 public interface VueloService {
 
-    public VueloDTO crearVuelo(VueloDTO vueloDTO) throws VueloNoCreadoException;
+    public VueloForm crearVuelo(VueloForm vueloDTO) throws VueloNoCreadoException;
 
-    public VueloDTO findById(Long nroVuelo);
+    public VueloForm findById(Long nroVuelo);
 }
