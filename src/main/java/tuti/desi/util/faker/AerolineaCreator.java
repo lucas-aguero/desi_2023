@@ -25,15 +25,15 @@ public class AerolineaCreator {
     public void createAerolineas(){
 
         for (int i = 0; i < 10 ; i++) {
-            createAerolinea();
+            //createAerolinea();
         }
 
     }
 
-    public void createAerolineas(){
+    public void createAerolineas(int cant){
 
         for (int i = 0; i < cant ; i++) {
-            createAerolinea();
+            //createAerolinea();
         }
 
     }
