@@ -6,14 +6,13 @@ import java.util.UUID;
 
 public record VueloForm(
         UUID nroVuelo,
+        String aerolinea,
+        String aeronave,
         String fechaPartida,
         LocalTime horaPartida,
-        String avion,
         int nroAsientos,
         Long origenId,
         Long destinoId,
-        String tipoVuelo,
-        String estadoVuelo,
         BigDecimal precio
 
 ){}

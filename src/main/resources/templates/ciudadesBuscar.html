@@ -2,40 +2,36 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title><span th:text="#{ciudad.buscar.titulo}"></span></title>
-    <meta th:replace=" ~{parent/template::charset}">
-    <meta th:replace=" ~{parent/template::viewport}">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="stylesheet" th:href="@{/css/main.css}"/>
-    <meta th:replace=" ~{parent/template::bootstrap}">
 </head>
 <body>
-    <header th:replace="~{parent/template::header}">
-        <div class="starter-template">
-            <h1><span  th:text="#{empresa}" /></h1>
-            <h2>
-                <span th:text="#{ciudad.buscar.titulo}"></span>
-            </h2>
-        </div>
-    </header>
 
-    
+	<div class="starter-template">
+        <h1><span  th:text="#{empresa}" /></h1>
+        <h2>
+            <span th:text="#{ciudad.buscar.titulo}"></span>
+        </h2>
+    </div>
+
 <form  th:action="@{/ciudadesBuscar}" th:object="${formBean}" method="post">
 	<p th:each="err : ${#fields.errors('global')}" th:text="${err}" class="error" />
 	<table border="1" style="align-self: center;">
-		
+
         <tr>
             <td><label th:text="#{ciudad.nombre}" /></td>
             <td><input type="text" th:field="*{nombre}" /></td>
-            
+
         </tr>
-       
-        
+
+
          <tr>
             <td><label th:text="#{ciudad.provincia}" /></td>
             <td>
 		        <select th:field="*{provinciaSeleccionada}">
 				  <option th:value="null" text="Seleccione una opción"></option>
-				  <option th:each="p : ${allProvincias}" 
-				          th:value="${p.id}" 
+				  <option th:each="p : ${allProvincias}"
+				          th:value="${p.id}"
 				          th:text="${p.nombre}"></option>
 				</select>
 			</td>
@@ -48,10 +44,10 @@
 	      <td><input type="submit" name="action" value="Cancelar" /></td>
 	       <td><input type="submit" name="action" value="Registrar" /></td>
       </tr>
-        
+
     </table>
-    
-    
+
+
     <table  class="resultados" border="0" style="align-self: center;">
 	    <thead>
 	      <tr>
@@ -75,14 +71,14 @@
                         eliminar
                     </a>
                 </td>
-		        
+
 	      </tr>
 	    </tbody>
     </table>
-    
-                            
+
+
 </form>
 
-    <script th:replace=" ~{parent/template::js-bundle}"></script>
+
 </body>
 </html>	

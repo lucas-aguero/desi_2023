@@ -17,7 +17,7 @@ public class Aeropuerto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "icao", unique = true)
+    @Column(unique = true)
     private String icao;
     private String iata;
     @NotNull

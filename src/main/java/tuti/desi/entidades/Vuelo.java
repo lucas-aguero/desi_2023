@@ -32,11 +32,12 @@ public class Vuelo {
     @DateTimeFormat
     @NotNull
     private LocalTime horaPartida;
-    private String avion;
-    @Transient
-    private int nroFilas;
-    @Transient
-    private int asientosPorFila;
+    @ManyToOne
+    @JoinColumn(name="aerolinea_id")
+    private Aerolinea aerolinea;
+    @ManyToOne
+    @JoinColumn(name="aeronave_id")
+    private Aeronave aeronave;
     @Column(name = "nro_asientos")
     private int nroAsientos;
     //Origen y destino

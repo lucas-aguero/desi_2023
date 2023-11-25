@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+    <head>
+        <meta th:replace="~{parent/template::charset}">
+        <meta th:replace="~{parent/template::viewport}">
+        <title>Crear Vuelo</title>
+        <meta th:replace="~{parent/template::bootstrap}">
+    </head>
+    <body>
+        <!--NAVBAR-->
+        <header th:replace="~{parent/template::header}"></header>
+
+        <!--TITLE-->
+        <div class="pt-4 container-fluid">
+            <h2 class="pt-2  text-center"><strong>Programar Vuelo</strong></h2>
+            <!--FORM-->
+            <div class="container col-lg-10 pt-4">
+                <form>
+                    <div class="row pb-3">
+                        <div class="col">
+                            <label for="fechaPartida">Fecha de Partida:</label>
+                            <input type="date" id="fechaPartida" name="fechaPartida" value="2018-07-22" min="2018-01-01" max="2100-12-31" />
+                        </div>
+                        <div class="col">
+                            <label for="horaPartida">Hora de Partida:</label>
+                            <input type="time" id="horaPartida" name="horaPartida" step="60"/>
+                        </div>
+                    </div>
+                    <div class="row pb-2">
+                        <div class="col">
+                            <select id="aerolinea" class="form-select" aria-label="aerolinea">
+                                <option selected>Aerolínea</option>
+                                <option value="1">One</option>
+                                <option value="2">Two</option>
+                                <option value="3">Three</option>
+                            </select>
+                        </div>
+                        <div class="col">
+                            <select  id="aeronave" class="form-select" aria-label="aeronave">
+                                <option selected>Aeronave</option>
+                                <option value="1">One</option>
+                                <option value="2">Two</option>
+                                <option value="3">Three</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row pb-2">
+                        <div class="col">
+                            <select id="origen" class="form-select" aria-label="origen">
+                                <option selected>Origen</option>
+                                <option value="1">One</option>
+                                <option value="2">Two</option>
+                                <option value="3">Three</option>
+                            </select>
+                        </div>
+                        <div class="col">
+                            <select id="destino" class="form-select" aria-label="destino">
+                                <option selected>Destino</option>
+                                <option value="1">One</option>
+                                <option value="2">Two</option>
+                                <option value="3">Three</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row pb-2 align-items-end">
+                        <div class="col">
+                            <label for="precio" class="form-label">Precio</label>
+                            <input type="number" class="form-control" id="precio">
+                        </div>
+                        <div class="col d-flex justify-content-center">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!--JS-->
+        <script th:replace="~{parent/template::js-bundle}"></script>
+    </body>
+</html>

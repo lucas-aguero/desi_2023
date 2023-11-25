@@ -9,7 +9,7 @@ import tuti.desi.servicios.VueloService;
 
 @Validated
 @Controller
-@RequestMapping("/vuelos")
+@RequestMapping()
 public class VueloController {
     private final VueloService vueloService;
 
@@ -33,16 +33,15 @@ public class VueloController {
 //        }
 //    }
 
-    @GetMapping("/crear")
+    @GetMapping("/crearVuelo")
     public String crearVuelo(){
 
-        return "crear-vuelo";
+        return "crearVuelo";
     }
-    @PostMapping("/crear")
+    @PostMapping("/crearVuelo")
     public String submit(@ModelAttribute VueloForm vueloDTO){
 
-        return("crear-vuelo");
+        return("crearVuelo");
     }
-
 
 }
