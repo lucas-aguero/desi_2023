@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Data;
 import lombok.Singular;
+import org.hibernate.annotations.NaturalId;
 
 import java.util.List;
 
@@ -15,6 +16,7 @@ public class Aerolinea {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @NaturalId(mutable = true)
     @Column(unique = true)
     private String nombre;
     @OneToMany(mappedBy = "aerolinea")

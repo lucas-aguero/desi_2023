@@ -13,15 +13,11 @@ import tuti.desi.util.faker.AeronaveCreator;
 @Component
 public class Migrador {
 
-    private final Faker faker;
-    private final IAeronaveRepo repo;
     private final IAeropuertoService aeropuertoService;
     private final AeronaveCreator aeronaveCreator;
 
     @Autowired
     public Migrador(Faker faker, IAeronaveRepo repo, IAeropuertoService aeropuertoService, AeronaveCreator aeronaveCreator) {
-        this.faker = faker;
-        this.repo = repo;
         this.aeropuertoService = aeropuertoService;
         this.aeronaveCreator = aeronaveCreator;
     }
@@ -30,7 +26,7 @@ public class Migrador {
     @EventListener(ApplicationReadyEvent.class)
     public void initialize(){
         //aeropuertoService.loadAirportsFromJsonFile();
-        aeronaveCreator.createAeronaves();
+        aeronaveCreator.createAeronaves(1);
     }
 
 }

@@ -39,13 +39,7 @@ public class AeronaveCreator {
     public void createAeronaves(int cant){
 
         for (int i = 0; i < cant ; i++) {
-
-            Aeronave aeronave = new Aeronave(
-                    faker.aviation().aircraft(),
-                    faker.number().numberBetween(5,10),
-                    faker.number().numberBetween(10,30));
-
-            repo.save(aeronave);
+            createAeronave();
         }
 
     }

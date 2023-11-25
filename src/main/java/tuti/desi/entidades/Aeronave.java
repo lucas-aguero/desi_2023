@@ -31,7 +31,7 @@ public class Aeronave {
      this.modelo = modelo;
      this.nroFilas = nroFilas;
      this.asientosPorFila = asientosPorFila;
-     capacidad = nroFilas*asientosPorFila;
+     this.capacidad = nroFilas*asientosPorFila;
 
     }
 }
