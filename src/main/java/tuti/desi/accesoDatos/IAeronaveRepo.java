@@ -2,13 +2,14 @@ package tuti.desi.accesoDatos;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+import tuti.desi.entidades.Aeronave;
 import tuti.desi.entidades.Aeropuerto;
 
 import java.util.Optional;
 
 @Repository
-public interface IAeropuertoRepo extends JpaRepository<Aeropuerto, Long> {
+public interface IAeronaveRepo extends JpaRepository<Aeronave, Long> {
 
-    Optional<Aeropuerto> findByNombre(String nombre);
+    Optional<Aeropuerto> findByModelo(String modelo);
 
 }
