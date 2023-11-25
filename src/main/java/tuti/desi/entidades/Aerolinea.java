@@ -16,7 +16,6 @@ public class Aerolinea {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NaturalId(mutable = true)
     @Column(unique = true)
     private String nombre;
     @OneToMany(mappedBy = "aerolinea")

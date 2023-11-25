@@ -11,4 +11,6 @@ public interface IAerolineaRepo extends JpaRepository<Aerolinea, Long> {
 
     Optional<Aerolinea> findByNombre(String nombre);
 
+    boolean existsByNombre(String nombre);
+
 }

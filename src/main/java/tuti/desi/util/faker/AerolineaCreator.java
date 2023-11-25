@@ -1,6 +1,6 @@
 package tuti.desi.util.faker;
 
-import com.github.javafaker.Faker;
+import net.datafaker.Faker;
 import org.springframework.stereotype.Component;
 import tuti.desi.accesoDatos.IAerolineaRepo;
 import tuti.desi.entidades.Aerolinea;
@@ -17,23 +17,48 @@ public class AerolineaCreator {
         this.repo = repo;
     }
 
-//    private void createAerolinea() {
-////        Aerolinea = Aerolinea.builder()
-////                .nombre(faker.aviation().airline()).build();
-//    }
+    private Aerolinea createAerolinea() {
 
-    public void createAerolineas(){
+        return Aerolinea.builder()
+                .nombre(faker.aviation().airline())
+                .build();
+    }
+
+    public void persistAerolineas(){
+
+        String nombreAerolinea;
 
         for (int i = 0; i < 10 ; i++) {
-            //createAerolinea();
+
+            Aerolinea aerolinea = createAerolinea();
+            nombreAerolinea = aerolinea.getNombre();
+
+            if(repo.existsByNombre(nombreAerolinea) && i > 0){
+                i--;
+
+            } else if (!repo.existsByNombre(nombreAerolinea)){
+                repo.save(aerolinea);
+            }
+
         }
 
     }
 
-    public void createAerolineas(int cant){
+    public void persistAerolineas(int cant){
+        String nombreAerolinea;
 
         for (int i = 0; i < cant ; i++) {
-            //createAerolinea();
+
+            Aerolinea aerolinea = createAerolinea();
+            nombreAerolinea = aerolinea.getNombre();
+
+            if(repo.existsByNombre(nombreAerolinea) && i > 0){
+                i--;
+
+            } else if (!repo.existsByNombre(nombreAerolinea)){
+                repo.save(aerolinea);
+            }
+
         }
 
     }

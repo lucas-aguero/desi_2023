@@ -1,7 +1,6 @@
 package tuti.desi.util.faker;
 
-
-import com.github.javafaker.Faker;
+import net.datafaker.Faker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import tuti.desi.accesoDatos.IAeronaveRepo;
@@ -18,31 +17,47 @@ public class AeronaveCreator {
         this.repo = repo;
     }
 
-    public void createAeronave(){
+    public Aeronave createAeronave(){
 
-        Aeronave aeronave = new Aeronave(
-                faker.aviation().aircraft(),
+        //        if(!repo.existsByModelo(aeronave.getModelo()))
+    //            repo.save(aeronave);
+        return new Aeronave(
+                faker.aviation().airplane(),
                 faker.number().numberBetween(5,10),
                 faker.number().numberBetween(10,30));
 
-        if(!repo.existsByModelo(aeronave.getModelo()))
-            repo.save(aeronave);
-
     }
-    public void createAeronaves(){
+    public void persistAeronaves(){
+        String modeloAeronave;
 
         for (int i = 0; i < 10 ; i++) {
-            createAeronave();
+            Aeronave aeronave = createAeronave();
+            modeloAeronave = aeronave.getModelo();
+
+            if(repo.existsByModelo(modeloAeronave) && i > 0){
+                i--;
+
+            } else if (!repo.existsByModelo(modeloAeronave)){
+                repo.save(aeronave);
+            }
         }
 
     }
-    public void createAeronaves(int cant){
+    public void persistAeronaves(int cant){
+        String modeloAeronave;
 
         for (int i = 0; i < cant ; i++) {
-            createAeronave();
+            Aeronave aeronave = createAeronave();
+            modeloAeronave = aeronave.getModelo();
+
+            if(repo.existsByModelo(modeloAeronave) && i > 0){
+                i--;
+
+            } else if (!repo.existsByModelo(modeloAeronave)){
+                repo.save(aeronave);
+            }
         }
 
     }
-
 
 }
