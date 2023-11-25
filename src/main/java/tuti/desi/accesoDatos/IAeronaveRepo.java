@@ -10,5 +10,5 @@ import java.util.Optional;
 public interface IAeronaveRepo extends JpaRepository<Aeronave, Long> {
 
     Optional<Aeronave> findByModelo(String modelo);
-
+    boolean existsByModelo(String modelo);
 }

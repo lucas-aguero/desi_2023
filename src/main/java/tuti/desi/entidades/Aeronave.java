@@ -3,12 +3,13 @@ package tuti.desi.entidades;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.Singular;
 
 import java.util.List;
 
 @Data
-@Builder
+@NoArgsConstructor
 @Entity
 @Table(name="aeronaves")
 public class Aeronave {
@@ -24,4 +25,13 @@ public class Aeronave {
     private int capacidad;
     @OneToMany(mappedBy = "aeronave")
     private @Singular("vueloAeronave") List<Vuelo> vuelosAeronave;
+
+    public Aeronave(String modelo, int nroFilas, int asientosPorFila){
+
+     this.modelo = modelo;
+     this.nroFilas = nroFilas;
+     this.asientosPorFila = asientosPorFila;
+     capacidad = nroFilas*asientosPorFila;
+
+    }
 }
