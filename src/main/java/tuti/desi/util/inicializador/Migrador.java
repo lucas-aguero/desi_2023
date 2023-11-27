@@ -28,8 +28,8 @@ public class Migrador {
     @EventListener(ApplicationReadyEvent.class)
     public void initialize(){
         //aeropuertoService.loadAirportsFromJsonFile();
-        aeronaveCreator.persistAeronaves(50);
-        aerolineaCreator.persistAerolineas(50);
+//        aeronaveCreator.persistAeronaves(50);
+//        aerolineaCreator.persistAerolineas(50);
     }
 
 }
