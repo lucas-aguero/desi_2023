@@ -1,13 +1,17 @@
 package tuti.desi.servicios;
 
-import tuti.desi.dto.VueloDTO;
+import tuti.desi.presentacion.form.NuevoVueloForm;
+import tuti.desi.entidades.Vuelo;
 import tuti.desi.excepciones.VueloNoCreadoException;
+
+import java.util.List;
 
 public interface VueloService {
 
-    public VueloDTO crearVuelo(VueloDTO vueloDTO) throws VueloNoCreadoException;
+    public NuevoVueloForm crearVuelo(NuevoVueloForm vueloDTO) throws VueloNoCreadoException;
 
-    public VueloDTO findById(Long nroVuelo);
+    public NuevoVueloForm findById(Long nroVuelo);
 
-    //public List<VueloForm> getVuelos();
+    public List<Vuelo> getVuelos();
+
 }

@@ -4,7 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import tuti.desi.dto.VueloDTO;
+import tuti.desi.presentacion.form.NuevoVueloForm;
+import tuti.desi.servicios.AerolineaService;
 import tuti.desi.servicios.VueloService;
 
 @Validated
@@ -12,11 +13,35 @@ import tuti.desi.servicios.VueloService;
 @RequestMapping()
 public class VueloController {
     private final VueloService vueloService;
+    private final AerolineaService aerolineaService;
 
     @Autowired
-    public VueloController(VueloService vueloService) {
+    public VueloController(VueloService vueloService, AerolineaService aerolineaService) {
         this.vueloService = vueloService;
+        this.aerolineaService = aerolineaService;
     }
+
+    @GetMapping("/crearVuelo")
+    public String prepararVueloForm(){
+
+        return "crearVuelo";
+    }
+
+    @PostMapping("/crearVuelo")
+    public String submit(@ModelAttribute NuevoVueloForm form){
+        NuevoVueloForm dto;
+
+        //List<AerolineaDTO> aerolineas = aerolineaService.getAerolineas();
+
+
+        //model.addAttribute("dto",dto);
+        //model.addAttribute("aeronaves", aeronaves);
+
+        return("crearVuelo");
+    }
+
+}
+
 
 //    @PostMapping("/vuelos")
 //    public ResponseEntity<?> crearVuelo(@RequestBody VueloDTO dto, HttpServletRequest request){
@@ -32,16 +57,3 @@ public class VueloController {
 //
 //        }
 //    }
-
-    @GetMapping("/crearVuelo")
-    public String crearVuelo(){
-
-        return "crearVuelo";
-    }
-    @PostMapping("/crearVuelo")
-    public String submit(@ModelAttribute VueloDTO vueloDTO){
-
-        return("crearVuelo");
-    }
-
-}

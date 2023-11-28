@@ -16,7 +16,7 @@
             <h2 class="pt-2  text-center"><strong>Programar Vuelo</strong></h2>
             <!--FORM-->
             <div class="container col-lg-10 pt-4">
-                <form>
+                <form th:action="@{/crearVuelo}" th:object="${dto}" method="POST">
                     <div class="row pb-3">
                         <div class="col">
                             <label for="fechaPartida">Fecha de Partida:</label>

@@ -10,6 +10,6 @@ import java.util.Optional;
 @Service
 public interface AerolineaService {
     List<AerolineaDTO> getAerolineas();
-    Optional<AerolineaDTO> findByNombre();
+    //Optional<AerolineaDTO> findByNombre();
 
 }
