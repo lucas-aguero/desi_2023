@@ -18,6 +18,6 @@ public interface AeronaveMapper {
     @Mapping(target = "vuelosAeronave", ignore = true)
     Aeronave dtoToAeronave(AeronaveDTO dto);
 
-    List<Aeronave> aeronavesToAeronaveDTOs(List<Aeronave> aeronaves);
-    List<AeronaveDTO> aeronavesDTOsToAeronaves(List<AeronaveDTO> dtos);
+    List<AeronaveDTO> aeronavesToAeronaveDTOs(List<Aeronave> aeronaves);
+    List<Aeronave> aeronavesDTOsToAeronaves(List<AeronaveDTO> dtos);
 }

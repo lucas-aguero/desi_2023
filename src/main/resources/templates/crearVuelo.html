@@ -16,7 +16,8 @@
             <h2 class="pt-2  text-center"><strong>Programar Vuelo</strong></h2>
             <!--FORM-->
             <div class="container col-lg-10 pt-4">
-                <form th:action="@{/crearVuelo}" th:object="${dto}" method="POST">
+                <form th:action="@{/crearVuelo}" th:object="${formBean}" method="POST">
+                    <!--FECHA HORA DE PARTIDA-->
                     <div class="row pb-3">
                         <div class="col">
                             <label for="fechaPartida">Fecha de Partida:</label>
@@ -27,42 +28,46 @@
                             <input type="time" id="horaPartida" name="horaPartida" step="60"/>
                         </div>
                     </div>
+                    <!--ORIGEN - DESTINO-->
                     <div class="row pb-2">
                         <div class="col">
-                            <select id="aerolinea" class="form-select" aria-label="aerolinea">
-                                <option selected>Aerolínea</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
+                            <select th:field="*{origenId}" id="origenId" class="form-select" aria-label="origenId">
+                                <option th:value="null" th:text="Salida" selected></option>
+                                <option th:each="aeropuerto : ${aeropuertos}"
+                                        th:value="${aeropuerto.id}"
+                                        th:text="${aeropuerto.icao}+' | '+ ${aeropuerto.city} +', '
+                                        +${aeropuerto.country} "></option>
                             </select>
                         </div>
                         <div class="col">
-                            <select  id="aeronave" class="form-select" aria-label="aeronave">
-                                <option selected>Aeronave</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
+                            <select th:field="*{destinoId}" id="destinoId" class="form-select" aria-label="destinoId">
+                                <option th:value="null" th:text="Destino" selected></option>
+<!--                                <option th:each="aeropuerto : ${aeropuertos}"-->
+<!--                                        th:value="aeropuerto.id"-->
+<!--                                        th:text="aeropuerto.name"></option>-->
                             </select>
                         </div>
                     </div>
+                    <!--AEROLINEA - AERONAVE-->
                     <div class="row pb-2">
                         <div class="col">
-                            <select id="origen" class="form-select" aria-label="origen">
-                                <option selected>Origen</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
+                            <select th:field="*{aerolineaId}" id="aerolineaId" class="form-select" aria-label="aerolineaId">
+                                <option th:value="null" th:text="Aerolínea" selected></option>
+                                <option th:each="aerolinea : ${aerolineas}"
+                                        th:value="${aerolinea.id}"
+                                        th:text="${aerolinea.nombre}"></option>
                             </select>
                         </div>
                         <div class="col">
-                            <select id="destino" class="form-select" aria-label="destino">
-                                <option selected>Destino</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
+                            <select th:field="*{aeronaveId}"  id="aeronaveId" class="form-select" aria-label="aeronaveId">
+                                <option th:value="null" th:text="Aeronave" selected></option>
+                                <option th:each="aeronave : ${aeronaves}"
+                                        th:value="${aeronave.id}"
+                                        th:text="${aeronave.modelo}"></option>
                             </select>
                         </div>
                     </div>
+                    <!--PRECIO - SUBMIT-->
                     <div class="row pb-2 align-items-end">
                         <div class="col">
                             <label for="precio" class="form-label">Precio</label>

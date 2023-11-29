@@ -10,8 +10,8 @@ import tuti.desi.entidades.Vuelo;
 public interface VueloMapper {
     @Mapping(target="origenId",source="origen.id")
     @Mapping(target="destinoId", source="destino.id")
-    @Mapping(target="aerolinea", source="aerolinea.nombre"/*, ignore = true*/)
-    @Mapping(target="aeronave", source="aeronave.modelo"/*, ignore = true*/)
+    @Mapping(target="aerolineaId", source="aerolinea.id"/*, ignore = true*/)
+    @Mapping(target="aeronaveId", source="aeronave.id"/*, ignore = true*/)
     @Mapping(target = "precio", numberFormat = "#,##E0")
     @Mapping(target="fechaPartida", dateFormat = "dd/MM/yyyy")
     NuevoVueloForm vueloToForm(Vuelo vuelo);
@@ -24,8 +24,9 @@ public interface VueloMapper {
 //    @Mapping(target="estadoVuelo", ignore = true)
 //    @Mapping(target="precio", expression="java(new java.math.BigDecimal(source.precio))")
     @InheritInverseConfiguration
-    @Mapping(target="tipoVuelo", ignore = true)
+    @Mapping(target="nroVuelo", ignore = true)
     @Mapping(target="estadoVuelo", ignore = true)
+    @Mapping(target="tipoVuelo", ignore = true)
     Vuelo formToVuelo(NuevoVueloForm vueloForm);
 //    List<VueloForm> vuelosToVueloDTOs(List<Vuelo> vuelos);
 //    @Mapping(target="id", ignore = true)

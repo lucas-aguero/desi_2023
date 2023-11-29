@@ -17,24 +17,47 @@ import java.util.Map;
 @Service
 public class AeropuertoServiceImpl implements IAeropuertoService{
 
-    private final IAeropuertoRepo aeropuertoRepo;
+    private final IAeropuertoRepo repo;
     private final ResourceLoader resourceLoader;
     private final AeropuertoMapper mapper;
 
     @Autowired
     public AeropuertoServiceImpl(IAeropuertoRepo aeropuertoRepo, ResourceLoader resourceLoader, AeropuertoMapper mapper) {
-        this.aeropuertoRepo = aeropuertoRepo;
+        this.repo = aeropuertoRepo;
         this.resourceLoader = resourceLoader;
         this.mapper = mapper;
     }
 
 
     @Override
-    public List<AeropuertoDTO> getAllAeropuertos() {
+    public List<AeropuertoDTO> getAeropuertosAleatorios() {
 
-        List<Aeropuerto> aeropuertos = aeropuertoRepo.findAll();
+        List<AeropuertoDTO> aeropuertoDTOs =  getAeropuertosArgentinosAleatorios();
 
-        return mapper.aeropuertosToDTOs(aeropuertos);
+        aeropuertoDTOs.addAll(getAeropuertosExtranjerosAleatorios());
+        aeropuertoDTOs.addAll(getAeropuertosUsaAleatorios());
+
+        return aeropuertoDTOs;
+    }
+
+    public List<AeropuertoDTO> getAeropuertosArgentinosAleatorios(){
+        return mapper.aeropuertosToDTOs(repo.getAeropuertosArgentinosAleatorios());
+    }
+
+    public List<AeropuertoDTO> getAllAeropuertosArgentinos(){
+        return mapper.aeropuertosToDTOs(repo.findAllAeropuertosArgentinos());
+    }
+
+    public List<AeropuertoDTO> getAeropuertosExtranjerosAleatorios(){
+
+        List<AeropuertoDTO> aeropuertoDTOs = mapper.aeropuertosToDTOs(repo.getAeropuertosExtranjerosAleatorios());
+        aeropuertoDTOs.addAll(getAeropuertosUsaAleatorios());
+
+        return aeropuertoDTOs;
+    }
+
+    public List<AeropuertoDTO> getAeropuertosUsaAleatorios(){
+        return mapper.aeropuertosToDTOs(repo.getAeropuertosUsaAleatorios());
     }
 
     @Override
@@ -52,7 +75,7 @@ public class AeropuertoServiceImpl implements IAeropuertoService{
                             .constructMapType(Map.class, String.class, Aeropuerto.class)
             );
 
-            aeropuertoRepo.saveAll(aeropuertosMap.values());
+            repo.saveAll(aeropuertosMap.values());
 
         } catch (Exception e){
             //Personalizar error

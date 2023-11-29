@@ -1,5 +1,6 @@
 package tuti.desi.mapper;
 
+import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
@@ -11,10 +12,7 @@ import java.util.List;
 @Mapper(componentModel="spring")
 public interface AeropuertoMapper {
 
-
-    AeropuertoDTO aeropuertoToDTO(Aeropuerto aeropuerto);
-    @Mapping(target="id",ignore=true)
-    @Mapping(target="icao",ignore=true)
+    @Mapping(target="iata",ignore=true)
     @Mapping(target="state",ignore=true)
     @Mapping(target="elevation",ignore=true)
     @Mapping(target="lat",ignore=true)
@@ -24,6 +22,7 @@ public interface AeropuertoMapper {
     @Mapping(target="vuelosDestino",ignore=true)
     Aeropuerto aeropuertoDTOToAeropuerto(AeropuertoDTO aeropuerto);
 
+    AeropuertoDTO aeropuertoToDTO(Aeropuerto aeropuerto);
     List<AeropuertoDTO> aeropuertosToDTOs(List<Aeropuerto> aeropuertos);
     List<Aeropuerto> aeropuertoDTOsToAeropuertos(List<AeropuertoDTO> aeropuertos);
 
