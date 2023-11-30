@@ -3,8 +3,10 @@ package tuti.desi.entidades;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import tuti.desi.entidades.enums.EstadoVuelo;
@@ -16,6 +18,8 @@ import java.time.LocalTime;
 import java.util.UUID;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Builder
 @Entity
 @Table(name = "vuelos")
@@ -32,13 +36,14 @@ public class Vuelo {
     @DateTimeFormat
     @NotNull
     private LocalTime horaPartida;
-    private String avion;
-    @Transient
-    private int nroFilas;
-    @Transient
-    private int asientosPorFila;
+    @ManyToOne
+    @JoinColumn(name="aerolinea_id")
+    private Aerolinea aerolinea;
+    @ManyToOne
+    @JoinColumn(name="aeronave_id")
+    private Aeronave aeronave;
     @Column(name = "nro_asientos")
-    private int nroAsientos;
+    private int capacidad;
     //Origen y destino
     @JsonIgnore
     @ManyToOne
@@ -55,8 +60,10 @@ public class Vuelo {
     @NotNull
     private BigDecimal precio;
 
-    public void setNroAsientos(int nroFilas, int asientosPorFila) {
-        this.nroAsientos = nroFilas * asientosPorFila;
+    public void setCapacidad() {
+
+        this.capacidad = this.aeronave.getCapacidad();
+
     }
 
     @Autowired //fuerzo a spring que utilice este metodo durante la IOC

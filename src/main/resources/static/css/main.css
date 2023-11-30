@@ -1,5 +1,6 @@
 @charset "ISO-8859-1";
 body {
+  min-height:100%;
   padding-top: 5rem;
 }
 .starter-template {

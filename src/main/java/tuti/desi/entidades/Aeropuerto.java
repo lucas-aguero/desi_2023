@@ -2,13 +2,13 @@ package tuti.desi.entidades;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
-import lombok.Builder;
-import lombok.Data;
-import lombok.Singular;
+import lombok.*;
 
 import java.util.List;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Builder
 @Entity
 @Table(name="aeropuertos")
@@ -17,7 +17,7 @@ public class Aeropuerto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "icao", unique = true)
+    @Column(unique = true)
     private String icao;
     private String iata;
     @NotNull
