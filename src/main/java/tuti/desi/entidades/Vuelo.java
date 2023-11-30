@@ -43,7 +43,7 @@ public class Vuelo {
     @JoinColumn(name="aeronave_id")
     private Aeronave aeronave;
     @Column(name = "nro_asientos")
-    private int nroAsientos;
+    private int capacidad;
     //Origen y destino
     @JsonIgnore
     @ManyToOne
@@ -60,9 +60,9 @@ public class Vuelo {
     @NotNull
     private BigDecimal precio;
 
-    public void setNroAsientos(int nroFilas, int asientosPorFila) {
+    public void setCapacidad() {
 
-        this.nroAsientos = nroFilas * asientosPorFila;
+        this.capacidad = this.aeronave.getCapacidad();
 
     }
 

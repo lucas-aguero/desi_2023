@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
     <head>
         <meta th:replace="~{parent/template::charset}">
         <meta th:replace="~{parent/template::viewport}">
@@ -14,70 +13,27 @@
         <!--TITLE-->
         <div class="pt-4 container-fluid">
             <h2 class="pt-2  text-center"><strong>Programar Vuelo</strong></h2>
-            <!--FORM-->
-            <div class="container col-lg-10 pt-4">
-                <form th:action="@{/crearVuelo}" th:object="${formBean}" method="POST">
-                    <!--FECHA HORA DE PARTIDA-->
-                    <div class="row pb-3">
-                        <div class="col">
-                            <label for="fechaPartida">Fecha de Partida:</label>
-                            <input type="date" id="fechaPartida" name="fechaPartida" value="2018-07-22" min="2018-01-01" max="2100-12-31" />
-                        </div>
-                        <div class="col">
-                            <label for="horaPartida">Hora de Partida:</label>
-                            <input type="time" id="horaPartida" name="horaPartida" step="60"/>
-                        </div>
-                    </div>
-                    <!--ORIGEN - DESTINO-->
-                    <div class="row pb-2">
-                        <div class="col">
-                            <select th:field="*{origenId}" id="origenId" class="form-select" aria-label="origenId">
-                                <option th:value="null" th:text="Salida" selected></option>
-                                <option th:each="aeropuerto : ${aeropuertos}"
-                                        th:value="${aeropuerto.id}"
-                                        th:text="${aeropuerto.icao}+' | '+ ${aeropuerto.city} +', '
-                                        +${aeropuerto.country} "></option>
-                            </select>
-                        </div>
-                        <div class="col">
-                            <select th:field="*{destinoId}" id="destinoId" class="form-select" aria-label="destinoId">
-                                <option th:value="null" th:text="Destino" selected></option>
-<!--                                <option th:each="aeropuerto : ${aeropuertos}"-->
-<!--                                        th:value="aeropuerto.id"-->
-<!--                                        th:text="aeropuerto.name"></option>-->
-                            </select>
-                        </div>
-                    </div>
-                    <!--AEROLINEA - AERONAVE-->
-                    <div class="row pb-2">
-                        <div class="col">
-                            <select th:field="*{aerolineaId}" id="aerolineaId" class="form-select" aria-label="aerolineaId">
-                                <option th:value="null" th:text="Aerolínea" selected></option>
-                                <option th:each="aerolinea : ${aerolineas}"
-                                        th:value="${aerolinea.id}"
-                                        th:text="${aerolinea.nombre}"></option>
-                            </select>
-                        </div>
-                        <div class="col">
-                            <select th:field="*{aeronaveId}"  id="aeronaveId" class="form-select" aria-label="aeronaveId">
-                                <option th:value="null" th:text="Aeronave" selected></option>
-                                <option th:each="aeronave : ${aeronaves}"
-                                        th:value="${aeronave.id}"
-                                        th:text="${aeronave.modelo}"></option>
-                            </select>
-                        </div>
-                    </div>
-                    <!--PRECIO - SUBMIT-->
-                    <div class="row pb-2 align-items-end">
-                        <div class="col">
-                            <label for="precio" class="form-label">Precio</label>
-                            <input type="number" class="form-control" id="precio">
-                        </div>
-                        <div class="col d-flex justify-content-center">
-                            <button type="submit" class="btn btn-primary">Submit</button>
-                        </div>
-                    </div>
-                </form>
+        </div>
+        <!--FORM DIV-->
+        <div class="container-fluid pt-4 col-lg-10 ">
+            <!--NAVS SALIDAS/ARRIBOS-->
+            <ul class="nav nav-tabs justify-content-center" id="formTabs" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link active" id="tab-saliente"  data-bs-toggle="tab" data-bs-target="#tab-saliente-form"
+                       type="button" role="tab" >Saliente</a>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link" id="tab-entrante"  data-bs-toggle="tab" data-bs-target="#tab-entrante-form"
+                       type="button" role="tab" >Entrante</a>
+                </li>
+            </ul>
+            <div class="tab-content" id="tab-content">
+                <div class="tab-pane fade show active" id="tab-saliente-form" role="tabpanel" tabindex="0">
+                    <div th:replace="~{/nuevoVueloForm::nuevo-vuelo-form (${'saliente'})}"></div>
+                </div>
+                <div class="tab-pane fade" id="tab-entrante-form" role="tabpanel" tabindex="1">
+                    <div th:replace="~{/nuevoVueloForm::nuevo-vuelo-form (${'entrante'})}"></div>
+                </div>
             </div>
         </div>
 
@@ -85,3 +41,13 @@
         <script th:replace="~{parent/template::js-bundle}"></script>
     </body>
 </html>
+
+<!--NAVS NAC/INTER-->
+<!--<ul class="nav nav-pills justify-content-center">
+    <li class="nav-item">
+        <a class="nav-link active" aria-current="page" href="#">Nacionales</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="#">Internacionales</a>
+    </li>
+</ul>-->

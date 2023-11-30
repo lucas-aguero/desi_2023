@@ -11,6 +11,7 @@ import java.util.Optional;
 @Repository
 public interface IAeropuertoRepo extends JpaRepository<Aeropuerto, Long> {
 
+    boolean existsByIcao(String icao);
     Optional<Aeropuerto> findByName(String name);
     Optional<Aeropuerto> findByIcao(String icao);
     Optional<Aeropuerto> findByIata(String iata);
@@ -39,7 +40,7 @@ public interface IAeropuertoRepo extends JpaRepository<Aeropuerto, Long> {
 
     @Query("SELECT a FROM Aeropuerto a WHERE a.country = 'US' " +
             "AND a.city <> '' " +
-            "ORDER BY RAND() LIMIT 100")
+            "ORDER BY RAND() LIMIT 50")
     List<Aeropuerto> getAeropuertosUsaAleatorios();
 
 

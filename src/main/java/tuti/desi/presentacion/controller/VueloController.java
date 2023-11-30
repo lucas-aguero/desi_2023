@@ -8,6 +8,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.thymeleaf.context.LazyContextVariable;
 import tuti.desi.dto.AerolineaDTO;
 import tuti.desi.dto.AeronaveDTO;
 import tuti.desi.dto.AeropuertoDTO;
@@ -17,6 +18,7 @@ import tuti.desi.servicios.IAeronaveService;
 import tuti.desi.servicios.IAeropuertoService;
 import tuti.desi.servicios.VueloService;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Validated
@@ -69,4 +71,18 @@ public class VueloController {
         return("crearVuelo");
     }
 
+    @ModelAttribute("today")
+    public LocalDate today(){
+        return LocalDate.now();
+    }
+
+    @ModelAttribute("maxDate")
+    public LocalDate maxDate(){
+        return LocalDate.now().plusDays(365);
+    }
+
+    @ModelAttribute("aeropuertoLocal")
+    public AeropuertoDTO aeropuertoLocal(){
+        return aeropuertoService.getAeropuertoLocal();
+    }
 }
