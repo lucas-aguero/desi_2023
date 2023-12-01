@@ -1,6 +1,5 @@
 package tuti.desi.dto;
 public record AeropuertoDTO(
-
         Long id,
         String icao,
         String name,
@@ -9,6 +8,12 @@ public record AeropuertoDTO(
 ) implements Comparable<AeropuertoDTO>{
     @Override
     public int compareTo(AeropuertoDTO aeropuertoDTO) {
-        return this.city().compareTo(aeropuertoDTO.city);
+        int compararPorPais = this.country.compareTo(aeropuertoDTO.country);
+
+        if (compararPorPais != 0) {
+            return compararPorPais;
+        }
+
+        return this.city.compareTo(aeropuertoDTO.city);
     }
 }

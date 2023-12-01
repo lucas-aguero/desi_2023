@@ -59,20 +59,4 @@ public class Vuelo {
     @NotNull
     private BigDecimal precio;
 
-//    public void setCapacidad() {
-//        this.capacidad = this.aeronave.getCapacidad();
-//    }
-
-//    @Autowired //fuerzo a spring que utilice este metodo durante la IOC
-//    public void setTipoVuelo() {
-//        String argentina = "AR";
-//
-//        if(argentina.equalsIgnoreCase(this.origen.getCountry()) && argentina.equalsIgnoreCase(this.destino.getCountry())) {
-//            this.tipoVuelo = TipoVuelo.NACIONAL;
-//        }
-//        else {
-//            this.tipoVuelo = TipoVuelo.INTERNACIONAL;
-//        }
-//    }
-
 }

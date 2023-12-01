@@ -4,7 +4,6 @@ import org.springframework.stereotype.Service;
 import tuti.desi.dto.AeropuertoDTO;
 import tuti.desi.excepciones.vueloexception.VueloNoEncontradoException;
 
-import java.util.List;
 import java.util.TreeSet;
 
 @Service
@@ -13,7 +12,7 @@ public interface IAeropuertoService {
 
     TreeSet<AeropuertoDTO> getAllAeropuertos();
 
-    public List<AeropuertoDTO> getAeropuertosAleatorios();
+    public TreeSet<AeropuertoDTO> getAeropuertosAleatorios();
 
     TreeSet<AeropuertoDTO> getAeropuertosArgentinosAleatorios();
 

@@ -67,9 +67,9 @@ public class AeropuertoServiceImpl implements IAeropuertoService{
     }
 
     @Override
-    public List<AeropuertoDTO> getAeropuertosAleatorios() {
+    public TreeSet<AeropuertoDTO> getAeropuertosAleatorios() {
 
-        List<AeropuertoDTO> aeropuertoDTOs = new ArrayList<AeropuertoDTO>(getAeropuertosArgentinosAleatorios());
+        TreeSet<AeropuertoDTO> aeropuertoDTOs = new TreeSet<AeropuertoDTO>(getAeropuertosArgentinosAleatorios());
 
         aeropuertoDTOs.addAll(getAeropuertosExtranjerosAleatorios());
         aeropuertoDTOs.addAll(getAeropuertosUsaAleatorios());

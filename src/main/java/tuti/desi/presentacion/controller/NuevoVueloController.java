@@ -43,20 +43,13 @@ public class NuevoVueloController {
     public String prepararVueloForm(Model model){
 
         NuevoVueloForm form = new NuevoVueloForm();
-//        List<AerolineaDTO> aerolineas = aerolineaService.getAerolineas();
-//        List<AeronaveDTO> aeronaves = aeronaveService.getAeronaves();
-        List<AeropuertoDTO> aeropuertos = aeropuertoService.getAeropuertosAleatorios();
-
         model.addAttribute("formBean", form);
-        model.addAttribute("aeropuertos", aeropuertos);
-//        model.addAttribute("aerolineas", aerolineas);
-//        model.addAttribute("aeronaves", aeronaves);
 
         return "crearVuelo";
     }
 
     @PostMapping("/crearVuelo")
-    public String submit(@ModelAttribute("formBean")/*@Valid*/ NuevoVueloForm form,
+    public String submit(@ModelAttribute("formBean")@Valid NuevoVueloForm form,
                          ModelMap model,
                          BindingResult binding){
 
@@ -79,6 +72,11 @@ public class NuevoVueloController {
     @ModelAttribute("aeropuertoLocal")
     public AeropuertoDTO aeropuertoLocal(){
         return aeropuertoService.getAeropuertoLocal();
+    }
+
+    @ModelAttribute("aeropuertos")
+    public TreeSet<AeropuertoDTO> aeropuertos(){
+        return aeropuertoService.getAeropuertosAleatorios();
     }
 
     @ModelAttribute("aerolineas")
