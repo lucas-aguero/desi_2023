@@ -53,12 +53,13 @@ public class VueloServiceImpl implements VueloService {
             vuelo.setEstadoVuelo(EstadoVuelo.NORMAL);
             vuelo.setNroAsientos(aeronaveRepo.getNroAsientos(vuelo.getAeronave().getId()));
 
-            if(aeropuertoRepo.existsByIdAndCountryEqualsAR(vuelo.getDestino().getId())){
+            if(!aeropuertoRepo.existsByIdAndCountryEqualsAR(vuelo.getDestino().getId())
+            || !aeropuertoRepo.existsByIdAndCountryEqualsAR(vuelo.getOrigen().getId())){
 
-                vuelo.setTipoVuelo(TipoVuelo.NACIONAL);
+                vuelo.setTipoVuelo(TipoVuelo.INTERNACIONAL);
 
             } else {
-                vuelo.setTipoVuelo(TipoVuelo.INTERNACIONAL);
+                vuelo.setTipoVuelo(TipoVuelo.NACIONAL);
             }
 
             vueloRepo.save(vuelo);
