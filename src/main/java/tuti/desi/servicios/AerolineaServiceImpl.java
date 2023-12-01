@@ -6,8 +6,7 @@ import tuti.desi.accesoDatos.IAerolineaRepo;
 import tuti.desi.dto.AerolineaDTO;
 import tuti.desi.mapper.AerolineaMapper;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.TreeSet;
 
 @Service
 public class AerolineaServiceImpl implements AerolineaService{
@@ -22,7 +21,7 @@ public class AerolineaServiceImpl implements AerolineaService{
     }
 
     @Override
-    public List<AerolineaDTO> getAerolineas() {
+    public TreeSet<AerolineaDTO> getAerolineas() {
 
         return mapper.aerolineasToDTOs(repo.findAll());
 

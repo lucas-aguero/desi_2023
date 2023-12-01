@@ -8,6 +8,7 @@ import tuti.desi.dto.AeropuertoDTO;
 import tuti.desi.entidades.Aeropuerto;
 
 import java.util.List;
+import java.util.TreeSet;
 
 @Mapper(componentModel="spring")
 public interface AeropuertoMapper {
@@ -23,7 +24,7 @@ public interface AeropuertoMapper {
     Aeropuerto aeropuertoDTOToAeropuerto(AeropuertoDTO aeropuerto);
 
     AeropuertoDTO aeropuertoToDTO(Aeropuerto aeropuerto);
-    List<AeropuertoDTO> aeropuertosToDTOs(List<Aeropuerto> aeropuertos);
-    List<Aeropuerto> aeropuertoDTOsToAeropuertos(List<AeropuertoDTO> aeropuertos);
+    TreeSet<AeropuertoDTO> aeropuertosToDTOs(List<Aeropuerto> aeropuertos);
+    TreeSet<Aeropuerto> aeropuertoDTOsToAeropuertos(List<AeropuertoDTO> aeropuertos);
 
 }

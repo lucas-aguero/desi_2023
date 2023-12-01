@@ -2,6 +2,7 @@ package tuti.desi.accesoDatos;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import tuti.desi.entidades.Aeropuerto;
 
@@ -11,7 +12,11 @@ import java.util.Optional;
 @Repository
 public interface IAeropuertoRepo extends JpaRepository<Aeropuerto, Long> {
 
+    @Query("SELECT COUNT(a) > 0 FROM Aeropuerto a WHERE a.id = :id " +
+            "AND a.country = 'AR' ")
+    boolean existsByIdAndCountryEqualsAR(@Param("id") Long id);
     boolean existsByIcao(String icao);
+    //Aeropuerto findById(Long id);
     Optional<Aeropuerto> findByName(String name);
     Optional<Aeropuerto> findByIcao(String icao);
     Optional<Aeropuerto> findByIata(String iata);

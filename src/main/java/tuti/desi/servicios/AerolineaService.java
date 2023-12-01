@@ -2,14 +2,12 @@ package tuti.desi.servicios;
 
 import org.springframework.stereotype.Service;
 import tuti.desi.dto.AerolineaDTO;
-import tuti.desi.entidades.Aerolinea;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.TreeSet;
 
 @Service
 public interface AerolineaService {
-    List<AerolineaDTO> getAerolineas();
+    TreeSet<AerolineaDTO> getAerolineas();
     //Optional<AerolineaDTO> findByNombre();
 
 }

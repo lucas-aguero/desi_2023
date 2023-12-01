@@ -13,7 +13,7 @@ public interface VueloMapper {
     @Mapping(target="aerolineaId", source="aerolinea.id"/*, ignore = true*/)
     @Mapping(target="aeronaveId", source="aeronave.id"/*, ignore = true*/)
     @Mapping(target = "precio", numberFormat = "#,##E0")
-    @Mapping(target="fechaPartida", dateFormat = "dd/MM/yyyy")
+    @Mapping(target="fechaPartida", dateFormat = "yyyy-MM-dd")
     NuevoVueloForm vueloToForm(Vuelo vuelo);
 //    @Mapping(target="nroVuelo", ignore = true)
 //    @Mapping(target="origen.id",source="origenId")

@@ -1,7 +1,4 @@
 package tuti.desi.dto;
-
-import org.hibernate.type.descriptor.sql.internal.Scale6IntervalSecondDdlType;
-
 public record AeropuertoDTO(
 
         Long id,
@@ -9,5 +6,9 @@ public record AeropuertoDTO(
         String name,
         String city,
         String country
-) {
+) implements Comparable<AeropuertoDTO>{
+    @Override
+    public int compareTo(AeropuertoDTO aeropuertoDTO) {
+        return this.city().compareTo(aeropuertoDTO.city);
+    }
 }

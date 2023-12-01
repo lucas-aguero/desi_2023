@@ -8,7 +8,6 @@ import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import org.thymeleaf.context.LazyContextVariable;
 import tuti.desi.dto.AerolineaDTO;
 import tuti.desi.dto.AeronaveDTO;
 import tuti.desi.dto.AeropuertoDTO;
@@ -20,19 +19,20 @@ import tuti.desi.servicios.VueloService;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.TreeSet;
 
 @Validated
 @Controller
 @RequestMapping()
-public class VueloController {
+public class NuevoVueloController {
     private final VueloService vueloService;
     private final AerolineaService aerolineaService;
     private final IAeropuertoService aeropuertoService;
     private final IAeronaveService aeronaveService;
 
     @Autowired
-    public VueloController(VueloService vueloService, AerolineaService aerolineaService,
-                           IAeropuertoService aeropuertoService, IAeronaveService aeronaveService) {
+    public NuevoVueloController(VueloService vueloService, AerolineaService aerolineaService,
+                                IAeropuertoService aeropuertoService, IAeronaveService aeronaveService) {
         this.vueloService = vueloService;
         this.aerolineaService = aerolineaService;
         this.aeropuertoService = aeropuertoService;
@@ -43,32 +43,27 @@ public class VueloController {
     public String prepararVueloForm(Model model){
 
         NuevoVueloForm form = new NuevoVueloForm();
-        List<AerolineaDTO> aerolineas = aerolineaService.getAerolineas();
-        List<AeronaveDTO> aeronaves = aeronaveService.getAeronaves();
+//        List<AerolineaDTO> aerolineas = aerolineaService.getAerolineas();
+//        List<AeronaveDTO> aeronaves = aeronaveService.getAeronaves();
         List<AeropuertoDTO> aeropuertos = aeropuertoService.getAeropuertosAleatorios();
 
         model.addAttribute("formBean", form);
         model.addAttribute("aeropuertos", aeropuertos);
-        model.addAttribute("aerolineas", aerolineas);
-        model.addAttribute("aeronaves", aeronaves);
+//        model.addAttribute("aerolineas", aerolineas);
+//        model.addAttribute("aeronaves", aeronaves);
 
         return "crearVuelo";
     }
 
     @PostMapping("/crearVuelo")
-    public String submit(@ModelAttribute("formBean")@Valid NuevoVueloForm form,
+    public String submit(@ModelAttribute("formBean")/*@Valid*/ NuevoVueloForm form,
                          ModelMap model,
                          BindingResult binding){
 
-//        List<AerolineaDTO> aerolineas = aerolineaService.getAerolineas();
-//        List<AeropuertoDTO> aeropuertos = aeropuertoService.getAeropuertos();
-//
-//
-//        model.addAttribute("aerolineas", aerolineas);
+        vueloService.crearVuelo(form);
 
-        model.addAttribute("formBean", form);
 
-        return("crearVuelo");
+        return("redirect:/crearVuelo");
     }
 
     @ModelAttribute("today")
@@ -84,5 +79,15 @@ public class VueloController {
     @ModelAttribute("aeropuertoLocal")
     public AeropuertoDTO aeropuertoLocal(){
         return aeropuertoService.getAeropuertoLocal();
+    }
+
+    @ModelAttribute("aerolineas")
+    public TreeSet<AerolineaDTO> aerolineas(){
+        return aerolineaService.getAerolineas();
+    }
+
+    @ModelAttribute("aeronaves")
+    public TreeSet<AeronaveDTO> aeronaves(){
+        return aeronaveService.getAeronaves();
     }
 }

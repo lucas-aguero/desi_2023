@@ -17,7 +17,7 @@
             <div class="row" th:case="'saliente'">
                 <div class="col-lg-6" >
                     <select th:field="*{origenId}" id="origenSalienteId" class="form-select" aria-label="origenId">
-                        <option th:value="aeropuertoLocal.id" th:text="' ('+${aeropuertoLocal.icao}+') '+ ${aeropuertoLocal.name}+' | '
+                        <option th:value="${aeropuertoLocal.id}" th:text="' ('+${aeropuertoLocal.icao}+') '+ ${aeropuertoLocal.name}+' | '
                                         + ${aeropuertoLocal.city} +', ' +${aeropuertoLocal.country}" selected>Salida</option>
                     </select>
                 </div>
@@ -45,7 +45,7 @@
                 </div>
                 <div class="col-lg-6">
                     <select th:field="*{destinoId}" id="destinoEntranteId" class="form-select" aria-label="destinoId">
-                        <option th:value="aeropuertoLocal.id" th:text="' ('+${aeropuertoLocal.icao}+') '+ ${aeropuertoLocal.name}+' | '
+                        <option th:value="${aeropuertoLocal.id}" th:text="' ('+${aeropuertoLocal.icao}+') '+ ${aeropuertoLocal.name}+' | '
                                         + ${aeropuertoLocal.city} +', ' +${aeropuertoLocal.country}"
                                 selected>Destino</option>
                     </select>

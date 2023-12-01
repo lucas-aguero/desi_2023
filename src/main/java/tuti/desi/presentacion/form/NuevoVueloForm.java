@@ -17,7 +17,7 @@ public class NuevoVueloForm{
     String fechaPartida;
     @NotNull
     //Cambiar por string
-    LocalTime horaPartida;
+    String horaPartida;
     @NotNull
     int nroAsientos;
     @NotNull

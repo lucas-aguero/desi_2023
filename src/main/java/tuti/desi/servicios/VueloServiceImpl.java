@@ -2,14 +2,19 @@ package tuti.desi.servicios;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import tuti.desi.accesoDatos.IAeronaveRepo;
+import tuti.desi.accesoDatos.IAeropuertoRepo;
 import tuti.desi.accesoDatos.IVueloRepo;
+import tuti.desi.entidades.enums.TipoVuelo;
+import tuti.desi.excepciones.vueloexception.VueloConDestinoYFechaExistenteException;
+import tuti.desi.excepciones.vueloexception.VueloNoCreadoException;
 import tuti.desi.presentacion.form.NuevoVueloForm;
 import tuti.desi.entidades.Vuelo;
 import tuti.desi.entidades.enums.EstadoVuelo;
-import tuti.desi.excepciones.VueloNoCreadoException;
-import tuti.desi.excepciones.VueloNoEncontradoException;
+import tuti.desi.excepciones.vueloexception.VueloNoEncontradoException;
 import tuti.desi.mapper.VueloMapper;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,31 +22,57 @@ import java.util.Optional;
 public class VueloServiceImpl implements VueloService {
 
     private final IVueloRepo vueloRepo;
+    private final IAeropuertoRepo aeropuertoRepo;
+    private final IAeronaveRepo aeronaveRepo;
     private final VueloMapper vueloMapper;
 
+
     @Autowired
-    public VueloServiceImpl(IVueloRepo vueloRepo, VueloMapper vueloMapper) {
+    public VueloServiceImpl(IVueloRepo vueloRepo, IAeropuertoRepo aeropuertoRepo,
+                            IAeronaveRepo aeronaveRepo, VueloMapper vueloMapper) {
         this.vueloRepo = vueloRepo;
+        this.aeropuertoRepo = aeropuertoRepo;
+        this.aeronaveRepo = aeronaveRepo;
         this.vueloMapper = vueloMapper;
     }
 
 
     @Override
-    public NuevoVueloForm crearVuelo(NuevoVueloForm vueloForm) throws VueloNoCreadoException {
-        //Formatear fechas antes de crear vuelo
-        try{
+    public NuevoVueloForm crearVuelo(NuevoVueloForm vueloForm){
+
+        if(vueloRepo.existsByDestinoIdAndFechaPartida(vueloForm.getDestinoId(),
+                LocalDate.parse(vueloForm.getFechaPartida()))){
+
+            throw new VueloConDestinoYFechaExistenteException("Ya existe un vuelo con ese destino para esa fecha");
+
+        } else {
+
+            try{
+
             Vuelo vuelo = vueloMapper.formToVuelo(vueloForm);
             vuelo.setEstadoVuelo(EstadoVuelo.NORMAL);
-            vuelo.setTipoVuelo();
+            vuelo.setNroAsientos(aeronaveRepo.getNroAsientos(vuelo.getAeronave().getId()));
+
+            if(aeropuertoRepo.existsByIdAndCountryEqualsAR(vuelo.getDestino().getId())){
+
+                vuelo.setTipoVuelo(TipoVuelo.NACIONAL);
+
+            } else {
+                vuelo.setTipoVuelo(TipoVuelo.INTERNACIONAL);
+            }
 
             vueloRepo.save(vuelo);
 
+            System.out.println(vuelo.toString());
+
             return vueloMapper.vueloToForm(vuelo);
 
-        }catch(Exception e){
+           }catch(Exception e){
 
             throw new VueloNoCreadoException("Ha ocurrido un error interno." +
                     " No se pudo crear el registro en la base de datos");
+            }
+
         }
 
     }
@@ -56,7 +87,6 @@ public class VueloServiceImpl implements VueloService {
 
             return vueloMapper.vueloToForm(vueloOptional.get());
         }else{
-
             throw new VueloNoEncontradoException("El vuelo con nro: " + nroVuelo + "no existe.");
         }
 
