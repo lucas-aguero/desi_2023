@@ -7,11 +7,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import tuti.desi.dto.AerolineaDTO;
 import tuti.desi.dto.AeronaveDTO;
 import tuti.desi.dto.AeropuertoDTO;
+import tuti.desi.excepciones.vueloexception.VueloPersistenceException;
 import tuti.desi.presentacion.form.NuevoVueloForm;
 import tuti.desi.servicios.AerolineaService;
 import tuti.desi.servicios.IAeronaveService;
@@ -52,11 +54,7 @@ public class NuevoVueloController {
     @PostMapping("/crearVuelo")
     public String submit(@Valid @ModelAttribute("formBean")  NuevoVueloForm formBean,
                          BindingResult result,
-                         ModelMap model
-                         ){
-
-
-        //System.out.println("ENTRO AL METODO SUBMIT");
+                         ModelMap model){
 
 
         if(result.hasErrors()){
@@ -67,8 +65,18 @@ public class NuevoVueloController {
         }
 
 
-        vueloService.crearVuelo(formBean);
-        //System.out.println("GUARDO EL OBJETO");
+        try{
+
+            vueloService.crearVuelo(formBean);
+
+        }catch (VueloPersistenceException e){
+
+            ObjectError error = new ObjectError("global", e.getMessage());
+
+            model.addAttribute("formBean", formBean);
+            model.addAttribute("global", error);
+            return("/crearVuelo");
+        }
 
         return("redirect:/crearVuelo");
     }

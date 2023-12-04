@@ -10,7 +10,9 @@ import java.util.List;
 
 @Repository
 public interface IVueloRepo extends JpaRepository<Vuelo, Long> {
-    List<Vuelo> findByFechaPartida(LocalDate fechaPartida);
     boolean existsByDestinoIdAndFechaPartida(Long destinoId, LocalDate fechaPartida);
+
+    boolean existsByOrigenIdAndFechaPartida(Long destinoId, LocalDate fechaPartida);
+
 
 }

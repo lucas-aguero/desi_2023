@@ -6,6 +6,7 @@ import tuti.desi.accesoDatos.IAeronaveRepo;
 import tuti.desi.accesoDatos.IAeropuertoRepo;
 import tuti.desi.accesoDatos.IVueloRepo;
 import tuti.desi.entidades.enums.TipoVuelo;
+import tuti.desi.excepciones.aeropuertoexception.VueloConOrigenYFechaExistenteException;
 import tuti.desi.excepciones.vueloexception.VueloConDestinoYFechaExistenteException;
 import tuti.desi.excepciones.vueloexception.VueloNoCreadoException;
 import tuti.desi.presentacion.form.NuevoVueloForm;
@@ -40,16 +41,26 @@ public class VueloServiceImpl implements VueloService {
     @Override
     public NuevoVueloForm crearVuelo(NuevoVueloForm vueloForm){
 
+        Vuelo vuelo = vueloMapper.formToVuelo(vueloForm);
+
         if(vueloRepo.existsByDestinoIdAndFechaPartida(vueloForm.getDestinoId(),
-                vueloForm.getFechaPartida())){
+                vueloForm.getFechaPartida())
+                && !aeropuertoRepo.findById(vueloForm.getDestinoId()).get().getIcao().equals("SAAV")){
 
             throw new VueloConDestinoYFechaExistenteException("Ya existe un vuelo con ese destino para esa fecha");
 
-        } else {
+        } else if (vueloRepo.existsByOrigenIdAndFechaPartida(vueloForm.getOrigenId(),
+                    vueloForm.getFechaPartida())
+                    && !aeropuertoRepo.findById(vueloForm.getOrigenId()).get().getIcao().equals("SAAV")){
+
+            throw new VueloConOrigenYFechaExistenteException("Ya existe un vuelo con ese origen para esa fecha");
+
+        }
+        else {
 
             try{
 
-            Vuelo vuelo = vueloMapper.formToVuelo(vueloForm);
+
             vuelo.setEstadoVuelo(EstadoVuelo.NORMAL);
             vuelo.setNroAsientos(aeronaveRepo.getNroAsientos(vuelo.getAeronave().getId()));
 

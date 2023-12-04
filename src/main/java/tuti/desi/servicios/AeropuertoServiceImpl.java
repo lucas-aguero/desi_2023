@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import tuti.desi.accesoDatos.IAeropuertoRepo;
 import tuti.desi.dto.AeropuertoDTO;
 import tuti.desi.entidades.Aeropuerto;
+import tuti.desi.excepciones.aeropuertoexception.AeropuertoNoEncontradoException;
 import tuti.desi.excepciones.vueloexception.VueloNoEncontradoException;
 import tuti.desi.mapper.AeropuertoMapper;
 
@@ -56,7 +57,7 @@ public class AeropuertoServiceImpl implements IAeropuertoService{
             }
 
         }catch(Exception e){
-            throw new VueloNoEncontradoException();
+            throw new AeropuertoNoEncontradoException();
         }
 
 
