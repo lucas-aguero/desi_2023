@@ -14,8 +14,8 @@
         <div class="pt-4 container-fluid">
             <h2 class="pt-2  text-center"><strong>Programar Vuelo</strong></h2>
         </div>
-        <div th:if="${global}">
-            <div class="text-align-center alert alert-danger" role="alert">
+        <div class="container-fluid col-lg-8 d-flex justify-content-center" th:if="${global}">
+            <div class="alert alert-danger d-flex justify-content-center col-lg-8" role="alert">
                 <p th:text="${global.defaultMessage}"></p>
             </div>
 
