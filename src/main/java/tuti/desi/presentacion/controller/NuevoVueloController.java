@@ -56,19 +56,19 @@ public class NuevoVueloController {
                          ){
 
 
-        System.out.println("ENTRO AL METODO SUBMIT");
+        //System.out.println("ENTRO AL METODO SUBMIT");
 
 
         if(result.hasErrors()){
 
-            System.out.println("ENTRO AL HAS ERRORS");
+            //System.out.println("ENTRO AL HAS ERRORS");
             model.addAttribute("formBean", formBean);
             return "crearVuelo";
         }
 
 
         vueloService.crearVuelo(formBean);
-        System.out.println("GUARDO EL OBJETO");
+        //System.out.println("GUARDO EL OBJETO");
 
         return("redirect:/crearVuelo");
     }

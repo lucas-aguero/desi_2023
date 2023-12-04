@@ -15,14 +15,6 @@ public interface VueloMapper {
     @Mapping(target = "precioNeto", numberFormat = "#,##E0")
     @Mapping(target="fechaPartida", dateFormat = "dd-MM-yyyy")
     NuevoVueloForm vueloToForm(Vuelo vuelo);
-//    @Mapping(target="nroVuelo", ignore = true)
-//    @Mapping(target="origen.id",source="origenId")
-//    @Mapping(target="destino.id", source="destinoId")
-//    @Mapping(target="aerolinea.nombre", source="aerolinea")
-//    @Mapping(target="aeronave.modelo", source="aeronave")
-//    @Mapping(target="tipoVuelo", ignore = true)
-//    @Mapping(target="estadoVuelo", ignore = true)
-//    @Mapping(target="precio", expression="java(new java.math.BigDecimal(source.precio))")
     @InheritInverseConfiguration
     @Mapping(target="nroVuelo", ignore = true)
     @Mapping(target="estadoVuelo", ignore = true)
