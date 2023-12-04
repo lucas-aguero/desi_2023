@@ -14,11 +14,18 @@
         <div class="pt-4 container-fluid">
             <h2 class="pt-2  text-center"><strong>Programar Vuelo</strong></h2>
         </div>
-        <div class="container-fluid col-lg-8 d-flex justify-content-center" th:if="${global}">
+        <!--PERSISTENCE STATUS ALERTS-->
+        <!--ERROR-->
+        <div class="container-fluid col-lg-8 d-flex justify-content-center pt-3" th:if="${global}">
             <div class="alert alert-danger d-flex justify-content-center col-lg-8" role="alert">
-                <p th:text="${global.defaultMessage}"></p>
+                <span th:text="${global.defaultMessage}"></span>
             </div>
-
+        </div>
+        <!--EXITO-->
+        <div class="container-fluid col-lg-8 d-flex justify-content-center" th:if="${successMessage}">
+            <div class="alert alert-success d-flex justify-content-center col-lg-8" role="alert">
+                <span th:text="${successMessage}"></span>
+            </div>
         </div>
         <!--FORM DIV-->
         <div class="container-fluid pt-4 col-lg-10 ">

@@ -10,6 +10,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import tuti.desi.dto.AerolineaDTO;
 import tuti.desi.dto.AeronaveDTO;
 import tuti.desi.dto.AeropuertoDTO;
@@ -54,12 +55,12 @@ public class NuevoVueloController {
     @PostMapping("/crearVuelo")
     public String submit(@Valid @ModelAttribute("formBean")  NuevoVueloForm formBean,
                          BindingResult result,
-                         ModelMap model){
+                         ModelMap model,
+                         RedirectAttributes redirectAttributes){
 
 
         if(result.hasErrors()){
 
-            //System.out.println("ENTRO AL HAS ERRORS");
             model.addAttribute("formBean", formBean);
             return "crearVuelo";
         }
@@ -68,17 +69,19 @@ public class NuevoVueloController {
         try{
 
             vueloService.crearVuelo(formBean);
+            redirectAttributes.addFlashAttribute("successMessage",
+                    "Vuelo creado con éxito!");
+
+            return("redirect:/crearVuelo");
 
         }catch (VueloPersistenceException e){
 
             ObjectError error = new ObjectError("global", e.getMessage());
 
-            model.addAttribute("formBean", formBean);
             model.addAttribute("global", error);
             return("/crearVuelo");
         }
 
-        return("redirect:/crearVuelo");
     }
 
     @ModelAttribute("today")
