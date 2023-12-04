@@ -41,7 +41,7 @@ public class VueloServiceImpl implements VueloService {
     public NuevoVueloForm crearVuelo(NuevoVueloForm vueloForm){
 
         if(vueloRepo.existsByDestinoIdAndFechaPartida(vueloForm.getDestinoId(),
-                LocalDate.parse(vueloForm.getFechaPartida()))){
+                vueloForm.getFechaPartida())){
 
             throw new VueloConDestinoYFechaExistenteException("Ya existe un vuelo con ese destino para esa fecha");
 

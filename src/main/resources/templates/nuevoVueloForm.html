@@ -6,88 +6,89 @@
             <div class="col-lg-6">
                 <label for="fechaPartida">Fecha de Partida:</label>
                 <input type="date" th:field="*{fechaPartida}" id="fechaPartida" name="fechaPartida" value="${today}"
-                       min="${today}" max="${maxDate}" required/>
-                <div class="valid-feedback">
-                    Looks good!
-                </div>
-
+                       min="${today}" max="${maxDate}">
+                <p th:if="${#fields.hasErrors('fechaPartida')}" th:errors="*{fechaPartida}" class="pt-2 small" ></p>
             </div>
+
             <div class="col-lg-6">
                 <label for="horaPartida">Hora de Partida:</label>
-                <input type="time" th:field="*{horaPartida}" id="horaPartida" name="horaPartida" step="60" required/>
+                <input type="time" th:field="*{horaPartida}" id="horaPartida" name="horaPartida" step="60"/>
+                <p th:if="${#fields.hasErrors('horaPartida')}" th:errors="*{horaPartida}" class="pt-2 small" ></p>
             </div>
         </div>
         <!--ORIGEN - DESTINO-->
         <div class="pb-2" th:switch="${procedencia}">
             <div class="row" th:case="'saliente'">
                 <div class="col-lg-6" >
-                    <select th:field="*{origenId}" id="origenSalienteId" class="form-select" required>
+                    <select th:field="*{origenId}" id="origenSalienteId" class="form-select">
                         <option th:value="null" th:text="Origen" selected></option>
                         <option th:value="${aeropuertoLocal.id}" th:text="' ('+${aeropuertoLocal.icao}+') '+ ${aeropuertoLocal.name}+' | '
                                         + ${aeropuertoLocal.city} +', ' +${aeropuertoLocal.country}" selected>Salida</option>
                     </select>
+                    <p th:if="${#fields.hasErrors('origenId')}" th:errors="*{origenId}" class="pt-2 small" ></p>
                 </div>
                 <div class="col-lg-6">
-                    <select th:field="*{destinoId}" id="destinoSalienteId" class="form-select" required>
+                    <select th:field="*{destinoId}" id="destinoSalienteId" class="form-select">
                         <option th:value="null" th:text="Destino" selected></option>
                         <option th:each="aeropuerto : ${aeropuertos}"
                                 th:value="${aeropuerto.id}"
                                 th:text="' ('+${aeropuerto.icao}+') '+ ${aeropuerto.name}+' | '
                                         + ${aeropuerto.city} +', ' +${aeropuerto.country} "></option>
                     </select>
+                    <p th:if="${#fields.hasErrors('destinoId')}" th:errors="*{destinoId}" class="pt-2 small" ></p>
                 </div>
             </div>
         </div>
         <div class="pb-2" th:switch="${procedencia}">
             <div class="row" th:case="'entrante'">
                 <div class="col-lg-6" >
-                    <select th:field="*{origenId}" id="origenEntranteId" class="form-select" aria-label="origenId" required>
+                    <select th:field="*{origenId}" id="origenEntranteId" class="form-select" aria-label="origenId">
                         <option th:value="null" th:text="Salida" selected></option>
                         <option th:each="aeropuerto : ${aeropuertos}"
                                 th:value="${aeropuerto.id}"
                                 th:text="' ('+${aeropuerto.icao}+') '+ ${aeropuerto.name}+' | '
                                         + ${aeropuerto.city} +', ' +${aeropuerto.country} "></option>
                     </select>
+                    <p th:if="${#fields.hasErrors('origenId')}" th:errors="*{origenId}" class="pt-2 small" ></p>
                 </div>
                 <div class="col-lg-6">
-                    <select th:field="*{destinoId}" id="destinoEntranteId" class="form-select" required>
+                    <select th:field="*{destinoId}" id="destinoEntranteId" class="form-select">
                         <option th:value="null" th:text="Destino" selected></option>
                         <option th:value="${aeropuertoLocal.id}" th:text="' ('+${aeropuertoLocal.icao}+') '+ ${aeropuertoLocal.name}+' | '
                                         + ${aeropuertoLocal.city} +', ' +${aeropuertoLocal.country}"
                                 selected>Destino</option>
                     </select>
+                    <p th:if="${#fields.hasErrors('destinoId')}" th:errors="*{destinoId}" class="pt-2 small" ></p>
                 </div>
             </div>
         </div>
         <!--AEROLINEA - AERONAVE-->
         <div class="row pb-2">
             <div class="col-lg-6">
-                <select th:field="*{aerolineaId}" id="aerolineaId" class="form-select" aria-label="aerolineaId" required>
+                <select th:field="*{aerolineaId}" id="aerolineaId" class="form-select" aria-label="aerolineaId">
                     <option th:value="null" th:text="Aerolínea" selected></option>
                     <option th:each="aerolinea : ${aerolineas}"
                             th:value="${aerolinea.id}"
                             th:text="${aerolinea.nombre}"></option>
                 </select>
+                <p th:if="${#fields.hasErrors('aerolineaId')}" th:errors="*{aerolineaId}" class="pt-2 small" th:errorclass="fieldError"></p>
             </div>
             <div class="col-lg-6">
-                <select th:field="*{aeronaveId}"  id="aeronaveId" class="form-select" aria-label="aeronaveId" required>
+                <select th:field="*{aeronaveId}"  id="aeronaveId" class="form-select" aria-label="aeronaveId">
                     <option th:value="null" th:text="Aeronave" selected></option>
                     <option th:each="aeronave : ${aeronaves}"
                             th:value="${aeronave.id}"
                             th:text="|${aeronave.modelo} \ Plazas: ${aeronave.capacidad}|"></option>
                 </select>
+                <p th:if="${#fields.hasErrors('aeronaveId')}" th:errors="*{aeronaveId}" class="pt-2 small" th:errorclass="fieldError"></p>
             </div>
         </div>
         <!--PRECIO - SUBMIT-->
         <div class="row pb-2 align-items-end">
             <div class="col-lg-6">
                 <label for="precioNeto" class="form-label">Precio Neto</label>
-                <input type="number" th:field="*{precio}" class="form-control" id="precioNeto" min="0"
-                       required>
-            </div>
-            <div class="col-lg-6">
-                <label for="precioTotal" class="form-label">Precio Final</label>
-                <input type="number" th:field="*{precio}" class="form-control" id="precioTotal" min="0">
+                <input type="number" th:field="*{precioNeto}" class="form-control" id="precioNeto" min="0">
+                <p th:if="${#fields.hasErrors('precioNeto')}" th:errors="*{precioNeto}" class="pt-2 small" th:errorclass="fieldError"></p>
             </div>
         </div>
         <div class="col d-flex justify-content-center pt-2">

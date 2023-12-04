@@ -1,6 +1,7 @@
 package tuti.desi.presentacion.controller;
 
-import jakarta.validation.Valid;
+//import jakarta.validation.Valid;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -42,19 +43,32 @@ public class NuevoVueloController {
     @GetMapping("/crearVuelo")
     public String prepararVueloForm(Model model){
 
-        NuevoVueloForm form = new NuevoVueloForm();
-        model.addAttribute("formBean", form);
+        NuevoVueloForm formBean = new NuevoVueloForm();
+        model.addAttribute("formBean", formBean);
 
         return "crearVuelo";
     }
 
     @PostMapping("/crearVuelo")
-    public String submit(@ModelAttribute("formBean")@Valid NuevoVueloForm form,
-                         ModelMap model,
-                         BindingResult binding){
+    public String submit(@Valid @ModelAttribute("formBean")  NuevoVueloForm formBean,
+                         BindingResult result,
+                         ModelMap model
+                         ){
 
-        vueloService.crearVuelo(form);
 
+        System.out.println("ENTRO AL METODO SUBMIT");
+
+
+        if(result.hasErrors()){
+
+            System.out.println("ENTRO AL HAS ERRORS");
+            model.addAttribute("formBean", formBean);
+            return "crearVuelo";
+        }
+
+
+        vueloService.crearVuelo(formBean);
+        System.out.println("GUARDO EL OBJETO");
 
         return("redirect:/crearVuelo");
     }
@@ -88,4 +102,5 @@ public class NuevoVueloController {
     public TreeSet<AeronaveDTO> aeronaves(){
         return aeronaveService.getAeronaves();
     }
+
 }

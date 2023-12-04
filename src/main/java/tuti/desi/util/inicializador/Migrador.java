@@ -27,7 +27,7 @@ public class Migrador {
 //Espera a que la app este lista para ejecutar la migracion
     @EventListener(ApplicationReadyEvent.class)
     public void initialize(){
-        //aeropuertoService.loadAirportsFromJsonFile();
+//        aeropuertoService.loadAirportsFromJsonFile();
 //        aeronaveCreator.persistAeronaves(50);
 //        aerolineaCreator.persistAerolineas(50);
     }
