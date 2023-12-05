@@ -16,10 +16,10 @@
             <!--NAC TAB CONTENT-->
             <div class="tab-content" id="nac-tab-content">
                 <div class="tab-pane fade show active" id="tab-nac-saliente-form" role="tabpanel" tabindex="0">
-                    <div th:replace="~{/nuevoVueloForm::nuevo-vuelo-form (${'saliente'},${'nacional'})}"></div>
+                    <div th:replace="~{vuelos/nuevoVueloForm::nuevo-vuelo-form (${'saliente'},${'nacional'})}"></div>
                 </div>
                 <div class="tab-pane fade" id="tab-nac-entrante-form" role="tabpanel" tabindex="1">
-                    <div th:replace="~{/nuevoVueloForm::nuevo-vuelo-form (${'entrante'},${'nacional'})}"></div>
+                    <div th:replace="~{vuelos/nuevoVueloForm::nuevo-vuelo-form (${'entrante'},${'nacional'})}"></div>
                 </div>
             </div>
         </div>
@@ -39,10 +39,10 @@
             <!--TAB CONTENT-->
             <div class="tab-content" id="internac-tab-content">
                 <div class="tab-pane fade show active" id="tab-internac-saliente-form" role="tabpanel" tabindex="0">
-                    <div th:replace="~{/nuevoVueloForm::nuevo-vuelo-form (${'saliente'},${'internacional'})}"></div>
+                    <div th:replace="~{vuelos/nuevoVueloForm::nuevo-vuelo-form (${'saliente'},${'internacional'})}"></div>
                 </div>
                 <div class="tab-pane fade" id="tab-internac-entrante-form" role="tabpanel" tabindex="1">
-                    <div th:replace="~{/nuevoVueloForm::nuevo-vuelo-form (${'entrante'},${'internacional'})}"></div>
+                    <div th:replace="~{vuelos/nuevoVueloForm::nuevo-vuelo-form (${'entrante'},${'internacional'})}"></div>
                 </div>
             </div>
         </div>

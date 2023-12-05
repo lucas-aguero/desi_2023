@@ -48,7 +48,11 @@ public class NuevoVueloController {
         NuevoVueloForm formBean = new NuevoVueloForm();
         model.addAttribute("formBean", formBean);
 
-        return "crearVuelo";
+        return "vuelos/crearVuelo";
+    }
+    @GetMapping("/prueba")
+    public String getPrueba(){
+        return "/crear-vuelo/prueba";
     }
 
     @PostMapping("/crearVuelo")
@@ -61,7 +65,7 @@ public class NuevoVueloController {
         if(result.hasErrors()){
 
             model.addAttribute("formBean", formBean);
-            return "crearVuelo";
+            return "vuelos/crearVuelo";
         }
 
 
@@ -78,7 +82,7 @@ public class NuevoVueloController {
             ObjectError error = new ObjectError("global", e.getMessage());
 
             model.addAttribute("global", error);
-            return("/crearVuelo");
+            return("vuelos/crearVuelo");
         }
 
     }
