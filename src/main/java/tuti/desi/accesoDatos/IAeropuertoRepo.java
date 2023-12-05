@@ -16,7 +16,6 @@ public interface IAeropuertoRepo extends JpaRepository<Aeropuerto, Long> {
             "AND a.country = 'AR' ")
     boolean existsByIdAndCountryEqualsAR(@Param("id") Long id);
     boolean existsByIcao(String icao);
-    //Aeropuerto findById(Long id);
     Optional<Aeropuerto> findByName(String name);
     Optional<Aeropuerto> findByIcao(String icao);
     Optional<Aeropuerto> findByIata(String iata);
@@ -40,12 +39,12 @@ public interface IAeropuertoRepo extends JpaRepository<Aeropuerto, Long> {
     @Query("SELECT a FROM Aeropuerto a WHERE a.country <> 'AR' " +
             "AND a.country <> 'US' " +
             "AND a.city <> ''" +
-            "ORDER BY RAND() LIMIT 100")
+            "ORDER BY RAND() LIMIT 200")
     List<Aeropuerto> getAeropuertosExtranjerosAleatorios();
 
     @Query("SELECT a FROM Aeropuerto a WHERE a.country = 'US' " +
             "AND a.city <> '' " +
-            "ORDER BY RAND() LIMIT 50")
+            "ORDER BY RAND() LIMIT 100")
     List<Aeropuerto> getAeropuertosUsaAleatorios();
 
 

@@ -9,15 +9,12 @@ import tuti.desi.entidades.enums.TipoVuelo;
 import tuti.desi.excepciones.aeropuertoexception.VueloConOrigenYFechaExistenteException;
 import tuti.desi.excepciones.vueloexception.VueloConDestinoYFechaExistenteException;
 import tuti.desi.excepciones.vueloexception.VueloNoCreadoException;
+import tuti.desi.excepciones.vueloexception.VueloConOrigenYDestinoDuplicados;
 import tuti.desi.presentacion.form.NuevoVueloForm;
 import tuti.desi.entidades.Vuelo;
 import tuti.desi.entidades.enums.EstadoVuelo;
-import tuti.desi.excepciones.vueloexception.VueloNoEncontradoException;
 import tuti.desi.mapper.VueloMapper;
-
-import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class VueloServiceImpl implements VueloService {
@@ -39,7 +36,7 @@ public class VueloServiceImpl implements VueloService {
 
 
     @Override
-    public NuevoVueloForm crearVuelo(NuevoVueloForm vueloForm){
+    public void crearVuelo(NuevoVueloForm vueloForm){
 
         Vuelo vuelo = vueloMapper.formToVuelo(vueloForm);
 
@@ -54,6 +51,13 @@ public class VueloServiceImpl implements VueloService {
                     && !aeropuertoRepo.findById(vueloForm.getOrigenId()).get().getIcao().equals("SAAV")){
 
             throw new VueloConOrigenYFechaExistenteException("Ya existe un vuelo con ese origen para esa fecha");
+
+        }
+
+        if(aeropuertoRepo.findById(vueloForm.getOrigenId())
+                .equals(aeropuertoRepo.findById(vueloForm.getDestinoId()))){
+
+            throw new VueloConOrigenYDestinoDuplicados("El vuelo no puede tener mismo origen y destino");
 
         }
         else {
@@ -77,8 +81,6 @@ public class VueloServiceImpl implements VueloService {
 
             System.out.println(vuelo.toString());
 
-            return vueloMapper.vueloToForm(vuelo);
-
            }catch(Exception e){
 
             throw new VueloNoCreadoException("Ha ocurrido un error interno." +
@@ -89,20 +91,20 @@ public class VueloServiceImpl implements VueloService {
 
     }
 
-    @Override
-    public NuevoVueloForm findById(Long nroVuelo){
-
-
-        Optional<Vuelo> vueloOptional = vueloRepo.findById(nroVuelo);
-
-        if(vueloOptional.isPresent()){
-
-            return vueloMapper.vueloToForm(vueloOptional.get());
-        }else{
-            throw new VueloNoEncontradoException("El vuelo con nro: " + nroVuelo + "no existe.");
-        }
-
-    }
+//    @Override
+//    public NuevoVueloForm findById(Long nroVuelo){
+//
+//
+//        Optional<Vuelo> vueloOptional = vueloRepo.findById(nroVuelo);
+//
+//        if(vueloOptional.isPresent()){
+//
+//            return vueloMapper.vueloToForm(vueloOptional.get());
+//        }else{
+//            throw new VueloNoEncontradoException("El vuelo con nro: " + nroVuelo + "no existe.");
+//        }
+//
+//    }
 
     @Override
     public List<Vuelo> getVuelos() {

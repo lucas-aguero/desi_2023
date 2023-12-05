@@ -8,10 +8,8 @@ import java.util.List;
 
 public interface VueloService {
 
-    public NuevoVueloForm crearVuelo(NuevoVueloForm vueloDTO) throws VueloNoCreadoException;
+    void crearVuelo(NuevoVueloForm vueloDTO);
 
-    public NuevoVueloForm findById(Long nroVuelo);
-
-    public List<Vuelo> getVuelos();
+    List<Vuelo> getVuelos();
 
 }

@@ -1,6 +1,5 @@
 package tuti.desi.presentacion.controller;
 
-//import jakarta.validation.Valid;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -102,6 +101,16 @@ public class NuevoVueloController {
     @ModelAttribute("aeropuertos")
     public TreeSet<AeropuertoDTO> aeropuertos(){
         return aeropuertoService.getAeropuertosAleatorios();
+    }
+
+    @ModelAttribute("aeropuertosInternac")
+    public TreeSet<AeropuertoDTO> aeropuertosInternac(){
+        return aeropuertoService.getAeropuertosExtranjerosAleatorios();
+    }
+
+    @ModelAttribute("aeropuertosNac")
+    public TreeSet<AeropuertoDTO> aeropuertosNac(){
+        return aeropuertoService.getAllAeropuertosArgentinos();
     }
 
     @ModelAttribute("aerolineas")
