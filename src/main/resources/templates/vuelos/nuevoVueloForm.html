@@ -4,14 +4,14 @@
         <!--FILA FECHA HORA DE PARTIDA-->
         <div class="row pb-3">
             <!--FECHA DE PARTIDA-->
-            <div class="col-lg-6">
+            <div class="col-lg-6 pb-2">
                 <label for="fechaPartida">Fecha de Partida:</label>
                 <input type="date" th:field="*{fechaPartida}" id="fechaPartida" name="fechaPartida" value="${today}"
                        min="${today}" max="${maxDate}">
                 <p th:if="${#fields.hasErrors('fechaPartida')}" th:errors="*{fechaPartida}" class="pt-2 small text-danger" ></p>
             </div>
             <!--HORA DE PARTIDA-->
-            <div class="col-lg-6">
+            <div class="col-lg-6 pb-2">
                 <label for="horaPartida">Hora de Partida:</label>
                 <input type="time" th:field="*{horaPartida}" id="horaPartida" name="horaPartida" step="60"/>
                 <p th:if="${#fields.hasErrors('horaPartida')}" th:errors="*{horaPartida}" class="pt-2 small text-danger" ></p>
@@ -21,7 +21,7 @@
         <div class="pb-2" th:switch="${condicion}">
             <div class="row" th:case="'saliente'">
                 <!--ORIGEN NACIONAL-->
-                <div class="col-lg-6" >
+                <div class="col-lg-6 pb-2" >
                     <select th:field="*{origenId}" id="origenNacSalienteId" class="form-select">
                         <option th:value="null" th:text="Origen" selected></option>
                         <option th:value="${aeropuertoLocal.id}" th:text="' ('+${aeropuertoLocal.icao}+') '+ ${aeropuertoLocal.name}+' | '
@@ -30,7 +30,7 @@
                     <p th:if="${#fields.hasErrors('origenId')}" th:errors="*{origenId}" class="pt-2 small text-danger" ></p>
                 </div>
                 <!--DESTINO NACIONAL-->
-                <div class="col-lg-6" th:switch="${tipoVuelo}">
+                <div class="col-lg-6 pb-2" th:switch="${tipoVuelo}">
                     <select th:case="'nacional'" th:field="*{destinoId}" id="destinoNacSalienteId" class="form-select">
                         <option th:value="null" th:text="Destino" selected></option>
                         <option th:each="aeropuerto : ${aeropuertosNac}"
@@ -38,7 +38,6 @@
                                 th:text="' ('+${aeropuerto.icao}+') '+ ${aeropuerto.name}+' | '
                                         + ${aeropuerto.city} +', ' +${aeropuerto.country} "></option>
                     </select>
-                    <!--<p th:if="${#fields.hasErrors('destinoId')}" th:errors="*{destinoId}" class="pt-2 small text-danger" ></p>-->
                     <!--DESTINO INTERNACIONAL-->
                     <select th:case="'internacional'" th:field="*{destinoId}" id="destinoInternacSalienteId" class="form-select">
                         <option th:value="null" th:text="Destino" selected></option>
@@ -54,7 +53,7 @@
         <!--FILA ORIGEN - DESTINO ENTRANTE-->
         <div class="pb-2" th:switch="${condicion}">
             <div class="row" th:case="'entrante'">
-                <div class="col-lg-6" th:switch="${tipoVuelo}">
+                <div class="col-lg-6 pb-2" th:switch="${tipoVuelo}">
                     <!--ORIGEN NACIONAL-->
                     <select th:case="'nacional'" th:field="*{origenId}" id="origenNacEntranteId" class="form-select" aria-label="origenId">
                         <option th:value="null" th:text="Salida" selected></option>
@@ -63,7 +62,6 @@
                                 th:text="' ('+${aeropuerto.icao}+') '+ ${aeropuerto.name}+' | '
                                         + ${aeropuerto.city} +', ' +${aeropuerto.country} "></option>
                     </select>
-                    <!--<p th:if="${#fields.hasErrors('origenId')}" th:errors="*{origenId}" class="pt-2 small text-danger" ></p>-->
                     <!--ORIGEN INTERNACIONAL-->
                     <select th:case="'internacional'" th:field="*{origenId}" id="origenInternacEntranteId" class="form-select" aria-label="origenId">
                         <option th:value="null" th:text="Salida" selected></option>
@@ -74,7 +72,7 @@
                     </select>
                     <p th:if="${#fields.hasErrors('origenId')}" th:errors="*{origenId}" class="pt-2 small text-danger" ></p>
                 </div>
-                <div class="col-lg-6">
+                <div class="col-lg-6 pb-2">
                     <!--DESTINO NACIONAL-->
                     <select th:field="*{destinoId}" id="destinoNacEntranteId" class="form-select">
                         <option th:value="null" th:text="Destino" selected></option>
@@ -88,7 +86,7 @@
         </div>
         <!--AEROLINEA - AERONAVE-->
         <div class="row pb-2">
-            <div class="col-lg-6">
+            <div class="col-lg-6 pb-2">
                 <select th:field="*{aerolineaId}" id="aerolineaId" class="form-select" aria-label="aerolineaId">
                     <option th:value="null" th:text="Aerolínea" selected></option>
                     <option th:each="aerolinea : ${aerolineas}"
@@ -98,7 +96,7 @@
                 <p th:if="${#fields.hasErrors('aerolineaId')}" th:errors="*{aerolineaId}" class="pt-2 small text-danger"
                    th:errorclass="fieldError"></p>
             </div>
-            <div class="col-lg-6">
+            <div class="col-lg-6 pb-2">
                 <select th:field="*{aeronaveId}"  id="aeronaveId" class="form-select" aria-label="aeronaveId">
                     <option th:value="null" th:text="Aeronave" selected></option>
                     <option th:each="aeronave : ${aeronaves}"
@@ -111,14 +109,14 @@
         </div>
         <!--PRECIO - SUBMIT-->
         <div class="row pb-2 align-items-end">
-            <div class="col-lg-6">
+            <div class="col-lg-6 pb-2">
                 <label for="precioNeto" class="form-label">Precio Neto</label>
                 <input type="number" th:field="*{precioNeto}" class="form-control" id="precioNeto" min="0">
                 <p th:if="${#fields.hasErrors('precioNeto')}" th:errors="*{precioNeto}" class="pt-2 small text-danger"
                    th:errorclass="fieldError"></p>
             </div>
         </div>
-        <div class="col d-flex justify-content-center pt-2">
+        <div class="col d-flex justify-content-center pt-2 pb-2">
             <button type="submit" class="btn btn-primary">Submit</button>
         </div>
     </form>

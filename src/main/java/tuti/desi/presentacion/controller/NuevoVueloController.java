@@ -13,6 +13,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import tuti.desi.dto.AerolineaDTO;
 import tuti.desi.dto.AeronaveDTO;
 import tuti.desi.dto.AeropuertoDTO;
+import tuti.desi.entidades.Vuelo;
 import tuti.desi.excepciones.vueloexception.VueloPersistenceException;
 import tuti.desi.presentacion.form.NuevoVueloForm;
 import tuti.desi.servicios.AerolineaService;
@@ -20,7 +21,9 @@ import tuti.desi.servicios.IAeronaveService;
 import tuti.desi.servicios.IAeropuertoService;
 import tuti.desi.servicios.VueloService;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.TreeSet;
 
@@ -49,10 +52,6 @@ public class NuevoVueloController {
         model.addAttribute("formBean", formBean);
 
         return "vuelos/crearVuelo";
-    }
-    @GetMapping("/prueba")
-    public String getPrueba(){
-        return "/crear-vuelo/prueba";
     }
 
     @PostMapping("/crearVuelo")

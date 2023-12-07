@@ -3,7 +3,7 @@
     <head>
         <meta th:replace="~{parent/template::charset}">
         <meta th:replace="~{parent/template::viewport}">
-        <title>Crear Vuelo</title>
+        <title>Programar Vuelo</title>
         <link th:replace="~{parent/template::bootstrap}">
     </head>
     <body>
@@ -11,8 +11,8 @@
         <header th:replace="~{parent/template::header}"></header>
 
         <!--TITLE-->
-        <div class="pt-4 container-fluid">
-            <h2 class="pt-2  text-center"><strong>Programar Vuelo</strong></h2>
+        <div class="pt-4 pb-4 container-fluid">
+            <h2 class="pt-2 text-center"><strong>Programar Vuelo</strong></h2>
         </div>
         <!--PERSISTENCE STATUS ALERTS-->
         <!--EXITO-->
@@ -20,20 +20,22 @@
         <!--ERROR-->
         <div th:replace="~{vuelos/vuelosAlerts::error}"></div>
 
-        <!--FORM DIV-->
-        <div class="container-fluid pt-4 col-lg-10 ">
+        <div class="card pb-4 mb-4 container-fluid col-lg-8">
             <!--NAVS NAC/INTER-->
-            <ul class="nav nav-pills justify-content-center pt-3 pb-3">
-                <li class="nav-item">
-                    <a class="nav-link active" id="nacionales-tab" data-bs-toggle="tab" data-bs-target="#nac-tab"
-                       type="button" role="tab" >Nacionales</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" id="internacionales-tab"  data-bs-toggle="tab" data-bs-target="#internac-tab"
-                       type="button" role="tab">Internacionales</a>
-                </li>
-            </ul>
-            <div class="tab-content" id="tab-content">
+            <div class="card-header">
+                <ul class="nav nav-pills justify-content-center pt-3 pb-3">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="nacionales-tab" data-bs-toggle="tab" data-bs-target="#nac-tab"
+                           type="button" role="tab" >Nacionales</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="internacionales-tab"  data-bs-toggle="tab" data-bs-target="#internac-tab"
+                           type="button" role="tab">Internacionales</a>
+                    </li>
+                </ul>
+            </div>
+            <!--CONDITION FORM DIVS-->
+            <div class="card-body tab-content pb-4 mb-4" id="tab-content">
                 <div class="tab-pane fade show active" id="nac-tab" role="tabpanel" tabindex="0">
                     <div th:replace="~{vuelos/condicionNavTabs::navTabs(${'nacional'})}"></div>
                 </div>

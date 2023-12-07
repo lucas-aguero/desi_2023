@@ -1,65 +1,72 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <link th:replace="~{parent/template::bootstrap}">
+    <link rel="stylesheet" th:href="@{/css/main.css}"/>
     <title>Editar Datos Impositivos</title>
 </head>
 <body>
-	 <link rel="stylesheet" th:href="@{/css/main.css}"/>
-    <h2>Editar Datos Impositivos</h2>
-     <p>Por favor, ingrese los valores de la siguiente manera:</p>
-    <ul>
-        <li>IVA: Número entero entre 0 y 100.</li>
-        <li>Tasa Aeroportuaria Nacional: Número decimal mayor o igual a 0.</li>
-        <li>Tasa Aeroportuaria Internacional: Número decimal mayor o igual a 0</li>
-        <li>Cotización Dólar: Número decimal mayor o igual a 0</li>
-        <li>En el caso de que los valores tengan decimales, no puede superar los dos decimales y la separación debe ser con un "." (punto).</li>
-    </ul>
-    <form th:action="@{/editarDatosImpositivos}" th:object="${formBean}" method="post">
-    <table border="0" style="align-self: center;">
+    <!--NAVBAR-->
+    <header th:replace=" ~{parent/template::header}"></header>
+    <div class="container-fluid pt-4 pb-2">
+        <div class="container">
+            <h2>Editar Datos Impositivos</h2>
+            <p>Por favor, ingrese los valores de la siguiente manera:</p>
+            <ul>
+                <li>IVA: Número entero entre 0 y 100.</li>
+                <li>Tasa Aeroportuaria Nacional: Número decimal mayor o igual a 0.</li>
+                <li>Tasa Aeroportuaria Internacional: Número decimal mayor o igual a 0</li>
+                <li>Cotización Dólar: Número decimal mayor o igual a 0</li>
+                <li>En el caso de que los valores tengan decimales, no puede superar los dos decimales y la separación debe ser con un "." (punto).</li>
+            </ul>
+            <form th:action="@{/editarDatosImpositivos}" th:object="${formBean}" method="post">
+                <table border="0" style="align-self: center;">
 
-        <tr>
-            <td><label th:text="#{iva}" /></td>
-            <td><input type="text" th:field="*{iva}" th:class="${#fields.hasErrors('iva') ? 'error-input' : ''}" /></td>
-            <td>
-                <ul>
-                    <li th:if="${#fields.hasErrors('iva')}" th:errors="*{iva}" class="error-message"></li>
-                </ul>
-            </td>
-        </tr>
-        <tr>
-            <td><label th:text="#{tasa_aeroportuaria_nacional}" /></td>
-            <td><input type="text" th:field="*{tasaAeroportuariaNacional}" th:class="${#fields.hasErrors('tasaAeroportuariaNacional') ? 'error-input' : ''}" /></td>
-            <td>
-                <ul>
-                    <li th:if="${#fields.hasErrors('tasaAeroportuariaNacional')}" th:errors="*{tasaAeroportuariaNacional}" class="error-message"></li>
-                </ul>
-            </td>
-        </tr>
-        <tr>
-            <td><label th:text="#{tasa_aeroportuaria_internacional}" /></td>
-            <td><input type="text" th:field="*{tasaAeroportuariaInternacional}" th:class="${#fields.hasErrors('tasaAeroportuariaInternacional') ? 'error-input' : ''}" /></td>
-            <td>
-                <ul>
-                    <li th:if="${#fields.hasErrors('tasaAeroportuariaInternacional')}" th:errors="*{tasaAeroportuariaInternacional}" class="error-message"></li>
-                </ul>
-            </td>
-        </tr>
-        <tr>
-            <td><label th:text="#{cotizacion_dolar}" /></td>
-            <td><input type="text" th:field="*{cotizacionDolar}" th:class="${#fields.hasErrors('cotizacionDolar') ? 'error-input' : ''}" /></td>
-            <td>
-                <ul>
-                    <li th:if="${#fields.hasErrors('cotizacionDolar')}" th:errors="*{cotizacionDolar}" class="error-message"></li>
-                </ul>
-            </td>
-        </tr>
-    </table>
-    <table class="botones">
-        <tr>
-            <td><input type="submit" name="action" value="Guardar" /></td>
-            <td><input type="submit" name="action" value="Cancelar" /></td>
-        </tr>
-    </table>
-</form>
-</body>
+                    <tr>
+                        <td><label th:text="#{iva}" /></td>
+                        <td><input type="text" th:field="*{iva}" th:class="${#fields.hasErrors('iva') ? 'error-input' : ''}" /></td>
+                        <td>
+                            <ul>
+                                <li th:if="${#fields.hasErrors('iva')}" th:errors="*{iva}" class="error-message"></li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label th:text="#{tasa_aeroportuaria_nacional}" /></td>
+                        <td><input type="text" th:field="*{tasaAeroportuariaNacional}" th:class="${#fields.hasErrors('tasaAeroportuariaNacional') ? 'error-input' : ''}" /></td>
+                        <td>
+                            <ul>
+                                <li th:if="${#fields.hasErrors('tasaAeroportuariaNacional')}" th:errors="*{tasaAeroportuariaNacional}" class="error-message"></li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label th:text="#{tasa_aeroportuaria_internacional}" /></td>
+                        <td><input type="text" th:field="*{tasaAeroportuariaInternacional}" th:class="${#fields.hasErrors('tasaAeroportuariaInternacional') ? 'error-input' : ''}" /></td>
+                        <td>
+                            <ul>
+                                <li th:if="${#fields.hasErrors('tasaAeroportuariaInternacional')}" th:errors="*{tasaAeroportuariaInternacional}" class="error-message"></li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label th:text="#{cotizacion_dolar}" /></td>
+                        <td><input type="text" th:field="*{cotizacionDolar}" th:class="${#fields.hasErrors('cotizacionDolar') ? 'error-input' : ''}" /></td>
+                        <td>
+                            <ul>
+                                <li th:if="${#fields.hasErrors('cotizacionDolar')}" th:errors="*{cotizacionDolar}" class="error-message"></li>
+                            </ul>
+                        </td>
+                    </tr>
+                </table>
+                <table class="botones">
+                    <tr>
+                        <td><input type="submit" name="action" value="Guardar" /></td>
+                        <td><input type="submit" name="action" value="Cancelar" /></td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+    </body>
 </html>
