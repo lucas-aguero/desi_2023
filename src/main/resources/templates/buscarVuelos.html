@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Buscar Vuelos</title>
+</head>
+<body>
+<h1>Buscar Vuelos</h1>
+<form action="#" th:action="@{/buscarVuelos}" th:method="post">
+    <label for="origen">Origen:</label>
+    <input type="text" id="origen" name="origen" />
+    <br />
+    <label for="destino">Destino:</label>
+    <input type="text" id="destino" name="destino" />
+    <br />
+    <label for="fechaVuelo">Fecha Vuelo:</label>
+    <input type="text" id="fechaVuelo" name="fechaVuelo" />
+    <br />
+    <button type="submit">Buscar</button>
+</form>
+<table>
+    <tr>
+        <th>Origen</th>
+        <th>Destino</th>
+        <th>Fecha Vuelo</th>
+        <th>Tipo Vuelo</th>
+        <th>Estado</th>
+        <th>Cant. Asientos Disp.</th>
+    </tr>
+    <tr th:each="vuelo : ${vuelos}">
+        <td th:text="${vuelo.origen}">Origen</td>
+        <td th:text="${vuelo.destino}">Destino</td>
+        <td th:text="${vuelo.fechaVuelo}">Fecha Vuelo</td>
+        <td th:text="${vuelo.tipoVuelo}">Tipo Vuelo</td>
+        <td th:text="${vuelo.estado}">Estado</td>
+        <td th:text="${vuelo.cantAsientosDisp}">Cant. Asientos Disp.</td>
+    </tr>
+</table>
+</body>
+</html>

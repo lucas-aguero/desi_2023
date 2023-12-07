@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Busqueda de Vuelos</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container">
+    <h2>Busqueda de Vuelos</h2>
+    <form action="#" th:action="@{/buscarVuelos}" th:object="${vuelo}" method="post">
+        <div class="form-group">
+            <label for="fechaVuelo">Fecha Vuelo:</label>
+            <input type="date" class="form-control" id="fechaVuelo" th:field="*{fechaVuelo}" name="fechaVuelo">
+        </div>
+        <div class="form-group">
+            <label for="origen">Origen:</label>
+            <input type="text" class="form-control" id="origen" th:field="*{origen}" name="origen">
+        </div>
+        <div class="form-group">
+            <label for="destino">Destino:</label>
+            <input type="text" class="form-control" id="destino" th:field="*{destino}" name="destino">
+        </div>
+        <div class="form-group">
+            <label for="tipoVuelo">Tipo Vuelo:</label>
+            <select class="form-control" id="tipoVuelo" th:field="*{tipoVuelo}" name="tipoVuelo">
+                <option value="Nacional">Nacional</option>
+                <option value="Internacional">Internacional</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Buscar</button>
+    </form>
+</div>
+</body>
+</html>

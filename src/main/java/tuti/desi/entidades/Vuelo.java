@@ -59,5 +59,4 @@ public class Vuelo {
     @NotNull
     @Column(name="precio_neto")
     private BigDecimal precioNeto;
-
 }

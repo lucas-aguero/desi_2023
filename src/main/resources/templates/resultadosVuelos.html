@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Resultados de Vuelos</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container">
+    <h2>Resultados de Vuelos</h2>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Fecha Vuelo</th>
+            <th>Origen</th>
+            <th>Destino</th>
+            <th>Tipo Vuelo</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="vuelo : ${vuelos}">
+            <td th:text="${vuelo.fechaVuelo}">Fecha Vuelo</td>
+            <td th:text="${vuelo.origen}">Origen</td>
+            <td th:text="${vuelo.destino}">Destino</td>
+            <td th:text="${vuelo.tipoVuelo}">Tipo Vuelo</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
