@@ -31,7 +31,7 @@ public class HomeController {
         aeronaveCreator.persistAeronaves(50);
         aeropuertoService.loadAirportsFromJsonFile();
 
-        return "/";
+        return "index";
     }
 
     @GetMapping("/crear-aeronaves")
@@ -39,7 +39,7 @@ public class HomeController {
 
         aeronaveCreator.persistAeronaves(50);
 
-        return "/";
+        return "index";
     }
 
     @GetMapping("/crear-aerolineas")
@@ -47,7 +47,7 @@ public class HomeController {
 
         aeronaveCreator.persistAeronaves(50);
 
-        return "/";
+        return "index";
     }
 
     @GetMapping("/crear-aeropuertos")
@@ -55,13 +55,13 @@ public class HomeController {
 
         aeropuertoService.loadAirportsFromJsonFile();
 
-        return "/";
+        return "index";
     }
 
     @GetMapping("/crear-vuelos")
     public String crearVuelos(){
 
-        return "/";
+        return "index";
     }
 
 
