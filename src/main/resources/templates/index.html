@@ -11,7 +11,27 @@
         <!--NAVBAR-->
         <header th:replace=" ~{parent/template::header}">
         </header>
+        <!--TITLE-->
+        <div class="container-fluid pt-4 pb-4">
+            <h1 class="text-center">DESI 2023</h1>
+            <h3 class="text-center">Trabajo Práctico Parte 2</h3>
+        </div>
+        <!--CONTENT-->
+        <div class="container-fluid pt-4 pb-4">
+            <h4 class="text-center pb-4 ">Inicializar datos de demostración</h4>
+            <div class="card container pt-4 pb-4">
+                <form th:action"@{}">
+                    <nav class="nav nav-pills nav-fill">
+                        <a class="nav-link active" aria-current="page" href="/inicializar-datos">Inicializar todos los datos</a>
+                        <a class="nav-link" href="/crear-aeronaves">Crear Aeronaves</a>
+                        <a class="nav-link" href="/crear-aerolineas">Crear Aerolíneas</a>
+                        <a class="nav-link" href="/crear-vuelos">Crear Aeropuertos</a>
+                        <a class="nav-link" href="/crear-vuelos">Crear Vuelos</a>
+                    </nav>
+                </form>
 
+            </div>
+        </div>
         <script th:replace="~{parent/template::js-bundle}"></script>
     </body>
 </html>
