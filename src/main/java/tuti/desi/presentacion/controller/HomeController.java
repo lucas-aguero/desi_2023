@@ -8,7 +8,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import tuti.desi.accesoDatos.IAeropuertoRepo;
+import tuti.desi.excepciones.aerolineaexception.AerolineaNoCreadaException;
 import tuti.desi.excepciones.aeronaveexception.AeronaveNoCreadaException;
+import tuti.desi.excepciones.aeropuertoexception.AeropuertoPersistenceException;
+import tuti.desi.excepciones.vueloexception.VueloNoCreadoException;
+import tuti.desi.excepciones.vueloexception.VueloPersistenceException;
 import tuti.desi.servicios.AerolineaServiceImpl;
 import tuti.desi.servicios.AeronaveServiceImpl;
 import tuti.desi.servicios.AeropuertoServiceImpl;
@@ -76,29 +80,79 @@ public class HomeController {
     }
 
     @GetMapping("/inicializar-aerolineas")
-    public String inicializarAerolineas(){
+    public String inicializarAerolineas(ModelMap model,
+                                        RedirectAttributes redirectAttributes){
 
-        aerolineaCreator.persistAerolineas();
+        try {
+            String statusMessage = aerolineaCreator.persistAerolineas();
+            redirectAttributes.addFlashAttribute("statusMessage", statusMessage);
+
+        } catch (AerolineaNoCreadaException e){
+            redirectAttributes.addFlashAttribute("errorMessage", e.getMessage());
+        }
+
+        redirectAttributes.addFlashAttribute("messageTitle", "Creación de Aerolíneas");
+        redirectAttributes.addFlashAttribute("toastId", "toastId");
 
         return "redirect:/";
     }
 
     @GetMapping("/inicializar-aeropuertos")
-    public String inicializarAeropuertos(){
+    public String inicializarAeropuertos(ModelMap model,
+                                         RedirectAttributes redirectAttributes){
 
-        if(aeropuertoService.contarAeropuertos() == 0){
-            aeropuertoService.loadAirportsFromJsonFile();
-        }else{
-            System.out.println("Los aeropuertos ya han sido cargados en el sistema.");
+        String statusMessage = "Inicialización de registros de aeropuertos exitosa. " +
+                "\nNro de registros creados: ";
+
+        try{
+            if(aeropuertoService.contarAeropuertos() == 0){
+
+                aeropuertoService.loadAirportsFromJsonFile();
+                redirectAttributes.addFlashAttribute("statusMessage",
+                        statusMessage.concat(Long.toString(aeropuertoService.contarAeropuertos())));
+
+            }else {
+                redirectAttributes.addFlashAttribute("statusMessage",
+                        statusMessage.concat(Long.toString( + aeropuertoService.contarAeropuertos())));
+            }
+
+        }catch(Exception e){
+
+            String errorMessage  = "Error Interno, No se pudieron crear los registros. " +
+                    "\nComuníquese con un administrador del sistema.";
+
+            redirectAttributes.addFlashAttribute("errorMessage", errorMessage);
+
         }
+
+        redirectAttributes.addFlashAttribute("messageTitle", "Creación de Aeropuertos");
+        redirectAttributes.addFlashAttribute("toastId", "toastId");
+
         return "redirect:/";
     }
 
     @GetMapping("/inicializar-vuelos")
-    public String inicializarVuelos(){
+    public String inicializarVuelos(ModelMap model,
+                                    RedirectAttributes redirectAttributes){
 
-        //CANT * 4 = 16
-        vueloCreator.persistirLotesVuelos(4);
+        try{
+            if(aeropuertoService.contarAeropuertos() == 0){
+                redirectAttributes.addFlashAttribute("errorMessage", "Debe inicializar datos de " +
+                        "aeropuertos antes de crear vuelos");
+
+            }else{
+                //CANT * 4 = 16
+                String statusMessage = vueloCreator.persistirLotesVuelos(4);
+                redirectAttributes.addFlashAttribute("statusMessage", statusMessage);
+            }
+
+        }catch(Exception e){
+            redirectAttributes.addFlashAttribute("errorMessage", "Error Interno, No se pudieron crear los registros. " +
+                    "\nComuníquese con un administrador del sistema.");
+        }
+
+        redirectAttributes.addFlashAttribute("messageTitle", "Creación de Vuelos");
+        redirectAttributes.addFlashAttribute("toastId", "toastId");
 
         return "redirect:/";
     }

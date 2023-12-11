@@ -62,60 +62,68 @@ public class VueloCreator {
         Optional<Aeropuerto> origenOptional = null;
         Optional<Aeropuerto> destinoOptional= null;
 
-        if(saliente){
+        try{
+            if(saliente){
 
-            origenOptional = aeropuertoRepo.findAeropuertoLocal();
+                origenOptional = aeropuertoRepo.findAeropuertoLocal();
 
-            if(nacional){
+                if(nacional){
 
-                destinoOptional = aeropuertoRepo.findRandomAeropuertoArgentino();
+                    destinoOptional = aeropuertoRepo.findRandomAeropuertoArgentino();
 
+                }else{
+
+                    destinoOptional = aeropuertoRepo.findRandomAeropuertoExtranjero();
+
+                }
+
+                if(origenOptional.isEmpty()){
+                    throw new AeropuertoNoEncontradoException("No existe aeropuerto local registrado. " +
+                            "Imposible crear un nuevo vuelo. " +
+                            "Registre un aeropuerto local e intente nuevamente");
+                }
+
+                if(destinoOptional.isEmpty()){
+                    throw new AeropuertoNoEncontradoException("No existen aeropuertos registrados. " +
+                            "Imposible crear un nuevo vuelo. " +
+                            "Registre al menos un aeropuerto e intente nuevamente");
+                }
+
+                //entrante
             }else{
 
-                destinoOptional = aeropuertoRepo.findRandomAeropuertoExtranjero();
+                if(nacional){
+
+                    origenOptional = aeropuertoRepo.findRandomAeropuertoArgentino();
+
+                }else{
+
+                    origenOptional = aeropuertoRepo.findRandomAeropuertoExtranjero();
+
+                }
+
+                destinoOptional = aeropuertoRepo.findAeropuertoLocal();
+
+                if(origenOptional.isEmpty()){
+                    throw new AeropuertoNoEncontradoException("No existen aeropuertos registrados. " +
+                            "Imposible crear un nuevo vuelo. " +
+                            "Registre al menos un aeropuerto e intente nuevamente");
+                }
+
+                if(destinoOptional.isEmpty()){
+                    throw new AeropuertoNoEncontradoException("No existe aeropuerto local registrado. " +
+                            "Imposible crear un nuevo vuelo. " +
+                            "Registre un aeropuerto local e intente nuevamente");
+                }
 
             }
 
-            if(origenOptional.isEmpty()){
-                throw new AeropuertoNoEncontradoException("No existe aeropuerto local registrado. " +
-                        "Imposible crear un nuevo vuelo. " +
-                        "Registre un aeropuerto local e intente nuevamente");
-            }
-
-            if(destinoOptional.isEmpty()){
-                throw new AeropuertoNoEncontradoException("No existen aeropuertos registrados. " +
-                        "Imposible crear un nuevo vuelo. " +
-                        "Registre al menos un aeropuerto e intente nuevamente");
-            }
-
-        //entrante
-        }else{
-
-            if(nacional){
-
-                origenOptional = aeropuertoRepo.findRandomAeropuertoArgentino();
-
-            }else{
-
-                origenOptional = aeropuertoRepo.findRandomAeropuertoExtranjero();
-
-            }
-
-            destinoOptional = aeropuertoRepo.findAeropuertoLocal();
-
-            if(origenOptional.isEmpty()){
-                throw new AeropuertoNoEncontradoException("No existen aeropuertos registrados. " +
-                        "Imposible crear un nuevo vuelo. " +
-                        "Registre al menos un aeropuerto e intente nuevamente");
-            }
-
-            if(destinoOptional.isEmpty()){
-                throw new AeropuertoNoEncontradoException("No existe aeropuerto local registrado. " +
-                        "Imposible crear un nuevo vuelo. " +
-                        "Registre un aeropuerto local e intente nuevamente");
-            }
-
+        }catch(Exception e){
+            throw new AeropuertoNoEncontradoException("No existen aeropuertos registrados. " +
+                    "Imposible crear un nuevo vuelo. " +
+                    "Registre al menos un aeropuerto e intente nuevamente");
         }
+
 
         origen = origenOptional.get();
         destino = destinoOptional.get();
@@ -171,100 +179,105 @@ public class VueloCreator {
 
     }
 
-    public void persistirVuelos(boolean saliente, boolean nacional){
+    public String persistirVuelos(boolean saliente, boolean nacional){
 
         for (int i = 0; i < 4; i++) {
-            Vuelo vuelo = createVuelo(saliente, nacional);
 
-            if(aeropuertoRepo.findByIcao(vuelo.getOrigen().getIcao())
-                    .equals(aeropuertoRepo.findByIcao(vuelo.getDestino().getIcao())))
-            {
-                System.out.println("origen-destino iguales");
-                --i;
-                break;
-            }
+            try {
 
-            if(vueloRepo.existsByDestinoIdAndFechaPartida(vuelo.getDestino().getId(),
-                    vuelo.getFechaPartida())
-                    && !vuelo.getDestino().getIcao().equals("SAAV")){
+                Vuelo vuelo = createVuelo(saliente, nacional);
 
-                System.out.println("destino-fecha ya existe");
-                --i;
-                break;
-            }
-            if(vueloRepo.existsByOrigenIdAndFechaPartida(vuelo.getOrigen().getId(),
-                    vuelo.getFechaPartida())
-                    && !vuelo.getOrigen().getIcao().equals("SAAV")){
+                if(aeropuertoRepo.findByIcao(vuelo.getOrigen().getIcao())
+                        .equals(aeropuertoRepo.findByIcao(vuelo.getDestino().getIcao())))
+                {
+                    System.out.println("origen-destino iguales");
+                    --i;
+                    break;
+                }
 
-                System.out.println("origen-fecha ya existe");
-                --i;
-                break;
-            }
+                if(vueloRepo.existsByDestinoIdAndFechaPartida(vuelo.getDestino().getId(),
+                        vuelo.getFechaPartida())
+                        && !vuelo.getDestino().getIcao().equals("SAAV")){
 
-            if(nacional){
-                vuelo.setTipoVuelo(TipoVuelo.NACIONAL);
-            }else{
-                vuelo.setTipoVuelo(TipoVuelo.INTERNACIONAL);
-            }
+                    System.out.println("destino-fecha ya existe");
+                    --i;
+                    break;
+                }
+                if(vueloRepo.existsByOrigenIdAndFechaPartida(vuelo.getOrigen().getId(),
+                        vuelo.getFechaPartida())
+                        && !vuelo.getOrigen().getIcao().equals("SAAV")){
 
-            try{
+                    System.out.println("origen-fecha ya existe");
+                    --i;
+                    break;
+                }
+
+                if(nacional){
+                    vuelo.setTipoVuelo(TipoVuelo.NACIONAL);
+                }else{
+                    vuelo.setTipoVuelo(TipoVuelo.INTERNACIONAL);
+                }
 
                 vueloRepo.save(vuelo);
 
-            }catch (Exception e){
+            }catch(Exception e){
                 throw new VueloNoCreadoException();
             }
         }
+        return "Inicialización de registros de aeronaves exitosa. " +
+                "\nNro de registros creados: " + vueloRepo.count();
     }
 
-    public void persistirVuelos(boolean saliente, boolean nacional, int cant){
+    public String persistirVuelos(boolean saliente, boolean nacional, int cant){
 
         for (int i = 0; i < cant; i++) {
 
-            Vuelo vuelo = createVuelo(saliente, nacional);
+            try {
 
-            if(aeropuertoRepo.findByIcao(vuelo.getOrigen().getIcao())
-                    .equals(aeropuertoRepo.findByIcao(vuelo.getDestino().getIcao())))
-            {
-                System.out.println("origen-destino iguales");
-                --i;
-                break;
-            }
+                Vuelo vuelo = createVuelo(saliente, nacional);
 
-            if(vueloRepo.existsByDestinoIdAndFechaPartida(vuelo.getDestino().getId(),
-                    vuelo.getFechaPartida())
-                    && !vuelo.getDestino().getIcao().equals("SAAV")){
+                if(aeropuertoRepo.findByIcao(vuelo.getOrigen().getIcao())
+                        .equals(aeropuertoRepo.findByIcao(vuelo.getDestino().getIcao())))
+                {
+                    System.out.println("origen-destino iguales");
+                    --i;
+                    break;
+                }
 
-                System.out.println("destino-fecha ya existe");
-                --i;
-                break;
-            }
-            if(vueloRepo.existsByOrigenIdAndFechaPartida(vuelo.getOrigen().getId(),
-                    vuelo.getFechaPartida())
-                    && !vuelo.getOrigen().getIcao().equals("SAAV")){
+                if(vueloRepo.existsByDestinoIdAndFechaPartida(vuelo.getDestino().getId(),
+                        vuelo.getFechaPartida())
+                        && !vuelo.getDestino().getIcao().equals("SAAV")){
 
-                System.out.println("origen-fecha ya existe");
-                --i;
-                break;
-            }
+                    System.out.println("destino-fecha ya existe");
+                    --i;
+                    break;
+                }
+                if(vueloRepo.existsByOrigenIdAndFechaPartida(vuelo.getOrigen().getId(),
+                        vuelo.getFechaPartida())
+                        && !vuelo.getOrigen().getIcao().equals("SAAV")){
 
-            if(nacional){
-                vuelo.setTipoVuelo(TipoVuelo.NACIONAL);
-            }else{
-                vuelo.setTipoVuelo(TipoVuelo.INTERNACIONAL);
-            }
+                    System.out.println("origen-fecha ya existe");
+                    --i;
+                    break;
+                }
 
-            try{
+                if(nacional){
+                    vuelo.setTipoVuelo(TipoVuelo.NACIONAL);
+                }else{
+                    vuelo.setTipoVuelo(TipoVuelo.INTERNACIONAL);
+                }
 
                 vueloRepo.save(vuelo);
 
-            }catch (Exception e){
+            }catch(Exception e){
                 throw new VueloNoCreadoException();
             }
         }
+        return "Inicialización de registros de aeronaves exitosa. " +
+                "\nNro de registros creados: " + vueloRepo.count();
     }
 
-    public void persistirLotesVuelos(int cant){
+    public String persistirLotesVuelos(int cant){
 
         //SALIENTE - NACIONAL
         persistirVuelos(true, true, cant);
@@ -275,6 +288,8 @@ public class VueloCreator {
         //ENTRANTE - INTERNACIONAL
         persistirVuelos(false, false, cant);
 
+        return "Inicialización de registros de aeronaves exitosa. " +
+                "\nNro de registros creados: " + vueloRepo.count();
     }
 
     private BigDecimal crearPrecioNetoAleatorio(){
