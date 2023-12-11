@@ -8,6 +8,8 @@ import java.util.TreeSet;
 @Service
 public interface AerolineaService {
     TreeSet<AerolineaDTO> getAerolineas();
+
+    long contarAerolineas();
     //Optional<AerolineaDTO> findByNombre();
 
 }

@@ -17,7 +17,7 @@ public class AerolineaCreator {
         this.repo = repo;
     }
 
-    private Aerolinea createAerolinea() {
+    public Aerolinea createAerolinea() {
 
         return Aerolinea.builder()
                 .nombre(faker.aviation().airline())
@@ -28,7 +28,7 @@ public class AerolineaCreator {
 
         String nombreAerolinea;
 
-        for (int i = 0; i < 10 ; i++) {
+        for (int i = 0; i < 200 ; i++) {
 
             Aerolinea aerolinea = createAerolinea();
             nombreAerolinea = aerolinea.getNombre();
@@ -40,6 +40,10 @@ public class AerolineaCreator {
                 repo.save(aerolinea);
             }
 
+            if(repo.count() > 200){
+                System.out.println("Ya se han cargado aerolineas en el sistema");
+                break;
+            }
         }
 
     }
@@ -59,6 +63,10 @@ public class AerolineaCreator {
                 repo.save(aerolinea);
             }
 
+            if(repo.count() > 200){
+                System.out.println("Ya se han cargado aerolineas en el sistema");
+                break;
+            }
         }
 
     }

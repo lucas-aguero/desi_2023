@@ -26,4 +26,11 @@ public class AeronaveServiceImpl implements IAeronaveService{
         return mapper.aeronavesToAeronaveDTOs(repo.findAll());
 
     }
+
+    @Override
+    public long contarAeronaves(){
+
+        return repo.count();
+
+    }
 }

@@ -2,67 +2,105 @@ package tuti.desi.presentacion.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import tuti.desi.accesoDatos.IAeropuertoRepo;
+import tuti.desi.excepciones.aeronaveexception.AeronaveNoCreadaException;
+import tuti.desi.servicios.AerolineaServiceImpl;
+import tuti.desi.servicios.AeronaveServiceImpl;
 import tuti.desi.servicios.AeropuertoServiceImpl;
 import tuti.desi.util.faker.AerolineaCreator;
 import tuti.desi.util.faker.AeronaveCreator;
+import tuti.desi.util.faker.VueloCreator;
 
 @Controller
 @RequestMapping("/")
 public class HomeController {
 
     private final AeropuertoServiceImpl aeropuertoService;
+    private final AerolineaServiceImpl aerolineaService;
+    private final AeronaveServiceImpl aeronaveService;
     private final AeronaveCreator aeronaveCreator;
     private final AerolineaCreator aerolineaCreator;
+    private final VueloCreator vueloCreator;
+
 
     @Autowired
-    public HomeController(AeropuertoServiceImpl aeropuertoService, AeronaveCreator aeronaveCreator, AerolineaCreator aerolineaCreator) {
+    public HomeController(AeropuertoServiceImpl aeropuertoService, AeronaveCreator aeronaveCreator, AerolineaCreator aerolineaCreator, VueloCreator vueloCreator, IAeropuertoRepo aeropuertoRepo, AerolineaServiceImpl aerolineaService, AeronaveServiceImpl aeronaveService) {
         this.aeropuertoService = aeropuertoService;
         this.aeronaveCreator = aeronaveCreator;
         this.aerolineaCreator = aerolineaCreator;
+        this.vueloCreator = vueloCreator;
+        this.aerolineaService = aerolineaService;
+        this.aeronaveService = aeronaveService;
     }
 
     @GetMapping("/inicializar-datos")
     public String inicializarDatos(){
 
-        aerolineaCreator.persistAerolineas(50);
-        aeronaveCreator.persistAeronaves(50);
-        aeropuertoService.loadAirportsFromJsonFile();
+        aerolineaCreator.persistAerolineas();
+        aeronaveCreator.persistAeronaves();
 
-        return "index";
+        if(aeropuertoService.contarAeropuertos() == 0){
+            aeropuertoService.loadAirportsFromJsonFile();
+        }
+
+        vueloCreator.persistirLotesVuelos(4);
+
+        return "redirect:/";
     }
 
-    @GetMapping("/crear-aeronaves")
-    public String crearAeronaves(){
+    @GetMapping("/inicializar-aeronaves")
+    public String inicializarAeronaves(ModelMap model,
+                                       RedirectAttributes redirectAttributes){
 
-        aeronaveCreator.persistAeronaves(50);
+        try{
+            String statusMessage = aeronaveCreator.persistAeronaves();
 
-        return "index";
+            redirectAttributes.addFlashAttribute("statusMessage", statusMessage);
+
+
+        }catch(AeronaveNoCreadaException e){
+
+            redirectAttributes.addFlashAttribute("errorMessage", e.getMessage());
+
+        }
+
+        redirectAttributes.addFlashAttribute("messageTitle", "Creación de Aeronaves");
+        redirectAttributes.addFlashAttribute("toastId", "toastId");
+
+        return "redirect:/";
     }
 
-    @GetMapping("/crear-aerolineas")
-    public String crearAerolineas(){
+    @GetMapping("/inicializar-aerolineas")
+    public String inicializarAerolineas(){
 
-        aeronaveCreator.persistAeronaves(50);
+        aerolineaCreator.persistAerolineas();
 
-        return "index";
+        return "redirect:/";
     }
 
-    @GetMapping("/crear-aeropuertos")
+    @GetMapping("/inicializar-aeropuertos")
     public String inicializarAeropuertos(){
 
-        aeropuertoService.loadAirportsFromJsonFile();
-
-        return "index";
+        if(aeropuertoService.contarAeropuertos() == 0){
+            aeropuertoService.loadAirportsFromJsonFile();
+        }else{
+            System.out.println("Los aeropuertos ya han sido cargados en el sistema.");
+        }
+        return "redirect:/";
     }
 
-    @GetMapping("/crear-vuelos")
-    public String crearVuelos(){
+    @GetMapping("/inicializar-vuelos")
+    public String inicializarVuelos(){
 
-        return "index";
+        //CANT * 4 = 16
+        vueloCreator.persistirLotesVuelos(4);
+
+        return "redirect:/";
     }
-
 
 }

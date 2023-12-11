@@ -6,7 +6,7 @@ import tuti.desi.accesoDatos.IAeronaveRepo;
 import tuti.desi.accesoDatos.IAeropuertoRepo;
 import tuti.desi.accesoDatos.IVueloRepo;
 import tuti.desi.entidades.enums.TipoVuelo;
-import tuti.desi.excepciones.aeropuertoexception.VueloConOrigenYFechaExistenteException;
+import tuti.desi.excepciones.vueloexception.VueloConOrigenYFechaExistenteException;
 import tuti.desi.excepciones.vueloexception.VueloConDestinoYFechaExistenteException;
 import tuti.desi.excepciones.vueloexception.VueloNoCreadoException;
 import tuti.desi.excepciones.vueloexception.VueloConOrigenYDestinoDuplicados;
@@ -33,7 +33,6 @@ public class VueloServiceImpl implements VueloService {
         this.aeronaveRepo = aeronaveRepo;
         this.vueloMapper = vueloMapper;
     }
-
 
     @Override
     public void crearVuelo(NuevoVueloForm vueloForm){
@@ -90,22 +89,6 @@ public class VueloServiceImpl implements VueloService {
         }
 
     }
-
-//    @Override
-//    public NuevoVueloForm findById(Long nroVuelo){
-//
-//
-//        Optional<Vuelo> vueloOptional = vueloRepo.findById(nroVuelo);
-//
-//        if(vueloOptional.isPresent()){
-//
-//            return vueloMapper.vueloToForm(vueloOptional.get());
-//        }else{
-//            throw new VueloNoEncontradoException("El vuelo con nro: " + nroVuelo + "no existe.");
-//        }
-//
-//    }
-
     @Override
     public List<Vuelo> getVuelos() {
 

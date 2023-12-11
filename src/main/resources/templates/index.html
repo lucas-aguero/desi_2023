@@ -20,18 +20,45 @@
         <div class="container-fluid pt-4 pb-4">
             <h4 class="text-center pb-4 ">Inicializar datos de demostración</h4>
             <div class="card container pt-4 pb-4">
-                <form th:action"@{}">
-                    <nav class="nav nav-pills nav-fill">
-                        <a class="nav-link active" aria-current="page" href="/inicializar-datos">Inicializar todos los datos</a>
-                        <a class="nav-link" href="/crear-aeronaves">Crear Aeronaves</a>
-                        <a class="nav-link" href="/crear-aerolineas">Crear Aerolíneas</a>
-                        <a class="nav-link" href="/crear-aeropuertos">Crear Aeropuertos</a>
-                        <a class="nav-link" href="/crear-vuelos">Crear Vuelos</a>
-                    </nav>
-                </form>
-
+                <nav class="nav nav-pills nav-fill">
+                    <a class="nav-link active" aria-current="page" href="/inicializar-datos">Inicializar todos los datos</a>
+                    <a class="nav-link" href="/inicializar-aeronaves">Crear Aeronaves</a>
+                    <a class="nav-link" href="/inicializar-aerolineas">Crear Aerolíneas</a>
+                    <a class="nav-link" href="/inicializar-aeropuertos">Crear Aeropuertos</a>
+                    <a class="nav-link" href="/inicializar-vuelos">Crear Vuelos</a>
+                </nav>
             </div>
         </div>
+        <!--NOTIFICACION DE ESTADO DE OPERACION-->
+        <div th:if="${toastId}">
+            <div class="toast-container position-fixed bottom-0 end-0 p-3">
+                <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                    <div class="toast-header">
+                        <strong class="me-auto" th:text="${messageTitle}"></strong>
+                        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                    </div>
+                    <div th:if="${statusMessage}" class="toast-body"
+                         th:utext="${statusMessage}">
+                    </div>
+                    <div th:if="${errorMessage}" class="toast-body text-danger"
+                         th:utext="${errorMessage}">
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <script th:replace="~{parent/template::js-bundle}"></script>
+        <!--SCRIPT DEL TOAST-->
+        <script th:if="${toastId}">
+            document.addEventListener('DOMContentLoaded', function () {
+            const toastLiveExample = document.getElementById('liveToast');
+
+            if (toastLiveExample) {
+                const toastBootstrap = new bootstrap.Toast(toastLiveExample);
+                toastBootstrap.show();
+            }
+        });
+
+        </script>
     </body>
 </html>

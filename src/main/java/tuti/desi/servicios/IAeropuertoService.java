@@ -22,5 +22,7 @@ public interface IAeropuertoService {
 
     TreeSet<AeropuertoDTO> getAeropuertosUsaAleatorios();
 
+    int contarAeropuertos();
+
     public void loadAirportsFromJsonFile();
 }

@@ -103,6 +103,10 @@ public class AeropuertoServiceImpl implements IAeropuertoService{
         return mapper.aeropuertosToDTOs(repo.getAeropuertosUsaAleatorios());
     }
 
+    public int contarAeropuertos(){
+        return repo.contarAeropuertos();
+    }
+
     @Override
     public void loadAirportsFromJsonFile() {
         var objectMapper = new ObjectMapper();

@@ -26,8 +26,9 @@ public class AerolineaServiceImpl implements AerolineaService{
         return mapper.aerolineasToDTOs(repo.findAll());
 
     }
-//    @Override
-//    public Optional<AerolineaDTO> findByNombre() {
-//        return Optional.empty();
-//    }
+
+    @Override
+    public long contarAerolineas(){
+        return repo.count();
+    }
 }

@@ -19,6 +19,29 @@ public interface IAeropuertoRepo extends JpaRepository<Aeropuerto, Long> {
     Optional<Aeropuerto> findByName(String name);
     Optional<Aeropuerto> findByIcao(String icao);
     Optional<Aeropuerto> findByIata(String iata);
+    @Query("SELECT COUNT(a) FROM Aeropuerto a")
+    int contarAeropuertos();
+
+    Optional<Aeropuerto> findTopByOrderByIdAsc();
+
+    Optional<Aeropuerto> findTopByOrderByIdDesc();
+
+    @Query(value = "SELECT * FROM aeropuertos a " +
+            "WHERE a.icao <> 'SAAV' ORDER BY RAND() LIMIT 1", nativeQuery = true)
+    Optional<Aeropuerto> findRandomAeropuerto();
+
+    @Query(value = "SELECT * FROM aeropuertos a " +
+            "WHERE a.icao <> 'SAAV' AND a.country = 'AR' " +
+            "ORDER BY RAND() LIMIT 1", nativeQuery = true)
+    Optional<Aeropuerto> findRandomAeropuertoArgentino();
+
+    @Query(value = "SELECT * FROM aeropuertos a " +
+            "WHERE a.icao <> 'SAAV' AND a.country <> 'AR' " +
+            "ORDER BY RAND() LIMIT 1", nativeQuery = true)
+    Optional<Aeropuerto> findRandomAeropuertoExtranjero();
+
+    @Query(value = "SELECT a FROM Aeropuerto a WHERE a.icao = 'SAAV'")
+    Optional<Aeropuerto> findAeropuertoLocal();
 
     @Query("SELECT a FROM Aeropuerto a WHERE a.country = 'AR' " +
             "AND a.city <>''")

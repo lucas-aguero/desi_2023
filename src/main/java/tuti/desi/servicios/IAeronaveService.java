@@ -8,4 +8,6 @@ import java.util.TreeSet;
 @Service
 public interface IAeronaveService {
     public TreeSet<AeronaveDTO> getAeronaves();
+
+    long contarAeronaves();
 }
