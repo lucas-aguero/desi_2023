@@ -12,4 +12,5 @@ public interface VueloService {
 
     List<Vuelo> getVuelos();
 
+    long contarAeropuertos();
 }

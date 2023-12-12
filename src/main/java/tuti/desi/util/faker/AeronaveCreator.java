@@ -28,7 +28,7 @@ public class AeronaveCreator {
     }
     public String persistAeronaves(){
         String modeloAeronave;
-        String statusMessage = "Inicialización de registros de aeronaves exitosa. " +
+        String statusMessage = "Inicialización de registros de aeronaves exitosa.<br>" +
                 "\nNro de registros creados: ";
 
         for (int i = 0; i < 112 ; i++) {
@@ -51,7 +51,7 @@ public class AeronaveCreator {
                 }
 
             }catch(Exception e){
-                throw new AeronaveNoCreadaException("Error Interno, No se pudieron crear los registros. " +
+                throw new AeronaveNoCreadaException("Error Interno, No se pudieron crear los registros.<br>" +
                         "Comuníquese con un administrador del sistema.");
             }
 
@@ -62,7 +62,7 @@ public class AeronaveCreator {
     public String persistAeronaves(int cant){
         
         String modeloAeronave;
-        String statusMessage = "Inicialización de registros de aeronaves exitosa. " +
+        String statusMessage = "Inicialización de registros de aeronaves exitosa.<br>" +
                 "\nNro de registros creados: ";
 
         for (int i = 0; i < cant ; i++) {
@@ -85,7 +85,7 @@ public class AeronaveCreator {
                 }
 
             }catch(Exception e){
-                throw new AeronaveNoCreadaException("Error Interno, No se pudo crear la aeronave. " +
+                throw new AeronaveNoCreadaException("Error Interno, No se pudo crear la aeronave.<br>" +
                         "Comuníquese con un administrador del sistema.");
             }
 

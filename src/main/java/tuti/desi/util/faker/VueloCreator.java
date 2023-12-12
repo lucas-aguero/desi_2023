@@ -224,7 +224,7 @@ public class VueloCreator {
                 throw new VueloNoCreadoException();
             }
         }
-        return "Inicialización de registros de aeronaves exitosa. " +
+        return "Inicialización de registros de vuelos exitosa.<br>" +
                 "\nNro de registros creados: " + vueloRepo.count();
     }
 
@@ -273,7 +273,7 @@ public class VueloCreator {
                 throw new VueloNoCreadoException();
             }
         }
-        return "Inicialización de registros de aeronaves exitosa. " +
+        return "Inicialización de registros de vuelos exitosa.<br>" +
                 "\nNro de registros creados: " + vueloRepo.count();
     }
 
@@ -288,7 +288,7 @@ public class VueloCreator {
         //ENTRANTE - INTERNACIONAL
         persistirVuelos(false, false, cant);
 
-        return "Inicialización de registros de aeronaves exitosa. " +
+        return "Inicialización de registros de vuelos exitosa.<br>" +
                 "\nNro de registros creados: " + vueloRepo.count();
     }
 

@@ -28,14 +28,14 @@ public class AerolineaCreator {
     public String persistAerolineas(){
 
         String nombreAerolinea;
-        String statusMessage = "Inicialización de registros de aerolíneas exitosa. " +
-                "\nNro de registros creados: ";
+        String statusMessage = "Inicialización de registros de aerolíneas exitosa.<br>" +
+                "Nro de registros creados: ";
 
 
         for (int i = 0; i < 200 ; i++) {
 
             try{
-                if(repo.count() > 200){
+                if(repo.count() >= 200){
                     return statusMessage.concat(Long.toString(repo.count()));
                 }
                 Aerolinea aerolinea = createAerolinea();
@@ -50,7 +50,7 @@ public class AerolineaCreator {
 
             }catch(Exception e){
 
-                throw new AerolineaNoCreadaException("Error Interno, No se pudieron crear los registros. " +
+                throw new AerolineaNoCreadaException("Error Interno, No se pudieron crear los registros.<br>" +
                         "Comuníquese con un administrador del sistema.");
 
             }
@@ -61,14 +61,14 @@ public class AerolineaCreator {
 
     public String persistAerolineas(int cant){
         String nombreAerolinea;
-        String statusMessage = "Inicialización de registros de aerolíneas exitosa. " +
-                "\nNro de registros creados: ";
+        String statusMessage = "Inicialización de registros de aerolíneas exitosa.<br>" +
+                "Nro de registros creados: ";
 
 
         for (int i = 0; i < cant ; i++) {
 
             try{
-                if(repo.count() > 200){
+                if(repo.count() >= 200){
                     return statusMessage.concat(Long.toString(repo.count()));
                 }
                 Aerolinea aerolinea = createAerolinea();
@@ -83,7 +83,7 @@ public class AerolineaCreator {
 
             }catch(Exception e){
 
-                throw new AerolineaNoCreadaException("Error Interno, No se pudieron crear los registros. " +
+                throw new AerolineaNoCreadaException("Error Interno, No se pudieron crear los registros.<br>" +
                         "Comuníquese con un administrador del sistema.");
 
             }

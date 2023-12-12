@@ -11,54 +11,38 @@
         <!--NAVBAR-->
         <header th:replace=" ~{parent/template::header}">
         </header>
+
         <!--TITLE-->
         <div class="container-fluid pt-4 pb-4">
             <h1 class="text-center">DESI 2023</h1>
             <h3 class="text-center">Trabajo Práctico Parte 2</h3>
+            </div>
         </div>
         <!--CONTENT-->
         <div class="container-fluid pt-4 pb-4">
-            <h4 class="text-center pb-4 ">Inicializar datos de demostración</h4>
+            <h4 class="text-center pb-4 "><u>Inicializar datos de demostración</u></h4>
             <div class="card container pt-4 pb-4">
-                <nav class="nav nav-pills nav-fill">
-                    <a class="nav-link active" aria-current="page" href="/inicializar-datos">Inicializar todos los datos</a>
-                    <a class="nav-link" href="/inicializar-aeronaves">Crear Aeronaves</a>
-                    <a class="nav-link" href="/inicializar-aerolineas">Crear Aerolíneas</a>
-                    <a class="nav-link" href="/inicializar-aeropuertos">Crear Aeropuertos</a>
-                    <a class="nav-link" href="/inicializar-vuelos">Crear Vuelos</a>
-                </nav>
-            </div>
-        </div>
-        <!--NOTIFICACION DE ESTADO DE OPERACION-->
-        <div th:if="${toastId}">
-            <div class="toast-container position-fixed bottom-0 end-0 p-3">
-                <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-                    <div class="toast-header">
-                        <strong class="me-auto" th:text="${messageTitle}"></strong>
-                        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-                    </div>
-                    <div th:if="${statusMessage}" class="toast-body"
-                         th:utext="${statusMessage}">
-                    </div>
-                    <div th:if="${errorMessage}" class="toast-body text-danger"
-                         th:utext="${errorMessage}">
-                    </div>
+                <div class="card-body">
+                    <nav class="nav nav-pills nav-fill" id="opciones-nav">
+                        <a class="nav-link active" aria-current="page" href="/inicializar-datos">Inicializar todos los datos</a>
+                        <a class="nav-link" href="/inicializar-aeronaves">Crear Aeronaves</a>
+                        <a class="nav-link" href="/inicializar-aerolineas">Crear Aerolíneas</a>
+                        <a class="nav-link" href="/inicializar-aeropuertos">Crear Aeropuertos</a>
+                        <a class="nav-link" href="/inicializar-vuelos">Crear Vuelos</a>
+                    </nav>
                 </div>
+                <div id="liveAlertPlaceholder"></div>
             </div>
         </div>
 
+        <!--NOTIFICACIONES DE ESTADO DE OPERACION-->
+        <div th:if="${toastId}" th:replace="~{indexNotifications::toastMessages}"></div>
+
+        <!--SCRIPT DE BOOTSTRAP-->
         <script th:replace="~{parent/template::js-bundle}"></script>
-        <!--SCRIPT DEL TOAST-->
-        <script th:if="${toastId}">
-            document.addEventListener('DOMContentLoaded', function () {
-            const toastLiveExample = document.getElementById('liveToast');
+        <!--SCRIPT DE LAS NOTIFICACIONES-->
+        <script th:src="@{js/index-alert-handler.js}"></script>
+        <script th:if="${toastId}" th:src="@{js/index-toast-handler.js}"></script>
 
-            if (toastLiveExample) {
-                const toastBootstrap = new bootstrap.Toast(toastLiveExample);
-                toastBootstrap.show();
-            }
-        });
-
-        </script>
     </body>
 </html>

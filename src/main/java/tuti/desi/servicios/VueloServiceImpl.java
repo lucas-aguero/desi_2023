@@ -96,4 +96,8 @@ public class VueloServiceImpl implements VueloService {
 
     }
 
+    @Override
+    public long contarAeropuertos() {
+        return vueloRepo.count();
+    }
 }
