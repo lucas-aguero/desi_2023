@@ -10,7 +10,6 @@ import org.springframework.validation.ObjectError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import tuti.desi.accesoDatos.IVueloRepo;
 import tuti.desi.dto.AerolineaDTO;
 import tuti.desi.dto.AeronaveDTO;
 import tuti.desi.dto.AeropuertoDTO;
@@ -22,9 +21,7 @@ import tuti.desi.servicios.IAeronaveService;
 import tuti.desi.servicios.IAeropuertoService;
 import tuti.desi.servicios.VueloService;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.List;
 import java.util.TreeSet;
 

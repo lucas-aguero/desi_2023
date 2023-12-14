@@ -3,8 +3,9 @@
     <head>
         <meta th:replace=" ~{parent/template::charset}">
         <meta th:replace=" ~{parent/template::viewport}">
-        <title>Home</title>
         <meta th:replace=" ~{parent/template::bootstrap}">
+        <link rel="stylesheet" href="/css/index.css"/>
+        <title>Home</title>
     </head>
 
     <body>
@@ -12,26 +13,24 @@
         <header th:replace=" ~{parent/template::header}">
         </header>
 
-        <!--TITLE-->
-        <div class="container-fluid pt-4 pb-4">
-            <h1 class="text-center">DESI 2023</h1>
-            <h3 class="text-center">Trabajo Práctico Parte 2</h3>
-        </div>
-        </div>
-
         <!--MAIN-->
         <div class="main">
+            <!--TITLE-->
+            <div class="titulos container-fluid pt-4 pb-4">
+                <h1 class="text-center">DESI 2023</h1>
+                <h3 class="text-center">Trabajo Práctico Parte 2</h3>
+            </div>
             <!--CONTENT-->
             <div class="container-fluid pt-4 pb-4">
-                <h4 class="text-center pb-4 "><u>Inicializar datos de demostración</u></h4>
-                <div class="card container pt-4 pb-4">
+                <h4 class="titulos text-center pb-4 "><u>Inicializar datos de demostración</u></h4>
+                <div class="card container pt-4 pb-4 bg-dark">
                     <div class="card-body">
                         <nav class="nav nav-pills nav-fill" id="opciones-nav">
-                            <a class="nav-link active" aria-current="page" href="/inicializar-datos">Inicializar todos los datos</a>
-                            <a class="nav-link" href="/inicializar-aeronaves">Crear Aeronaves</a>
-                            <a class="nav-link" href="/inicializar-aerolineas">Crear Aerolíneas</a>
-                            <a class="nav-link" href="/inicializar-aeropuertos">Crear Aeropuertos</a>
-                            <a class="nav-link" href="/inicializar-vuelos">Crear Vuelos</a>
+                            <a class="nav-link" role="button" aria-current="page" href="/inicializar-datos">Inicializar todos los datos</a>
+                            <a class="nav-link" role="button" href="/inicializar-aeronaves">Crear Aeronaves</a>
+                            <a class="nav-link" role="button" href="/inicializar-aerolineas">Crear Aerolíneas</a>
+                            <a class="nav-link" role="button" href="/inicializar-aeropuertos">Crear Aeropuertos</a>
+                            <a class="nav-link" role="button" href="/inicializar-vuelos">Crear Vuelos</a>
                         </nav>
                     </div>
                     <div id="liveAlertPlaceholder"></div>

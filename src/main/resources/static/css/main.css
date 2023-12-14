@@ -1,8 +1,14 @@
 @charset "ISO-8859-1";
+
+html{
+    min-height:100%;
+}
+
 body {
   min-height:100%;
-  /*padding-top: 5rem;*/
+  background-color: #080E2A;
 }
+
 .starter-template {
   padding: 3rem 1.5rem;
   text-align: center;

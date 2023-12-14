@@ -76,7 +76,7 @@ public class HomeController {
             redirectAttributes.addFlashAttribute("errorMessage", errorMessage);
 
         }
-        redirectAttributes.addFlashAttribute("messageTitle", "Creación de Aeronaves");
+        redirectAttributes.addFlashAttribute("messageTitle", "Inicialización de Datos Demo");
         redirectAttributes.addFlashAttribute("toastId", "toastId");
         return "redirect:/";
     }
@@ -150,7 +150,7 @@ public class HomeController {
 
         }
 
-        redirectAttributes.addFlashAttribute("messageTitle", "Inicialización de Datos Demo");
+        redirectAttributes.addFlashAttribute("messageTitle", "Creación de Aeronaves");
         redirectAttributes.addFlashAttribute("toastId", "toastId");
 
         return "redirect:/";
