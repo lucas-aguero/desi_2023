@@ -4,7 +4,7 @@
         <meta th:replace="~{parent/template::charset}">
         <meta th:replace="~{parent/template::viewport}">
         <link th:replace="~{parent/template::bootstrap}">
-        <link rel="stylesheet" href="/css/main.css"/>
+        <link rel="stylesheet" href="/css/crear-vuelo.css"/>
         <title>Programar Vuelo</title>
     </head>
     <body>
@@ -12,7 +12,7 @@
         <header th:replace="~{parent/template::header}"></header>
 
         <!--TITLE-->
-        <div class="pt-4 pb-4 container-fluid">
+        <div class="pt-4 pb-4 container-fluid titulos">
             <h2 class="pt-2 text-center"><strong>Programar Vuelo</strong></h2>
         </div>
         <!--PERSISTENCE STATUS ALERTS-->
@@ -26,12 +26,12 @@
             <div class="card-header bg-dark">
                 <ul class="nav nav-pills justify-content-center pt-3 pb-3">
                     <li class="nav-item">
-                        <a class="nav-link active" id="nacionales-tab" data-bs-toggle="tab" data-bs-target="#nac-tab"
-                           type="button" role="tab" >Nacionales</a>
+                        <button class="btn active btn-dark" id="nacionales-tab" data-bs-toggle="tab" data-bs-target="#nac-tab"
+                           type="button" role="tab" >Nacionales</button>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="internacionales-tab"  data-bs-toggle="tab" data-bs-target="#internac-tab"
-                           type="button" role="tab">Internacionales</a>
+                        <button class="btn btn-dark" id="internacionales-tab"  data-bs-toggle="tab" data-bs-target="#internac-tab"
+                           type="button" role="tab">Internacionales</button>
                     </li>
                 </ul>
             </div>
@@ -47,5 +47,7 @@
         </div>
         <!--JS-->
         <script th:replace="~{parent/template::js-bundle}"></script>
+        <!--SCRIPT DEL TOOLTIP-->
+        <script th:replace="~{parent/template::repo-tooltip}"></script>
     </body>
 </html>
