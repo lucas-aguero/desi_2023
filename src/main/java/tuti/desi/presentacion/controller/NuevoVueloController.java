@@ -10,6 +10,7 @@ import org.springframework.validation.ObjectError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import tuti.desi.accesoDatos.IVueloRepo;
 import tuti.desi.dto.AerolineaDTO;
 import tuti.desi.dto.AeronaveDTO;
 import tuti.desi.dto.AeropuertoDTO;
@@ -44,6 +45,16 @@ public class NuevoVueloController {
         this.aeropuertoService = aeropuertoService;
         this.aeronaveService = aeronaveService;
     }
+    @GetMapping("/lista-vuelos")
+    public String listarVuelos(Model model){
+        List<Vuelo> vuelos = vueloService.getVuelos();
+        model.addAttribute("vuelos", vuelos);
+
+
+
+        return "lista-vuelos";
+    }
+
 
     @GetMapping("/crearVuelo")
     public String prepararVueloForm(Model model){

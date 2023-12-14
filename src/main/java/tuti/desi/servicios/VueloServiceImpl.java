@@ -14,7 +14,10 @@ import tuti.desi.presentacion.form.NuevoVueloForm;
 import tuti.desi.entidades.Vuelo;
 import tuti.desi.entidades.enums.EstadoVuelo;
 import tuti.desi.mapper.VueloMapper;
+
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class VueloServiceImpl implements VueloService {
@@ -100,4 +103,17 @@ public class VueloServiceImpl implements VueloService {
     public long contarAeropuertos() {
         return vueloRepo.count();
     }
+
+    /*public Vuelo v(){
+        Optional<Vuelo> vueloOptional = vueloRepo.findByFechaPartida(LocalDate.of(2023,22,22);
+
+        if(vueloOptional.isPresent()){
+
+            Vuelo vuelo = vueloOptional.get();
+
+            return vuelo;
+        }
+
+        return null;
+    }*/
 }

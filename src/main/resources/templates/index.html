@@ -16,27 +16,30 @@
         <div class="container-fluid pt-4 pb-4">
             <h1 class="text-center">DESI 2023</h1>
             <h3 class="text-center">Trabajo Práctico Parte 2</h3>
-            </div>
         </div>
-        <!--CONTENT-->
-        <div class="container-fluid pt-4 pb-4">
-            <h4 class="text-center pb-4 "><u>Inicializar datos de demostración</u></h4>
-            <div class="card container pt-4 pb-4">
-                <div class="card-body">
-                    <nav class="nav nav-pills nav-fill" id="opciones-nav">
-                        <a class="nav-link active" aria-current="page" href="/inicializar-datos">Inicializar todos los datos</a>
-                        <a class="nav-link" href="/inicializar-aeronaves">Crear Aeronaves</a>
-                        <a class="nav-link" href="/inicializar-aerolineas">Crear Aerolíneas</a>
-                        <a class="nav-link" href="/inicializar-aeropuertos">Crear Aeropuertos</a>
-                        <a class="nav-link" href="/inicializar-vuelos">Crear Vuelos</a>
-                    </nav>
-                </div>
-                <div id="liveAlertPlaceholder"></div>
-            </div>
         </div>
 
-        <!--NOTIFICACIONES DE ESTADO DE OPERACION-->
-        <div th:if="${toastId}" th:replace="~{indexNotifications::toastMessages}"></div>
+        <!--MAIN-->
+        <div class="main">
+            <!--CONTENT-->
+            <div class="container-fluid pt-4 pb-4">
+                <h4 class="text-center pb-4 "><u>Inicializar datos de demostración</u></h4>
+                <div class="card container pt-4 pb-4">
+                    <div class="card-body">
+                        <nav class="nav nav-pills nav-fill" id="opciones-nav">
+                            <a class="nav-link active" aria-current="page" href="/inicializar-datos">Inicializar todos los datos</a>
+                            <a class="nav-link" href="/inicializar-aeronaves">Crear Aeronaves</a>
+                            <a class="nav-link" href="/inicializar-aerolineas">Crear Aerolíneas</a>
+                            <a class="nav-link" href="/inicializar-aeropuertos">Crear Aeropuertos</a>
+                            <a class="nav-link" href="/inicializar-vuelos">Crear Vuelos</a>
+                        </nav>
+                    </div>
+                    <div id="liveAlertPlaceholder"></div>
+                </div>
+            </div>
+            <!--NOTIFICACIONES DE ESTADO DE OPERACION-->
+            <div th:if="${toastId}" th:replace="~{indexNotifications::toastMessages}"></div>
+        </div>
 
         <!--SCRIPT DE BOOTSTRAP-->
         <script th:replace="~{parent/template::js-bundle}"></script>
