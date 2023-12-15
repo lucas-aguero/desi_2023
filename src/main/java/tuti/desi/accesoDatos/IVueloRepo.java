@@ -16,7 +16,7 @@ public interface IVueloRepo extends JpaRepository<Vuelo, Long> {
     boolean existsByOrigenIdAndFechaPartida(Long destinoId, LocalDate fechaPartida);
 
     //BUSCAR POR FECHA PARTIDA
-    Optional<Vuelo> findByFechaPartida(LocalDate fechaPartida);
+    List<Vuelo> findByFechaPartida(LocalDate fechaPartida);
     Optional<Vuelo> findByFechaPartidaOrDestinoIdOrOrigenIdOrEstadoVuelo(LocalDate fechaPartida,
                                                             Long destinoId,
                                                              Long origenId,
