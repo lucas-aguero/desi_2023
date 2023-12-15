@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+    <head>
+        <meta th:replace="~{parent/template::charset}">
+        <meta th:replace="~{parent/template::viewport}">
+        <title>Clientes - Buscar</title>
+        <link th:replace="~{parent/template::bootstrap}">
+    </head>
+<body>
+	<!--NAVBAR-->
+    	<header th:replace="~{parent/template::header}"></header>
+	
+	<div class="container-fluid pt-4 mt-4 pb-2">
+        <h2 class="pt-2 text-center">Buscar Cliente - Resultado</h2>
+    </div>
+   	<div class="container-fluid col-lg-4 col-md-8">    
+	    <!-- Manejo del mensaje de error -->
+	    <div th:if="${mensaje}" class="alert alert-danger" role="alert">
+	        <p th:text="${mensaje}"></p>
+	    </div>
+	  
+	    <div th:if="${cliente != null}">
+	        <!-- <p>ID: <span th:text="${cliente.id}"></span></p> -->
+	        <p>Nombre: <span th:text="${cliente.nombre}"></span></p>
+	        <p>Apellido: <span th:text="${cliente.apellido}"></span></p>
+	        <p>Domicilio: <span th:text="${cliente.domicilio}"></span></p>
+	        <p>Correo Electrónico: <span th:text="${cliente.correoElectronico}"></span></p>
+	        <p>Fecha de Nacimiento: <span th:text="${cliente.fechaNacimiento}"></span></p>
+	        <p>Pasaporte: <span th:text="${cliente.pasaporte}"></span></p>
+	        <!-- Otros campos del cliente -->
+	    </div>
+    </div>
+    
+	<script th:replace="~{parent/template::js-bundle}"></script>    
+</body>
+</html>

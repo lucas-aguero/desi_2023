@@ -1,19 +1,53 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-  <body>
-	
-   
-	
-   <div class="starter-template">
-        <h1>Ejemplo Spring Boot Web Thymeleaf </h1>
-        <h2>
-            <span th:text="'Bienvenido'"></span>
-        </h2>
-    </div>
- 
-    <a th:href="ciudadesBuscar">Buscar Ciudades</a>
-    
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+    <head>
+        <meta th:replace=" ~{parent/template::charset}">
+        <meta th:replace=" ~{parent/template::viewport}">
+        <meta th:replace=" ~{parent/template::bootstrap}">
+        <link rel="stylesheet" href="/css/index.css">
+        <title>Home</title>
+    </head>
 
-        
-  </body>
+    <body>
+        <!--NAVBAR-->
+        <header th:replace=" ~{parent/template::header}">
+        </header>
+
+        <!--MAIN-->
+        <div class="main">
+            <!--TITLE-->
+            <div class="titulos container-fluid pt-4 pb-4">
+                <h1 class="text-center">DESI 2023</h1>
+                <h3 class="text-center">Trabajo Práctico Parte 2</h3>
+            </div>
+            <!--CONTENT-->
+            <div class="container-fluid pt-4 pb-4">
+                <h4 class="titulos text-center pb-4 ">Inicializar datos de demostración</h4>
+                <div class="card container pt-4 pb-4 bg-dark">
+                    <div class="card-body">
+                        <nav class="nav nav-pills nav-fill" id="opciones-nav">
+                            <a class="nav-link" role="button" aria-current="page" th:href="inicializar-datos"><strong>Inicializar todos los datos</strong></a>
+                            <a class="nav-link" role="button" th:href="inicializar-aeronaves"><strong>Crear Aeronaves</strong></a>
+                            <a class="nav-link" role="button" th:href="inicializar-aerolineas"><strong>Crear Aerolíneas</strong></a>
+                            <a class="nav-link" role="button" th:href="inicializar-aeropuertos"><strong>Crear Aeropuertos</strong></a>
+                            <a class="nav-link" role="button" th:href="inicializar-vuelos"><strong>Crear Vuelos</strong></a>
+                        </nav>
+                    </div>
+                    <div id="liveAlertPlaceholder"></div>
+                </div>
+            </div>
+        </div>
+
+        <!--NOTIFICACIONES DE ESTADO DE OPERACION-->
+        <div th:if="${toastId}" th:replace="~{indexNotifications::toastMessages}"></div>
+
+        <!--SCRIPT DE BOOTSTRAP-->
+        <script th:replace="~{parent/template::js-bundle}"></script>
+        <!--SCRIPT DEL TOOLTIP-->
+        <script th:replace="~{parent/template::repo-tooltip}"></script>
+        <!--SCRIPT DE LAS NOTIFICACIONES-->
+        <script th:src="@{js/index-alert-handler.js}"></script>
+        <script th:if="${toastId}" th:src="@{js/index-toast-handler.js}"></script>
+
+    </body>
 </html>

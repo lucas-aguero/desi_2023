@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+    <head>
+        <meta th:replace="~{parent/template::charset}">
+        <meta th:replace="~{parent/template::viewport}">
+        <title>Clientes - Listar</title>
+        <link th:replace="~{parent/template::bootstrap}">
+    </head>
+<body>
+	<!--NAVBAR-->
+        <header th:replace="~{parent/template::header}"></header>
+   
+    <div class="container-fluid pt-4 mt-4 pb-2">
+        <h2 class="pt-2 text-center">Listado de Clientes</h2>
+    </div>    
+    
+    <div class="container-fluid col-lg-4 col-md-8">
+	    <!-- Manejo del mensaje de error -->
+	    <div th:if="${error}" class="alert alert-danger" role="alert">
+	        <p th:text="${error}"></p>
+	    </div>    
+	    
+	    <table th:if="${not #lists.isEmpty(datosClienteList)}">
+	        <thead>
+	            <tr>
+	                <th>Nombre</th>
+	                <th>Apellido</th>
+	                <th>Correo Electronico</th>
+	                <th>Pasaporte</th>
+	                <th>Acciones</th>
+	            </tr>
+	        </thead>
+	        <tbody>
+	            <tr th:each="datosCliente : ${datosClienteList}">
+	                <td th:text="${datosCliente.nombre}"></td>
+	                <td th:text="${datosCliente.apellido}"></td>
+	                <td th:text="${datosCliente.correoElectronico}"></td>
+	                <td th:text="${datosCliente.pasaporte}"></td>
+	                <td>
+						<a th:href="@{/clientesBuscar/resultado(correoElectronico=${datosCliente.correoElectronico})}"><button>Mostrar</button></a>
+					</td>
+	            </tr>
+	        </tbody>
+	    </table>
+   	</div>
+    <script th:replace="~{parent/template::js-bundle}"></script>
+</body>
+</html>

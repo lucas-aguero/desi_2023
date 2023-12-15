@@ -1,0 +1,17 @@
+html{
+    min-height:100%;
+}
+
+body{
+    min-height:100%;
+    background-image: url('../images/bg-6.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-color: #080E2A;
+}
+
+.titulos{
+    color:white
+}
+

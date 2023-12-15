@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta th:replace="~{parent/template::charset}">
+    <meta th:replace="~{parent/template::viewport}">
+    <title>Listar Vuelos</title>
+    <link th:replace="~{parent/template::bootstrap}">
+</head>
+<body>
+<!--NAVBAR-->
+<header th:replace="~{parent/template::header}"></header>
+<h2>Listado de Vuelos</h2>
+<div>
+    <div class="pb-2">
+        <form action="#" th:action="@{/filtrar}" th:method="get">
+            <div class="row">
+                <div class="col">
+                    <label for="fecha">Fecha Vuelo:</label>
+                    <input type="date" id="fecha" name="fecha" />
+                </div>
+                <div class="col">
+                    <label for="origen">Origen Vuelo:</label>
+                    <input type="text" id="origen" name="origen" />
+                </div>
+                <div class="col">
+                    <label for="destino">Destino Vuelo:</label>
+                    <input type="text" id="destino" name="destino" />
+                </div>
+                <div class="col">
+                    <label for="tipoVuelo">Tipo Vuelo:</label>
+                    <input type="text" id="tipoVuelo" name="tipoVuelo" />
+                </div>
+
+                <div>
+                    <button type="submit">Filtrar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<table class="table">
+    <thead>
+    <tr>
+        <th>Fecha</th>
+        <th>Nro de Vuelo</th>
+        <th>Tipo de Vuelo</th>
+        <th>Estado</th>
+        <th>Cant. Asientos Libres</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="vuelo : ${vuelos}">
+        <td th:text="${vuelo.fechaPartida}">Fecha Vuelo</td>
+        <td th:text="${vuelo.nroVuelo}">Nro de Vuelo</td>
+        <td th:text="${vuelo.tipoVuelo}">Tipo de Vuelo</td>
+        <td th:text="${vuelo.estadoVuelo}">Estado Vuelo</td>
+        <td th:text="${vuelo.nroAsientos}">Cant. Asientos Libres</td>
+        <td>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<script th:replace="~{parent/template::js-bundle}"></script>
+</body>
+</html>

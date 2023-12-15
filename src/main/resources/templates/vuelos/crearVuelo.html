@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+    <head>
+        <meta th:replace="~{parent/template::charset}">
+        <meta th:replace="~{parent/template::viewport}">
+        <link th:replace="~{parent/template::bootstrap}">
+        <link rel="stylesheet" href="/css/crear-vuelo.css"/>
+        <title>Programar Vuelo</title>
+    </head>
+    <body>
+        <!--NAVBAR-->
+        <header th:replace="~{parent/template::header}"></header>
+
+        <!--TITLE-->
+        <div class="pt-4 pb-4 container-fluid titulos">
+            <h2 class="pt-2 text-center"><strong>Programar Vuelo</strong></h2>
+        </div>
+        <!--PERSISTENCE STATUS ALERTS-->
+        <!--EXITO-->
+        <div th:replace="~{vuelos/vuelosAlerts::success}"></div>
+        <!--ERROR-->
+        <div th:replace="~{vuelos/vuelosAlerts::error}"></div>
+
+        <div class="card pb-4 mb-4 container-fluid col-lg-8">
+            <!--NAVS NAC/INTER-->
+            <div class="card-header bg-dark">
+                <ul class="nav nav-pills justify-content-center pt-3 pb-3">
+                    <li class="nav-item">
+                        <button class="btn active btn-dark" id="nacionales-tab" data-bs-toggle="tab" data-bs-target="#nac-tab"
+                           type="button" role="tab" >Nacionales</button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="btn btn-dark" id="internacionales-tab"  data-bs-toggle="tab" data-bs-target="#internac-tab"
+                           type="button" role="tab">Internacionales</button>
+                    </li>
+                </ul>
+            </div>
+            <!--CONDITION FORM DIVS-->
+            <div class="card-body tab-content pb-4 mb-4" id="tab-content">
+                <div class="tab-pane fade show active" id="nac-tab" role="tabpanel" tabindex="0">
+                    <div th:replace="~{vuelos/condicionNavTabs::navTabs(${'nacional'})}"></div>
+                </div>
+                <div class="tab-pane fade" id="internac-tab" role="tabpanel" tabindex="1">
+                    <div th:replace="~{vuelos/condicionNavTabs::navTabs(${'internacional'})}"></div>
+                </div>
+            </div>
+        </div>
+        <!--JS-->
+        <script th:replace="~{parent/template::js-bundle}"></script>
+        <!--SCRIPT DEL TOOLTIP-->
+        <script th:replace="~{parent/template::repo-tooltip}"></script>
+    </body>
+</html>
