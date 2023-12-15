@@ -21,6 +21,8 @@ public class Cliente {
     private String apellido;
     @NotNull
     private String domicilio;
+    @NotNull
+    private int dni;    
     
     @NotNull
     @Column(name = "correo_electronico") 
