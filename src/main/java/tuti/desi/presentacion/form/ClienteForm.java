@@ -26,15 +26,15 @@ public class ClienteForm {
     @Pattern(regexp="^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@" + "[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$")	
 	private String correoElectronico;	
 	
-	@NotNull (message = "Campo Obligatorio. Debe ingresar la Fecha de Nacimiento")
+	/* @NotNull (message = "Campo Obligatorio. Debe ingresar la Fecha de Nacimiento")
 	@NotEmpty
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private Date fechaNacimiento;	
+	private Date fechaNacimiento;
+	*/	
 
 	@NotNull (message = "Campo Obligatorio. Debe ingresar el Pasaporte")
 	@NotEmpty
 	private String pasaporte;	
-	
 
 	public ClienteForm(Cliente datosCliente) {
 		super();
@@ -42,7 +42,7 @@ public class ClienteForm {
 		this.apellido = datosCliente.getApellido();
 		this.domicilio = datosCliente.getDomicilio();
 		this.correoElectronico = datosCliente.getCorreoElectronico();
-		this.fechaNacimiento = datosCliente.getFechaNacimiento();
+		/*this.fechaNacimiento = datosCliente.getFechaNacimiento(); */
 		this.pasaporte = datosCliente.getPasaporte();
 	}
 
@@ -57,7 +57,7 @@ public class ClienteForm {
 		datoCliente.setApellido(this.apellido);
 		datoCliente.setDomicilio(this.domicilio);
 		datoCliente.setCorreoElectronico(this.correoElectronico);
-		datoCliente.setFechaNacimiento(this.fechaNacimiento);
+		/* datoCliente.setFechaNacimiento(this.fechaNacimiento); */
 		datoCliente.setPasaporte(this.pasaporte);
 		return datoCliente;
 	}

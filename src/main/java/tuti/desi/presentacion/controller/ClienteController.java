@@ -4,37 +4,44 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import jakarta.validation.Valid;
 import tuti.desi.entidades.Cliente;
 import tuti.desi.servicios.ClienteService;
-import tuti.desi.presentacion.form.ClienteForm;
-
 import java.util.List;
 
 @Controller
-@RequestMapping("/cliente")
 public class ClienteController {
 
     @Autowired
     private ClienteService datosClienteService;
-
-    @GetMapping("/listarClientes")
+    
+    @GetMapping("/clientesListar")
     public String listarClientes(Model model) {
         List<Cliente> datosClienteList = datosClienteService.getAll();
-        model.addAttribute("datosClienteList", datosClienteList);
-        return "listarClientes";
+        if (datosClienteList.isEmpty()) {
+            model.addAttribute("error", "No hay Clientes.");
+        } else {
+            model.addAttribute("datosClienteList", datosClienteList);
+        }        
+        return "clientesListar";
     }
 
-    @GetMapping("/editarCliente/{id}")
-    public String editar(@PathVariable Long id, Model model) {
-    	Cliente datosCliente = datosClienteService.getById(id);
-        model.addAttribute("datosCliente", datosCliente);
-        return "editarCliente";
+    @GetMapping("/clientesBuscar")
+    public String mostrarFormularioBuscarCliente(Model model) {
+        model.addAttribute("correoElectronico", "");
+        return "clientesBuscar";
     }
 
-    @PostMapping("/guardarCliente")
-    public String guardarDatos(@ModelAttribute("datosCliente") @Valid Cliente datosCliente) throws Exception {
-    	datosClienteService.save(datosCliente);
-        return "redirect:/cliente/listarClientes";
-    }
+    @GetMapping("/clientesBuscar/resultado")
+    public String buscarClientePorEmail(@RequestParam("correoElectronico") String correoElectronico, Model model) {
+        Cliente cliente = datosClienteService.buscarPorCorreoElectronico(correoElectronico);
+        if (cliente != null) {
+            model.addAttribute("cliente", cliente);
+            return "clientesDetalle";
+        } else {
+            model.addAttribute("mensaje", "Cliente no encontrado");
+            return "clientesDetalle";
+        }
+    }    
+    
+ 
 }

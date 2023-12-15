@@ -1,16 +1,16 @@
 package tuti.desi.servicios;
 
 import java.util.List;
+import java.util.Optional;
 
 import tuti.desi.entidades.Cliente;
 
 public interface ClienteService {
+
 	List<Cliente> getAll();
 	
-	Cliente getById(Long id);
+	Optional<Cliente> getById(Long id);
 	
-	void save(Cliente cliente) throws Exception;
+    Cliente buscarPorCorreoElectronico(String correoElectronico);
+
 }
-
-
-

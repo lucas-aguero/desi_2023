@@ -33,7 +33,6 @@ public class Cliente {
     @NotNull
     private String pasaporte;
     
-    
     // Getters
     public Long getId() {
     	return id;
@@ -61,8 +60,6 @@ public class Cliente {
     public String getPasaporte() {
     	return pasaporte;
     }
-   
-    
     
     // Setters
     public void setId(Long datoId) {
