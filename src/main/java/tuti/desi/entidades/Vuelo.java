@@ -7,7 +7,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import tuti.desi.entidades.enums.EstadoVuelo;
 import tuti.desi.entidades.enums.TipoVuelo;
@@ -43,7 +42,7 @@ public class Vuelo {
     @JoinColumn(name="aeronave_id")
     private Aeronave aeronave;
     @Column(name = "nro_asientos")
-    private int capacidad;
+    private int nroAsientos;
     //Origen y destino
     @JsonIgnore
     @ManyToOne
@@ -58,24 +57,7 @@ public class Vuelo {
     @Column(name="estado_vuelo")
     private EstadoVuelo estadoVuelo;
     @NotNull
-    private BigDecimal precio;
-
-    public void setCapacidad() {
-
-        this.capacidad = this.aeronave.getCapacidad();
-
-    }
-
-    @Autowired //fuerzo a spring que utilice este metodo durante la IOC
-    public void setTipoVuelo() {
-        String argentina = "AR";
-
-        if(argentina.equalsIgnoreCase(this.origen.getCountry()) && argentina.equalsIgnoreCase(this.destino.getCountry())) {
-            this.tipoVuelo = TipoVuelo.NACIONAL;
-        }
-        else {
-            this.tipoVuelo = TipoVuelo.INTERNACIONAL;
-        }
-    }
+    @Column(name="precio_neto")
+    private BigDecimal precioNeto;
 
 }

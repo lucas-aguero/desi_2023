@@ -2,25 +2,27 @@ package tuti.desi.servicios;
 
 import org.springframework.stereotype.Service;
 import tuti.desi.dto.AeropuertoDTO;
-import tuti.desi.excepciones.VueloNoEncontradoException;
+import tuti.desi.excepciones.vueloexception.VueloNoEncontradoException;
 
-import java.util.List;
+import java.util.TreeSet;
 
 @Service
 public interface IAeropuertoService {
     AeropuertoDTO getAeropuertoLocal() throws VueloNoEncontradoException;
 
-    List<AeropuertoDTO> getAllAeropuertos();
+    TreeSet<AeropuertoDTO> getAllAeropuertos();
 
-    public List<AeropuertoDTO> getAeropuertosAleatorios();
+    public TreeSet<AeropuertoDTO> getAeropuertosAleatorios();
 
-    List<AeropuertoDTO> getAeropuertosArgentinosAleatorios();
+    TreeSet<AeropuertoDTO> getAeropuertosArgentinosAleatorios();
 
-    List<AeropuertoDTO> getAllAeropuertosArgentinos();
+    TreeSet<AeropuertoDTO> getAllAeropuertosArgentinos();
 
-    List<AeropuertoDTO> getAeropuertosExtranjerosAleatorios();
+    TreeSet<AeropuertoDTO> getAeropuertosExtranjerosAleatorios();
 
-    List<AeropuertoDTO> getAeropuertosUsaAleatorios();
+    TreeSet<AeropuertoDTO> getAeropuertosUsaAleatorios();
+
+    int contarAeropuertos();
 
     public void loadAirportsFromJsonFile();
 }

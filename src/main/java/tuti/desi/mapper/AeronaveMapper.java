@@ -7,6 +7,7 @@ import tuti.desi.dto.AeronaveDTO;
 import tuti.desi.entidades.Aeronave;
 
 import java.util.List;
+import java.util.TreeSet;
 
 @Mapper(componentModel="spring")
 public interface AeronaveMapper {
@@ -18,6 +19,6 @@ public interface AeronaveMapper {
     @Mapping(target = "vuelosAeronave", ignore = true)
     Aeronave dtoToAeronave(AeronaveDTO dto);
 
-    List<AeronaveDTO> aeronavesToAeronaveDTOs(List<Aeronave> aeronaves);
-    List<Aeronave> aeronavesDTOsToAeronaves(List<AeronaveDTO> dtos);
+    TreeSet<AeronaveDTO> aeronavesToAeronaveDTOs(List<Aeronave> aeronaves);
+    TreeSet<Aeronave> aeronavesDTOsToAeronaves(List<AeronaveDTO> dtos);
 }

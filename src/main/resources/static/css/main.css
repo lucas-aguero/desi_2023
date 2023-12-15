@@ -1,8 +1,9 @@
 @charset "ISO-8859-1";
-body {
+
+html, body {
   min-height:100%;
-  padding-top: 5rem;
 }
+
 .starter-template {
   padding: 3rem 1.5rem;
   text-align: center;
@@ -15,10 +16,6 @@ h1{
 h2{
 	color:#FF0000;
 }
-
-
-
-
 
 .resultados th {
   background-color: #4CAF50;

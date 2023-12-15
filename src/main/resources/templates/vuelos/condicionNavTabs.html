@@ -1,0 +1,50 @@
+<div th:fragment="navTabs(tipoVuelo)" class="pt-3 pb-4" xmlns:th="http://www.thymeleaf.org" lang="en">
+    <div th:switch="${tipoVuelo}">
+        <!--VUELOS NACIONALES-->
+        <div th:case="'nacional'">
+            <!--TABS-->
+            <ul class="nav nav-tabs justify-content-center" id="nac-formTabs" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link active" id="tab-nac-saliente"  data-bs-toggle="tab" data-bs-target="#tab-nac-saliente-form"
+                       type="button" role="tab" >Saliente</a>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link" id="tab-nac-entrante"  data-bs-toggle="tab" data-bs-target="#tab-nac-entrante-form"
+                       type="button" role="tab" >Entrante</a>
+                </li>
+            </ul>
+            <!--NAC TAB CONTENT-->
+            <div class="tab-content" id="nac-tab-content">
+                <div class="tab-pane fade show active" id="tab-nac-saliente-form" role="tabpanel" tabindex="0">
+                    <div th:replace="~{vuelos/nuevoVueloForm::nuevo-vuelo-form (${'saliente'},${'nacional'})}"></div>
+                </div>
+                <div class="tab-pane fade" id="tab-nac-entrante-form" role="tabpanel" tabindex="1">
+                    <div th:replace="~{vuelos/nuevoVueloForm::nuevo-vuelo-form (${'entrante'},${'nacional'})}"></div>
+                </div>
+            </div>
+        </div>
+        <!--VUELOS INTERNACIONALES-->
+        <div th:case="'internacional'">
+            <!--INTERNAC TABS-->
+            <ul class="nav nav-tabs justify-content-center" id="internac-formTabs" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link active" id="tab-internac-saliente"  data-bs-toggle="tab" data-bs-target="#tab-internac-saliente-form"
+                       type="button" role="tab" >Saliente</a>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link" id="tab-internac-entrante"  data-bs-toggle="tab" data-bs-target="#tab-internac-entrante-form"
+                       type="button" role="tab" >Entrante</a>
+                </li>
+            </ul>
+            <!--TAB CONTENT-->
+            <div class="tab-content" id="internac-tab-content">
+                <div class="tab-pane fade show active" id="tab-internac-saliente-form" role="tabpanel" tabindex="0">
+                    <div th:replace="~{vuelos/nuevoVueloForm::nuevo-vuelo-form (${'saliente'},${'internacional'})}"></div>
+                </div>
+                <div class="tab-pane fade" id="tab-internac-entrante-form" role="tabpanel" tabindex="1">
+                    <div th:replace="~{vuelos/nuevoVueloForm::nuevo-vuelo-form (${'entrante'},${'internacional'})}"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

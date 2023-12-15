@@ -8,13 +8,12 @@ import org.springframework.stereotype.Service;
 import tuti.desi.accesoDatos.IAeropuertoRepo;
 import tuti.desi.dto.AeropuertoDTO;
 import tuti.desi.entidades.Aeropuerto;
-import tuti.desi.excepciones.VueloNoEncontradoException;
+import tuti.desi.excepciones.aeropuertoexception.AeropuertoNoEncontradoException;
+import tuti.desi.excepciones.vueloexception.VueloNoEncontradoException;
 import tuti.desi.mapper.AeropuertoMapper;
 
 import java.io.InputStream;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class AeropuertoServiceImpl implements IAeropuertoService{
@@ -58,49 +57,54 @@ public class AeropuertoServiceImpl implements IAeropuertoService{
             }
 
         }catch(Exception e){
-            throw new VueloNoEncontradoException();
+            throw new AeropuertoNoEncontradoException();
         }
 
 
     }
     @Override
-    public List<AeropuertoDTO> getAllAeropuertos(){
+    public TreeSet<AeropuertoDTO> getAllAeropuertos(){
         return mapper.aeropuertosToDTOs(repo.findAllAeropuertos());
     }
 
     @Override
-    public List<AeropuertoDTO> getAeropuertosAleatorios() {
+    public TreeSet<AeropuertoDTO> getAeropuertosAleatorios() {
 
-        List<AeropuertoDTO> aeropuertoDTOs =  getAeropuertosArgentinosAleatorios();
+        TreeSet<AeropuertoDTO> aeropuertoDTOs = new TreeSet<AeropuertoDTO>(getAeropuertosArgentinosAleatorios());
 
         aeropuertoDTOs.addAll(getAeropuertosExtranjerosAleatorios());
         aeropuertoDTOs.addAll(getAeropuertosUsaAleatorios());
 
+
         return aeropuertoDTOs;
     }
 
     @Override
-    public List<AeropuertoDTO> getAeropuertosArgentinosAleatorios(){
+    public TreeSet<AeropuertoDTO> getAeropuertosArgentinosAleatorios(){
         return mapper.aeropuertosToDTOs(repo.getAeropuertosArgentinosAleatorios());
     }
 
     @Override
-    public List<AeropuertoDTO> getAllAeropuertosArgentinos(){
+    public TreeSet<AeropuertoDTO> getAllAeropuertosArgentinos(){
         return mapper.aeropuertosToDTOs(repo.findAllAeropuertosArgentinos());
     }
 
     @Override
-    public List<AeropuertoDTO> getAeropuertosExtranjerosAleatorios(){
+    public TreeSet<AeropuertoDTO> getAeropuertosExtranjerosAleatorios(){
 
-        List<AeropuertoDTO> aeropuertoDTOs = mapper.aeropuertosToDTOs(repo.getAeropuertosExtranjerosAleatorios());
+        TreeSet<AeropuertoDTO> aeropuertoDTOs = mapper.aeropuertosToDTOs(repo.getAeropuertosExtranjerosAleatorios());
         aeropuertoDTOs.addAll(getAeropuertosUsaAleatorios());
 
         return aeropuertoDTOs;
     }
 
     @Override
-    public List<AeropuertoDTO> getAeropuertosUsaAleatorios(){
+    public TreeSet<AeropuertoDTO> getAeropuertosUsaAleatorios(){
         return mapper.aeropuertosToDTOs(repo.getAeropuertosUsaAleatorios());
+    }
+
+    public int contarAeropuertos(){
+        return repo.contarAeropuertos();
     }
 
     @Override
