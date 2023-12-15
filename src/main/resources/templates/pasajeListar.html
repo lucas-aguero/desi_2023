@@ -36,15 +36,15 @@
 	                </tr>
 	            </thead>
 	            <tbody>
-	                <tr th:each="pasaje : ${pasajeLista}">
+	                <tr th:text="pasajeLista">
 	                    <!-- <td th:text="${pasaje.fechaPartida}"></td>
 	                    <td th:text="${pasaje.vuelo.horaPartida}"></td>                    
 	                    <td th:text="${pasaje.vuelo.origen.name}"></td>
 	                    <td th:text="${pasaje.vuelo.destino.name}"></td>
 	                    <td th:text="${pasaje.vuelo.aerolinea.nombre}"></td>
 	                    <td th:text="${pasaje.vuelo.aeronave.modelo}"></td>
-	                    <td th:text="${pasaje.vuelo.nroAsientos}"></td>
-	                    <td th:text="${pasaje.nroPasaje}"></td> -->
+	                    <td th:text="${pasaje.vuelo.nroAsientos}"></td> -->
+	                    <td th:text="${nroPasaje}"></td>
 	                </tr>
 	            </tbody>
 	        </table>

@@ -9,5 +9,7 @@ import tuti.desi.entidades.Pasaje;
 public interface IPasajeRepo extends JpaRepository<Pasaje, Long> {
 
 	List<Pasaje> findByVuelo_NroVuelo(UUID nroVuelo);
+
+	int countByVuelo_NroVuelo(UUID nroVuelo);
 	
 }

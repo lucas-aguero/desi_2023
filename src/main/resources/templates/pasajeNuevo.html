@@ -35,7 +35,9 @@
 	            <button type="submit">Buscar Cliente</button>
 	        </form>
         </div>
-       
+     </div>
+        
+     <div class="container-fluid col-lg-10">  
         <div th:if="${clienteEncontrado}">
             <h3>Datos del Cliente</h3>
             <p>
@@ -59,7 +61,7 @@
 	                    <th>Destino</th>
 	                    <th>Aerolínea</th>
 	                    <th>Aeronave</th>
-	                    <th>Cant.Asientos</th>
+	                    <th>Asientos Disponibles</th>
 	                    <th>Precio</th>
 	                    <th>Accion</th>
 	                </tr>
@@ -123,30 +125,31 @@
 	                    <td th:text="${vuelo.aerolinea.nombre}"></td>
 	                    <td th:text="${vuelo.aeronave.modelo}"></td>
 	                    <td th:text="${vuelo.nroAsientos}"></td>
-	
-	                    <td> <!-- Mostrar la cantidad de Asientos Disponibles -->
-	                        <!-- <span th:text="${vuelo.asientosDisponibles()}"></span> -->
-	                    </td>
+	 	                <td th:text="${asientosDisponibles}"></td>
 	                    <td th:text="${vuelo.precioNeto}"></td>
 	                </tr>
 	            </tbody>
 	        </table>
+
+			    <div th:if="${asientoElegido == 0}" class="alert alert-danger" role="alert">
+			    	<p>Seleccione un Nro de Asiento</p>
+			    </div>
+		
+			<p> hola </p>
 	        
 		   <form th:action="@{/pasajeGuardar(correoElectronico=${cliente.correoElectronico},nroVuelo=${vuelo.nroVuelo})}" method="post">
+		   		
+		   		<label for="nroAsiento">Seleccione un Asiento:</label>
 		        <select name="nroAsiento" id="nroAsiento">
-		            <th:block th:each="nroAsiento: ${#numbers.sequence(1, vuelo.nroAsientos)}">
-		                <th:unless="${listaPasajeVuelo.contains(nroAsiento)}">
-		                    <option th:value="${nroAsiento}" th:text="${nroAsiento}"></option>
-		                </th:unless>
-		            </th:block>
-		        </select>
+		        	<option th:value="0" Selected>Selecciona un asiento</option>
+        			<option th:each="nroAsiento : ${listaAsientosLibres}" th:value="${nroAsiento}" th:text="${nroAsiento}"></option>
+    			</select>
+    			
 		        <br>
-		        <button type="submit">Guardar Ticket</button>
+		        <br>
+		        <button type="submit">Emitir Ticket</button>
 		    </form>	        
-	        
         </div>	
-
-        
     </div>
     
     <script th:replace="~{parent/template::js-bundle}"></script>

@@ -31,4 +31,8 @@ public class Pasaje {
 		this.nroAsiento = nroAsiento;
 	}
 	
+	public int getNroAsiento() {
+		return this.nroAsiento;
+	}
+	
 }

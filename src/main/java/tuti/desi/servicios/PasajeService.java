@@ -8,8 +8,12 @@ public interface PasajeService {
 
 	List<Pasaje> getAll();
     
-	List<Pasaje> getPasajeNroVuelo(UUID nroVuelo);
+	/* List<Pasaje> getPasajeNroVuelo(UUID nroVuelo); */
 
 	void guardarPasaje(Pasaje pasajeNuevo);
+
+	int countPasajesByNroVuelo(UUID nroVuelo);
+
+	List<Pasaje> obtenerPasajesPorNroVuelo(UUID nroVuelo);
 
 }

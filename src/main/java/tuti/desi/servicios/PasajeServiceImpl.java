@@ -30,14 +30,26 @@ public class PasajeServiceImpl implements PasajeService {
         return vueloRepo.findAll();
     }
     
+    /*
 	public List<Pasaje> getPasajeNroVuelo(UUID nroVuelo) {
 		
 		return pasajeRepo.findByVuelo_NroVuelo(nroVuelo) ;
 	}
+	*/
 
 	@Override
 	public void guardarPasaje(Pasaje pasajeNuevo) {
 		pasajeRepo.save(pasajeNuevo);
+	}
+
+	@Override
+	public int countPasajesByNroVuelo(UUID nroVuelo) {
+		return pasajeRepo.countByVuelo_NroVuelo(nroVuelo);
+	}
+
+	@Override
+	public List<Pasaje> obtenerPasajesPorNroVuelo(UUID nroVuelo) {
+		return pasajeRepo.findByVuelo_NroVuelo(nroVuelo);
 	}
 
 
