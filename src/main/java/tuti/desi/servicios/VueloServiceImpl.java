@@ -17,7 +17,6 @@ import tuti.desi.mapper.VueloMapper;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class VueloServiceImpl implements VueloService {
@@ -97,6 +96,11 @@ public class VueloServiceImpl implements VueloService {
 
         return vueloRepo.findAll();
 
+    }
+    @Override
+    public List<Vuelo> filtrarbyFechaVuelo(LocalDate fecha)
+    {
+        return vueloRepo.findByFechaPartida(fecha);
     }
 
     @Override
