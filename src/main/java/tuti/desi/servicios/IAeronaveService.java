@@ -3,9 +3,11 @@ package tuti.desi.servicios;
 import org.springframework.stereotype.Service;
 import tuti.desi.dto.AeronaveDTO;
 
-import java.util.List;
+import java.util.TreeSet;
 
 @Service
 public interface IAeronaveService {
-    public List<AeronaveDTO> getAeronaves();
+    public TreeSet<AeronaveDTO> getAeronaves();
+
+    long contarAeronaves();
 }

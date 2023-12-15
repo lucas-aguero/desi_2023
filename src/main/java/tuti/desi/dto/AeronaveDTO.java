@@ -8,4 +8,9 @@ public record AeronaveDTO(
         int asientosPorFila,
         int capacidad
 
-) {}
+) implements Comparable<AeronaveDTO>{
+    @Override
+    public int compareTo(AeronaveDTO aeronaveDTO) {
+        return this.modelo.compareTo(aeronaveDTO.modelo);
+    }
+}

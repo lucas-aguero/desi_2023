@@ -18,41 +18,52 @@
            margin-top: 10px;
        }
    </style>
-   <link rel="stylesheet" th:href="@{/css/main.css}"/>
+   <!--<link rel="stylesheet" th:href="@{/css/main.css}"/>-->
     <link th:replace="~{parent/template::bootstrap}">
 </head>
 <body>
-   <h2>Datos Impositivos</h2>
-   <form th:action="@{/datosImpositivos}" th:object="${formBean}" method="post">
-       <table>
-           <tr>
-               <td><b>IVA: %</b></td>
-               <td><span th:text="${ultimoRegistro != null ? ultimoRegistro.iva : '0'}"></span></td>
-           </tr>
-           <tr>
-               <td><b>Tasa Aeroportuaria Nacional: $</b></td>
-               <td><span th:text="${ultimoRegistro != null ? ultimoRegistro.tasaAeroportuariaNacional : '0'}"></span></td>
-           </tr>
-           <tr>
-               <td><b>Tasa Aeroportuaria Internacional: USD</b></td>
-               <td><span th:text="${ultimoRegistro != null ? ultimoRegistro.tasaAeroportuariaInternacional : '0'}"></span></td>
-           </tr>
-           <tr>
-               <td><b>Cotización Dólar: $</b></td>
-               <td><span th:text="${ultimoRegistro != null ? ultimoRegistro.cotizacionDolar : '0'}"></span></td>
-           </tr>
-           <tr>
-               <td><b>Fecha Modificación:</b></td>
-               <td>
-				    <span th:if="${ultimoRegistro != null}" th:text="${ultimoRegistro.fechaModificacion}"></span>
-				    <span th:unless="${ultimoRegistro != null}">N/A</span>
-				    </td>
-       </table>
-       <div class="acciones">
-           <input type="submit" name="action" value="Editar" />
-           <input type="submit" name="action" value="Cancelar" />
-       </div>
-   </form>
+    <!--NAVBAR-->
+    <header th:replace=" ~{parent/template::header}"></header>
+
+    <div class="container-fluid pt-4 mt-4 pb-2">
+        <h2 class="pt-2 text-center">Datos Impositivos</h2>
+    </div>
+        <div class="container-fluid col-lg-4 col-md-8">
+            <form th:action="@{/datosImpositivos}" th:object="${formBean}" method="post">
+                <table>
+                    <tr>
+                        <td><b>IVA: %</b></td>
+                        <td><span th:text="${ultimoRegistro != null ? ultimoRegistro.iva : '0'}"></span></td>
+                    </tr>
+                    <tr>
+                        <td><b>Tasa Aeroportuaria Nacional: $</b></td>
+                        <td><span th:text="${ultimoRegistro != null ? ultimoRegistro.tasaAeroportuariaNacional : '0'}"></span></td>
+                    </tr>
+                    <tr>
+                        <td><b>Tasa Aeroportuaria Internacional: USD</b></td>
+                        <td><span th:text="${ultimoRegistro != null ? ultimoRegistro.tasaAeroportuariaInternacional : '0'}"></span></td>
+                    </tr>
+                    <tr>
+                        <td><b>Cotización Dólar: $</b></td>
+                        <td><span th:text="${ultimoRegistro != null ? ultimoRegistro.cotizacionDolar : '0'}"></span></td>
+                    </tr>
+                    <tr>
+                        <td><b>Fecha Modificación:</b></td>
+                        <td>
+                            <span th:if="${ultimoRegistro != null}" th:text="${ultimoRegistro.fechaModificacion}"></span>
+                            <span th:unless="${ultimoRegistro != null}">N/A</span>
+                        </td>
+                </table>
+                <div class="acciones d-flex justify-content-center">
+                    <input type="submit" name="action" value="Editar" />
+                    <input type="submit" name="action" value="Cancelar" />
+                </div>
+            </form>
+        </div>
+
+
    <script th:replace="~{parent/template::js-bundle}"></script>
+    <!--SCRIPT DEL TOOLTIP-->
+    <script th:replace="~{parent/template::repo-tooltip}"></script>
 </body>
 </html>

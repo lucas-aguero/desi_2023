@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import tuti.desi.accesoDatos.IAeronaveRepo;
 import tuti.desi.entidades.Aeronave;
+import tuti.desi.excepciones.aeronaveexception.AeronaveNoCreadaException;
 
 @Component
 public class AeronaveCreator {
@@ -19,45 +20,77 @@ public class AeronaveCreator {
 
     public Aeronave createAeronave(){
 
-        //        if(!repo.existsByModelo(aeronave.getModelo()))
-    //            repo.save(aeronave);
         return new Aeronave(
                 faker.aviation().airplane(),
                 faker.number().numberBetween(5,10),
                 faker.number().numberBetween(10,30));
 
     }
-    public void persistAeronaves(){
+    public String persistAeronaves(){
         String modeloAeronave;
+        String statusMessage = "Inicialización de registros de aeronaves exitosa.<br>" +
+                "\nNro de registros creados: ";
 
-        for (int i = 0; i < 10 ; i++) {
-            Aeronave aeronave = createAeronave();
-            modeloAeronave = aeronave.getModelo();
+        for (int i = 0; i < 112 ; i++) {
+            //contar limite de aeronaves
+            try{
+                if(repo.count() >= 90){
 
-            if(repo.existsByModelo(modeloAeronave) && i > 0){
-                i--;
+                    return statusMessage.concat(Long.toString(repo.count()));
 
-            } else if (!repo.existsByModelo(modeloAeronave)){
-                repo.save(aeronave);
+                }
+
+                Aeronave aeronave = createAeronave();
+                modeloAeronave = aeronave.getModelo();
+
+                if(repo.existsByModelo(modeloAeronave) && i > 0){
+                    i--;
+
+                } else if (!repo.existsByModelo(modeloAeronave)){
+                    repo.save(aeronave);
+                }
+
+            }catch(Exception e){
+                throw new AeronaveNoCreadaException("Error Interno, No se pudieron crear los registros.<br>" +
+                        "Comuníquese con un administrador del sistema.");
             }
-        }
 
+        }
+        return statusMessage.concat(Long.toString(repo.count()));
     }
-    public void persistAeronaves(int cant){
+    
+    public String persistAeronaves(int cant){
+        
         String modeloAeronave;
+        String statusMessage = "Inicialización de registros de aeronaves exitosa.<br>" +
+                "\nNro de registros creados: ";
 
         for (int i = 0; i < cant ; i++) {
-            Aeronave aeronave = createAeronave();
-            modeloAeronave = aeronave.getModelo();
+            //contar limite de aeronaves
+            try{
+                if(repo.count() >= 90){
 
-            if(repo.existsByModelo(modeloAeronave) && i > 0){
-                i--;
+                    return statusMessage.concat(Long.toString(repo.count()));
 
-            } else if (!repo.existsByModelo(modeloAeronave)){
-                repo.save(aeronave);
+                }
+
+                Aeronave aeronave = createAeronave();
+                modeloAeronave = aeronave.getModelo();
+
+                if(repo.existsByModelo(modeloAeronave) && i > 0){
+                    i--;
+
+                } else if (!repo.existsByModelo(modeloAeronave)){
+                    repo.save(aeronave);
+                }
+
+            }catch(Exception e){
+                throw new AeronaveNoCreadaException("Error Interno, No se pudo crear la aeronave.<br>" +
+                        "Comuníquese con un administrador del sistema.");
             }
-        }
 
+        }
+        return statusMessage.concat(Long.toString(repo.count()));
     }
 
 }

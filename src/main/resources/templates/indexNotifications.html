@@ -1,0 +1,24 @@
+<div xmlns:th="http://www.thymeleaf.org" lang="en">
+    <div th:fragment="toastMessages">
+        <div class="toast-container position-fixed bottom-0 end-0 p-3">
+            <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="toast-header">
+                    <strong class="me-auto" th:text="${messageTitle}"></strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+                <div th:if="${statusMessage}" class="toast-body"
+                     th:utext="${statusMessage}">
+                </div>
+                <div th:if="${errorMessage}" class="toast-body text-danger"
+                     th:utext="${errorMessage}">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div th:fragment="cargaEnProcesoAlert" class="pt-4 align-self-end" id="liveAlertPlaceholder">
+        <div class="alert alert-primary" role="alert">
+            Se estan cargando los datos solicitados, el proceso puede tardar un poco...
+        </div>
+    </div>
+</div>

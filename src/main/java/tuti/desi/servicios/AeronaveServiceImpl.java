@@ -6,7 +6,7 @@ import tuti.desi.accesoDatos.IAeronaveRepo;
 import tuti.desi.dto.AeronaveDTO;
 import tuti.desi.mapper.AeronaveMapper;
 
-import java.util.List;
+import java.util.TreeSet;
 
 @Service
 public class AeronaveServiceImpl implements IAeronaveService{
@@ -21,9 +21,16 @@ public class AeronaveServiceImpl implements IAeronaveService{
     }
 
     @Override
-    public List<AeronaveDTO> getAeronaves() {
+    public TreeSet<AeronaveDTO> getAeronaves() {
 
         return mapper.aeronavesToAeronaveDTOs(repo.findAll());
+
+    }
+
+    @Override
+    public long contarAeronaves(){
+
+        return repo.count();
 
     }
 }
