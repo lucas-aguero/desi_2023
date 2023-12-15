@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta th:replace="~{parent/template::charset}">
+    <meta th:replace="~{parent/template::viewport}">
+    <title>Buscar Vuelo</title>
+    <link th:replace="~{parent/template::bootstrap}">
+</head>
+<body>
+    <!--NAVBAR-->
+    <header th:replace="~{parent/template::header}"></header>
+    
+    <div class="container-fluid pt-4 mt-4 pb-2">
+        <h2 class="pt-2 text-center">Pasaje Nuevo</h2>
+    </div>
+    
+    <div class="container-fluid col-lg-4 col-md-8">
+
+	    <!-- Manejo del mensaje de error -->
+	    <div th:if="${error}" class="alert alert-danger" role="alert">
+	    	<p th:text="${error}"></p>
+	    </div>
+	            
+	    <!-- Manejo del mensaje de error -->
+	    <div th:if="${mensaje}" class="alert alert-success" role="alert">
+	        <p th:text="${mensaje}"></p>
+	    </div>	            
+
+        <div th:if="${pasajeNuevo}">
+	        <form th:action="@{/pasajeNuevo}" method="get">
+	            <label for="correoElectronico">Buscar Cliente por Correo Electrónico:</label>
+	            <br>
+	            <input type="text" id="correoElectronico" name="correoElectronico" required>
+	            <br>
+	            <button type="submit">Buscar Cliente</button>
+	        </form>
+        </div>
+       
+        <div th:if="${clienteEncontrado}">
+            <h3>Datos del Cliente</h3>
+            <p>
+	            <strong>Nombre:</strong> <span th:text="${cliente.nombre}"></span>
+	            <strong>Apellido:</strong> <span th:text="${cliente.apellido}"></span>
+	            <strong>Pasaporte:</strong> <span th:text="${cliente.pasaporte}"></span>
+            </p>
+            <p>
+	            <strong>Domicilio:</strong> <span th:text="${cliente.domicilio}"></span>
+	            <strong>Fecha Nacimiento:</strong> <span th:text="${#dates.format(cliente.fechaNacimiento, 'dd-MM-YYYY')}"></span>
+            </p>
+            <p><strong>Correo Electrónico:</strong> <span th:text="${cliente.correoElectronico}"></span></p>
+             
+	      	<table class="table">
+	        	<thead>
+	            	<tr>
+	                	<!-- <th>Nro vuelo</th> -->
+	                    <th>Fecha Partida</th>                    
+	                    <th>Hora</th>
+	                    <th>Origen</th>
+	                    <th>Destino</th>
+	                    <th>Aerolínea</th>
+	                    <th>Aeronave</th>
+	                    <th>Cant.Asientos</th>
+	                    <th>Precio</th>
+	                    <th>Accion</th>
+	                </tr>
+	            </thead>
+	            <tbody>
+	                <tr th:each="vuelo : ${vuelos}">
+	                    <!-- <td th:text="${vuelo.nroVuelo}"></td> -->
+	                    <td th:text="${vuelo.fechaPartida}"></td>
+	                    <td th:text="${vuelo.horaPartida}"></td>                    
+	                    <td th:text="${vuelo.origen.name}"></td>
+	                    <td th:text="${vuelo.destino.name}"></td>
+	                    <td th:text="${vuelo.aerolinea.nombre}"></td>
+	                    <td th:text="${vuelo.aeronave.modelo}"></td>
+	                    <td th:text="${vuelo.nroAsientos}"></td>
+	                    <td th:text="${vuelo.precioNeto}"></td>
+	                    <td><a th:href="@{/pasajeSeleccionar/resultado(correoElectronico=${cliente.correoElectronico},nroVuelo=${vuelo.nroVuelo})}">
+	                    	<button>Seleccionar</button>
+	                    </a>
+	                    </td>
+	                </tr>
+	            </tbody>
+	        </table>
+        </div>
+
+        <div th:if="${clienteVuelo}">
+            <h3>Datos del Cliente</h3>
+            <p>
+	            <strong>Nombre:</strong> <span th:text="${cliente.nombre}"></span>
+	            <strong>Apellido:</strong> <span th:text="${cliente.apellido}"></span>
+	            <strong>Pasaporte:</strong> <span th:text="${cliente.pasaporte}"></span>
+            </p>
+            <p>
+	            <strong>Domicilio:</strong> <span th:text="${cliente.domicilio}"></span>
+	            <strong>Fecha Nacimiento:</strong> <span th:text="${#dates.format(cliente.fechaNacimiento, 'dd-MM-YYYY')}"></span>
+            </p>
+            <p><strong>Correo Electrónico:</strong> <span th:text="${cliente.correoElectronico}"></span></p>
+             
+			<h3>Datos del Vuelo</h3> 
+	      	<table class="table">
+	        	<thead>
+	            	<tr>
+	                	<!-- <th>Nro vuelo</th> -->
+	                    <th>Fecha Partida</th>                    
+	                    <th>Hora</th>
+	                    <th>Origen</th>
+	                    <th>Destino</th>
+	                    <th>Aerolínea</th>
+	                    <th>Aeronave</th>
+	                    <th>Cant.Asientos</th>
+	                    <th>Asientos Disponibles</th>
+	                    <th>Precio</th>
+	                </tr>
+	            </thead>
+	            <tbody>
+	                <tr th:each="vuelo : ${vuelo}">
+	                    <!-- <td th:text="${vuelo.nroVuelo}"></td> -->
+	                    <td th:text="${vuelo.fechaPartida}"></td>
+	                    <td th:text="${vuelo.horaPartida}"></td>                    
+	                    <td th:text="${vuelo.origen.name}"></td>
+	                    <td th:text="${vuelo.destino.name}"></td>
+	                    <td th:text="${vuelo.aerolinea.nombre}"></td>
+	                    <td th:text="${vuelo.aeronave.modelo}"></td>
+	                    <td th:text="${vuelo.nroAsientos}"></td>
+	
+	                    <td> <!-- Mostrar la cantidad de Asientos Disponibles -->
+	                        <!-- <span th:text="${vuelo.asientosDisponibles()}"></span> -->
+	                    </td>
+	                    <td th:text="${vuelo.precioNeto}"></td>
+	                </tr>
+	            </tbody>
+	        </table>
+	        
+		   <form th:action="@{/pasajeGuardar(correoElectronico=${cliente.correoElectronico},nroVuelo=${vuelo.nroVuelo})}" method="post">
+		        <select name="nroAsiento" id="nroAsiento">
+		            <th:block th:each="nroAsiento: ${#numbers.sequence(1, vuelo.nroAsientos)}">
+		                <th:unless="${listaPasajeVuelo.contains(nroAsiento)}">
+		                    <option th:value="${nroAsiento}" th:text="${nroAsiento}"></option>
+		                </th:unless>
+		            </th:block>
+		        </select>
+		        <br>
+		        <button type="submit">Guardar Ticket</button>
+		    </form>	        
+	        
+        </div>	
+
+        
+    </div>
+    
+    <script th:replace="~{parent/template::js-bundle}"></script>
+</body>
+</html>

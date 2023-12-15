@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta th:replace="~{parent/template::charset}">
+    <meta th:replace="~{parent/template::viewport}">
+    <title>Lista de Vuelos</title>
+    <link th:replace="~{parent/template::bootstrap}">
+</head>
+<body>
+    <!--NAVBAR-->
+    <header th:replace="~{parent/template::header}"></header>
+
+    <div class="container-fluid pt-4 mt-4 pb-2">
+        <h2 class="pt-2 text-center">Lista de Pasajes Vendidos</h2>
+    </div>
+
+    <div class="container-fluid col-lg-10">
+	            
+	    <!-- Manejo del mensaje de error -->
+	    <div th:if="${error}" class="alert alert-danger" role="alert">
+	    	<p th:text="${error}"></p>
+	    </div>
+	    
+	    <div th:if="${listar}">
+	        <table class="table">
+	            <thead>
+	                <tr>
+	                    <th>Fecha Partida</th>                    
+	                    <th>Hora</th>
+	                    <th>Origen</th>
+	                    <th>Destino</th>
+	                    <th>Aerolínea</th>
+	                    <th>Aeronave</th>
+	                    <th>Cant.Asientos</th>
+	                    <th>Precio</th>
+	                </tr>
+	            </thead>
+	            <tbody>
+	                <tr th:each="pasaje : ${pasajeLista}">
+	                    <!-- <td th:text="${pasaje.fechaPartida}"></td>
+	                    <td th:text="${pasaje.vuelo.horaPartida}"></td>                    
+	                    <td th:text="${pasaje.vuelo.origen.name}"></td>
+	                    <td th:text="${pasaje.vuelo.destino.name}"></td>
+	                    <td th:text="${pasaje.vuelo.aerolinea.nombre}"></td>
+	                    <td th:text="${pasaje.vuelo.aeronave.modelo}"></td>
+	                    <td th:text="${pasaje.vuelo.nroAsientos}"></td>
+	                    <td th:text="${pasaje.nroPasaje}"></td> -->
+	                </tr>
+	            </tbody>
+	        </table>
+	    </div>
+    </div>
+
+    <script th:replace="~{parent/template::js-bundle}"></script>
+</body>
+</html>

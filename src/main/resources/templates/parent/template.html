@@ -51,11 +51,19 @@
                             <li class="nav-item">
                                 <a class="nav-link" th:href="datosImpositivos">Datos Impositivos</a>
                             </li>
-                            <!--PASAJES-->
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Pasajes</a>
-                            </li>
-                            <!--INTEGRANTES-->
+                            
+	                        <!--DROPDOWN PASAJES-->
+	                        <li class="nav-item dropdown">
+	                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+	                                Pasajes
+	                            </a>
+	                            <ul class="dropdown-center dropdown-menu pl-4">
+	                                <li><a class="dropdown-item" href="/pasajeNuevo?correoElectronico=">Nuevo</a></li>
+	                                <li><a class="dropdown-item" href="/pasajeListar">Listar</a></li>
+	                            </ul>
+	                        </li>
+	                        
+               				<!--INTEGRANTES-->
                             <li class="nav-item">
                                 <div class="btn-group dropend">
                                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">

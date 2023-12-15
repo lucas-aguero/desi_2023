@@ -5,6 +5,7 @@ import tuti.desi.entidades.Vuelo;
 import tuti.desi.excepciones.vueloexception.VueloNoCreadoException;
 
 import java.util.List;
+import java.util.UUID;
 
 public interface VueloService {
 
@@ -13,4 +14,6 @@ public interface VueloService {
     List<Vuelo> getVuelos();
 
     long contarAeropuertos();
+	
+	Vuelo getByNroVuelo(UUID nroVuelo);
 }
