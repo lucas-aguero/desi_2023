@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta th:replace="~{parent/template::charset}">
+    <meta th:replace="~{parent/template::viewport}">
+    <title>Listar Vuelos</title>
+    <link th:replace="~{parent/template::bootstrap}">
+</head>
+<body>
+<!--NAVBAR-->
+<header th:replace="~{parent/template::header}"></header>
+<h2>Listado de Vuelo</h2>
+<table>
+    <thead>
+    <tr>
+        <th>Fecha</th>
+        <th>Nro de Vuelo</th>
+        <th>Tipo de Vuelo</th>
+        <th>Estado</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="vuelo : ${vuelos}">
+        <td th:text="${vuelo.fechaPartida}"></td>
+        <td th:text="${vuelo.nroVuelo}"></td>
+        <td th:text="${vuelo.tipoVuelo}"></td>
+        <td th:text="${vuelo.estadoVuelo}"></td>
+        <td>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<script th:replace="~{parent/template::js-bundle}"></script>
+</body>
+</html>

@@ -1,7 +1,9 @@
 @charset "ISO-8859-1";
-body {
-  padding-top: 5rem;
+
+html, body {
+  min-height:100%;
 }
+
 .starter-template {
   padding: 3rem 1.5rem;
   text-align: center;
@@ -14,10 +16,6 @@ h1{
 h2{
 	color:#FF0000;
 }
-
-
-
-
 
 .resultados th {
   background-color: #4CAF50;
@@ -65,3 +63,13 @@ float: left;
 .error {
     color: red;
 }
+
+.error-message {
+    color: red; /* Color del texto del mensaje de error */
+    font-size: 12px; /* Tamaño de fuente del mensaje de error */
+}
+
+.error-input {
+    border: 1px solid red; /* Borde rojo para el campo con error */
+}
+

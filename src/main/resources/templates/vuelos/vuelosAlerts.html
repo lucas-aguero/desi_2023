@@ -1,0 +1,15 @@
+<div th:fragment="divAlerts" xmlns:th="http://www.thymeleaf.org" lang="en">
+    <!--GLOBAL ERROR-->
+    <div th:fragment="error" class="container-fluid col-lg-8 d-flex justify-content-center pt-3" th:if="${global}">
+        <div class="alert alert-danger d-flex justify-content-center col-lg-8" role="alert">
+            <span th:text="${global.defaultMessage}"></span>
+        </div>
+    </div>
+
+    <!--SUCCESS-->
+    <div th:fragment="success" class="container-fluid col-lg-8 d-flex justify-content-center pt-3" th:if="${successMessage}">
+        <div class="alert alert-success d-flex justify-content-center col-lg-8" role="alert">
+            <span th:text="${successMessage}"></span>
+        </div>
+    </div>
+</div>
