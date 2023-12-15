@@ -1,7 +1,8 @@
 package tuti.desi.presentacion.controller;
-
+import java.util.Arrays;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -46,12 +47,24 @@ public class NuevoVueloController {
     public String listarVuelos(Model model){
         List<Vuelo> vuelos = vueloService.getVuelos();
         model.addAttribute("vuelos", vuelos);
-
-
-
         return "lista-vuelos";
     }
 
+    @GetMapping("/flight")
+    public String getFlight(Model model)
+    {
+        List<String> flightTypes = Arrays.asList("Nacional", "Internacional");
+        model.addAttribute("flightTypes", flightTypes);
+        return "flight";
+    }
+
+    @GetMapping("/filtrar")
+    public String getVuelosByFecha(@RequestParam("fecha") LocalDate fecha,Model model)
+    {
+        List<Vuelo> vuelos = vueloService.filtrarbyFechaVuelo(fecha);
+        model.addAttribute("vuelos", vuelos);
+        return "lista-vuelos";
+    }
 
     @GetMapping("/crearVuelo")
     public String prepararVueloForm(Model model){
