@@ -109,7 +109,6 @@ public class VueloServiceImpl implements VueloService {
     	return vueloRepo.findByNroVuelo(nroVuelo);
     }
 
-
     /*public Vuelo v(){
         Optional<Vuelo> vueloOptional = vueloRepo.findByFechaPartida(LocalDate.of(2023,22,22);
 
