@@ -131,14 +131,8 @@
 	            </tbody>
 	        </table>
 
-			    <div th:if="${asientoElegido == 0}" class="alert alert-danger" role="alert">
-			    	<p>Seleccione un Nro de Asiento</p>
-			    </div>
-		
-			<p> hola </p>
-	        
 		   <form th:action="@{/pasajeGuardar(correoElectronico=${cliente.correoElectronico},nroVuelo=${vuelo.nroVuelo})}" method="post">
-		   		
+ 		
 		   		<label for="nroAsiento">Seleccione un Asiento:</label>
 		        <select name="nroAsiento" id="nroAsiento">
 		        	<option th:value="0" Selected>Selecciona un asiento</option>
