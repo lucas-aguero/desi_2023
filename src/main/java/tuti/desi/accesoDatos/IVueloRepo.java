@@ -9,11 +9,13 @@ import tuti.desi.entidades.enums.EstadoVuelo;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Repository
-public interface IVueloRepo extends JpaRepository<Vuelo, Long> {
+public interface IVueloRepo extends JpaRepository<Vuelo, UUID> {
     boolean existsByDestinoIdAndFechaPartida(Long destinoId, LocalDate fechaPartida);
     boolean existsByOrigenIdAndFechaPartida(Long destinoId, LocalDate fechaPartida);
+    Vuelo findByNroVuelo(UUID nroVuelo);
 
     //BUSCAR POR FECHA PARTIDA
     List<Vuelo> findByFechaPartida(LocalDate fechaPartida);

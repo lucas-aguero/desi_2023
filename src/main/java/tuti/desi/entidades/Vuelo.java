@@ -59,5 +59,17 @@ public class Vuelo {
     @NotNull
     @Column(name="precio_neto")
     private BigDecimal precioNeto;
+	
+    public UUID getNroVuelo() {
+		return this.nroVuelo;
+	}
+
+	public int getNroAsientos() {
+		return this.nroAsientos;
+	}
+
+	public void setNroAsientos(int asientosDisponibles) {
+		this.nroAsientos = asientosDisponibles; 
+	}
 
 }

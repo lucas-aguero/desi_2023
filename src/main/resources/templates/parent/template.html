@@ -35,14 +35,33 @@
                                     <li><a class="dropdown-item" th:href="crearVuelo">Programar Vuelo</a></li>
                                 </ul>
                             </li>
+
+	                        <!--DROPDOWN CLIENTES-->
+	                        <li class="nav-item dropdown">
+	                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+	                                Clientes
+	                            </a>
+	                            <ul class="dropdown-center dropdown-menu pl-4">
+	                                <li><a class="dropdown-item" href="/clientesListar">Listar</a></li>
+	                                <li><a class="dropdown-item" href="/clientesBuscar">Buscar</a></li>
+	                            </ul>
+	                        </li>
+                                                   
                             <!--DATOS IMPOSITIVOS-->
                             <li class="nav-item">
-                                <a class="nav-link" th:href="datosImpositivos">Datos Impositivos</a>
+                                <a class="nav-link" href="/datosImpositivos">Datos Impositivos</a>
                             </li>
-                            <!--PASAJES-->
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Pasajes</a>
-                            </li>
+                            
+	                        <!--DROPDOWN PASAJES-->
+	                        <li class="nav-item dropdown">
+	                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+	                                Pasajes
+	                            </a>
+	                            <ul class="dropdown-center dropdown-menu pl-4">
+	                                <li><a class="dropdown-item" href="/pasajeNuevo?correoElectronico=">Nuevo</a></li>
+	                            </ul>
+	                        </li>
+	                        
                             <!--INTEGRANTES-->
                             <li class="nav-item">
                                 <div class="btn-group dropend">
@@ -50,20 +69,20 @@
                                         Integrantes
                                     </a>
                                     <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="https://github.com/lucas-aguero">
+                                        <li><a class="dropdown-item" href="https://github.com/lucas-aguero" target=”_blank”>
                                             Agüero Lucas</a></li>
-                                        <li><a class="dropdown-item" href="https://github.com/goemca">
+                                        <li><a class="dropdown-item" href="https://github.com/goemca" target=”_blank”>
                                             Cano Gonzalo</a></li>
-                                        <li><a class="dropdown-item" href="https://github.com/FlaminiaCastano">
+                                        <li><a class="dropdown-item" href="https://github.com/FlaminiaCastano" target=”_blank”>
                                             Castaño Flaminia</a></li>
-                                        <li><a class="dropdown-item" href="https://github.com/brunovt074">
-                                            Vargas Bruno</a></li>
+                                        <li><a class="dropdown-item" href="https://github.com/brunovt074" target=”_blank”>
+                                        	Vargas Bruno</a></li>
                                     </ul>
                                 </div>
                             </li>
                             <li class="nav-item flex-grow-1"></li>
                             <li class="nav-item pl-3">
-                                <a class="icon-link" href="https://github.com/lucas-aguero/desi_2023"
+                                <a class="icon-link" href="https://github.com/lucas-aguero/desi_2023"  target=”_blank”
                                    data-bs-toggle="tooltip" data-bs-title="Repositorio del TP">
                                     <img src="/images/github-logo.png" width="50" height="40">
                                 </a>

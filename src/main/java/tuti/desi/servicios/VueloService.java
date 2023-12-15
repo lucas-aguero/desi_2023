@@ -5,6 +5,7 @@ import tuti.desi.entidades.Vuelo;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.UUID;
 
 public interface VueloService {
 
@@ -16,4 +17,7 @@ public interface VueloService {
 
 
     long contarAeropuertos();
+	
+	Vuelo getByNroVuelo(UUID nroVuelo);
+
 }

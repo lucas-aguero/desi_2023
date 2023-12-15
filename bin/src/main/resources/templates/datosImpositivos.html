@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+   <title>Datos Impositivos</title>
+   <style>
+       table, th, td {
+           border: 1px solid black;
+           border-collapse: collapse;
+       }
+       th, td {
+           padding: 8px;
+           text-align: left;
+       }
+       th {
+           font-weight: bold;
+       }
+       .acciones {
+           margin-top: 10px;
+       }
+   </style>
+   <link rel="stylesheet" th:href="@{/css/main.css}"/>
+    <link th:replace="~{parent/template::bootstrap}">
+</head>
+<body>
+   <h2>Datos Impositivos</h2>
+   <form th:action="@{/datosImpositivos}" th:object="${formBean}" method="post">
+       <table>
+           <tr>
+               <td><b>IVA: %</b></td>
+               <td><span th:text="${ultimoRegistro != null ? ultimoRegistro.iva : '0'}"></span></td>
+           </tr>
+           <tr>
+               <td><b>Tasa Aeroportuaria Nacional: $</b></td>
+               <td><span th:text="${ultimoRegistro != null ? ultimoRegistro.tasaAeroportuariaNacional : '0'}"></span></td>
+           </tr>
+           <tr>
+               <td><b>Tasa Aeroportuaria Internacional: USD</b></td>
+               <td><span th:text="${ultimoRegistro != null ? ultimoRegistro.tasaAeroportuariaInternacional : '0'}"></span></td>
+           </tr>
+           <tr>
+               <td><b>Cotización Dólar: $</b></td>
+               <td><span th:text="${ultimoRegistro != null ? ultimoRegistro.cotizacionDolar : '0'}"></span></td>
+           </tr>
+           <tr>
+               <td><b>Fecha Modificación:</b></td>
+               <td>
+				    <span th:if="${ultimoRegistro != null}" th:text="${ultimoRegistro.fechaModificacion}"></span>
+				    <span th:unless="${ultimoRegistro != null}">N/A</span>
+				    </td>
+       </table>
+       <div class="acciones">
+           <input type="submit" name="action" value="Editar" />
+           <input type="submit" name="action" value="Cancelar" />
+       </div>
+   </form>
+   <script th:replace="~{parent/template::js-bundle}"></script>
+</body>
+</html>
